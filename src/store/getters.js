@@ -14,7 +14,7 @@ const attributeCharts = (state) => ({
 })
 
 const constraints = (state, includingBiobank) => {
-  const booleanConstraints = ['smoking', 'sex', 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs']
+  const booleanConstraints = ['smoking', 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs']
     .filter(attr => state[attr])
     .map(attr => ({selector: attr, comparison: '==', arguments: 'true'}))
 
