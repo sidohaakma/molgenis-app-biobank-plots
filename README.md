@@ -1,28 +1,25 @@
-# molgenis-biobank-plots-app
+# MOLGENIS biobank plots
 
-> This app plots aggregate sample information for biobanks.
+This app plots aggregate sample information for biobanks.
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-npm install
+yarn install
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn run dev
 
 # build for production with minification
 # The created artifacts can be uploaded to the MOLGENIS app store.
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+yarn run build
 
 # run unit tests
-npm run unit
+yarn run unit
 
 # run all tests
-npm test
+yarn test
 ```
 
 TODO: Document
