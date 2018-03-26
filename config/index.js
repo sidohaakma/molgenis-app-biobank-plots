@@ -3,6 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const biobankResponse = require('./dev-responses/biobank-response.js')
 
 module.exports = {
   dev: {
@@ -33,14 +34,20 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true
+    cssSourceMap: true,
+
+    before(app) {
+      app.get('/api/v2/*', function (request, response) {
+        response.json(biobankResponse)
+      })
+    }
   },
 
   build: {
