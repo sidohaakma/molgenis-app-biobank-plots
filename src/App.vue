@@ -1,34 +1,28 @@
 <template>
   <div id="app">
-    <div id="header">
-      <img src="./assets/img/bbmri.png">
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <filters/>
-        </div>
-        <div class="col-md-9">
-          <graph/>
-          <br/>
-          <attribute-graphs/>
-        </div>
-      </div>
-    </div>
+    <img src="./assets/logo.png">
+    <HelloWorld/>
   </div>
 </template>
 
 <script>
-import Filters from './components/Filters'
-import Graph from './components/Graph'
-import AttributeGraphs from './components/AttributeGraphs'
+import HelloWorld from './components/HelloWorld'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Filters,
-    Graph,
-    AttributeGraphs
+    HelloWorld
   }
 }
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
