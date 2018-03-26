@@ -3,7 +3,8 @@ import type { State } from '../flow.types'
 
 const state: State = {
   aggs: [],
-  biobanks: []
+  biobanks: [],
+  filters: []
 }
 
 export default state

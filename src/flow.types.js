@@ -2,5 +2,6 @@
 
 export type State = {
   aggs: Array<Array<mixed>>,
-  biobanks: Array<Object>
+  biobanks: Array<Object>,
+  filters: Array<Object>
 }
