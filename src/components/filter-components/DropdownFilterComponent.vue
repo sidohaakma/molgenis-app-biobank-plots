@@ -15,15 +15,28 @@
 <script>
   export default {
     name: 'DropdownFilterComponent',
-    props: ['options', 'initialSelectedOption', 'onOptionSelect'],
+    props: {
+      filter: {
+        type: String,
+        required: true
+      },
+      options: {
+        type: Array,
+        required: true
+      },
+      onOptionSelect: {
+        type: Function,
+        required: true
+      }
+    },
     data () {
       return {
-        selectedOption: this.initialSelectedOption || 'no-option-pre-select'
+        selectedOption: ''
       }
     },
     watch: {
-      selectedOption (newValue, oldValue) {
-        this.onOptionSelect(newValue)
+      selectedOption (value) {
+        this.onOptionSelect(this.filter, value)
       }
     }
   }
