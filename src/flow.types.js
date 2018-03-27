@@ -1,9 +1,9 @@
 // @flow
 
 export type State = {
-  aggs: Array<Array<mixed>>,
-  biobanks: Array<Object>,
-  filters: Object
+  activeFilters: Object,
+  attributeChartData: Object,
+  filterComponents: Object
 }
 
 export type VuexContext = {
