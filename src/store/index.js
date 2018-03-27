@@ -9,14 +9,14 @@ import type { State } from '../flow.types'
 
 const state: State = {
   /**
-   * A map containing the different types of filters and their specific option lists
+   * A map containing active filters and their selected filter values
    */
-  filters: {},
+  activeFilters: {},
 
   /**
-   * The currently selected biobank
+   * A map containing the different filter components and their specific option lists
    */
-  selectedBiobank: '',
+  filterComponents: {},
 
   aggs: [],
   biobanks: [],

@@ -46,8 +46,7 @@
     props: ['filter'],
     methods: {
       onOptionSelect (filter, value) {
-        console.log('filter', filter)
-        console.log('value', value)
+        this.$store.commit('UPDATE_ACTIVE_FILTERS', {[filter]: value})
       }
     },
     components: {

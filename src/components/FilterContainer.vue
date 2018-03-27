@@ -7,7 +7,10 @@
         </div>
 
         <div class="col-6">
-          <button id="reset-filter-btn" class="btn btn-sm btn-primary float-right" @click="resetFilters">
+          <button
+            id="reset-filter-btn"
+            class="btn btn-sm btn-primary float-right"
+            @click="resetFilters">
             Reset
           </button>
         </div>
@@ -15,7 +18,7 @@
     </div>
 
     <div class="card-body">
-      <div v-for="filter in filters" class="mb-4">
+      <div v-for="filter in filterComponents" class="mb-4">
         <filter-component
           :filter="filter"
           :key="filter.id">
@@ -36,8 +39,8 @@
       }
     },
     computed: {
-      filters () {
-        return this.$store.state.filters
+      filterComponents () {
+        return this.$store.state.filterComponents
       }
     },
     components: {

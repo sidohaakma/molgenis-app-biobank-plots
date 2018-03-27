@@ -1,9 +1,9 @@
 export default {
-  'SET_FILTERS' (state, filters) {
-    state.filters = filters
+  'SET_FILTER_COMPONENTS' (state, filterComponents) {
+    state.filterComponents = filterComponents
   },
 
-  'SET_SELECTED_BIOBANK' (state, biobank) {
-    state.selectedBiobank = biobank
+  'UPDATE_ACTIVE_FILTERS' (state, update) {
+    state.activeFilters = {...state.activeFilters, ...update}
   }
 }
