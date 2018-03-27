@@ -15,20 +15,12 @@
     </div>
 
     <div class="card-body">
-      <template v-for="filter in filters">
+      <div v-for="filter in filters" class="mb-4">
         <filter-component
           :filter="filter"
           :key="filter.id">
         </filter-component>
-        <hr>
-      </template>
-      <!--<p v-for="attribute in filters">-->
-      <!--<span v-if="attribute.fieldType === 'CATEGORICAL'">-->
-      <!--<categorical-filter :label="attribute.label" :id="attribute.name"-->
-      <!--:optionsRef="attribute.refEntity.href"></categorical-filter>-->
-      <!--</span>-->
-      <!--<span v-else>{{attribute.name}}</span>-->
-      <!--</p>-->
+      </div>
     </div>
   </div>
 </template>
