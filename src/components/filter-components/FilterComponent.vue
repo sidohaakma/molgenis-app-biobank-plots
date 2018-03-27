@@ -13,12 +13,17 @@
     <template v-if="filter.filterType === 'range'">
       <range-filter-component></range-filter-component>
     </template>
+
+    <template v-if="filter.filterType === 'checkbox-row'">
+      <checkbox-filter-component></checkbox-filter-component>
+    </template>
   </div>
 </template>
 
 <script>
+
   import DropdownFilterComponent from './DropdownFilterComponent'
-  import RangeFilterComponent from './RangeFilterComponent'
+  import RangeFilterComponent from '../RangeFilterComponent'
 
   export default {
     name: 'FilterComponent',

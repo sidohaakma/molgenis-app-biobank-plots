@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import FilterComponent from './FilterComponent'
+  import FilterComponent from './filter-components/FilterComponent'
 
   export default {
     name: 'FilterContainer',
