@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import mutations from './mutations'
 import actions from './actions'
-import getters from './getters'
 
 import type { State } from '../flow.types'
 
@@ -14,13 +13,15 @@ const state: State = {
   activeFilters: {},
 
   /**
+   * A map containing aggregate data and labels for different categories i.e. sex and smoking
+   * mapped to a format understandable for VueCharts.js
+   */
+  attributeChartData: {},
+
+  /**
    * A map containing the different filter components and their specific option lists
    */
-  filterComponents: {},
-
-  aggs: [],
-  biobanks: [],
-  lookupList: []
+  filterComponents: {}
 }
 
 Vue.use(Vuex)
@@ -28,6 +29,5 @@ export default new Vuex.Store({
   state,
   mutations,
   actions,
-  getters,
   strict: true
 })
