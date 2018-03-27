@@ -14,7 +14,6 @@
 </template>
 
 <script>
-  import { GET_BIOBANKS, GET_FILTER_DATA } from '../store/actions'
   import Filters from './Filters'
   import PlotContainer from './PlotContainer'
 
@@ -30,9 +29,6 @@
       }
     },
     created () {
-      this.$store.dispatch(GET_BIOBANKS)
-      this.$store.dispatch(GET_FILTER_DATA)
     }
-
   }
 </script>
