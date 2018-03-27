@@ -1,7 +1,5 @@
 <template>
   <div class="row">
-
-    <!-- Filter container -->
     <div class="col-3">
       <filter-container/>
     </div>
@@ -20,6 +18,7 @@
     name: 'BiobankAggregatesContainer',
     created () {
       this.$store.dispatch('GET_SUBJECT_METADATA')
+      this.$store.dispatch('GET_SUBJECT_AGGREGATION')
     },
     components: {
       FilterContainer,

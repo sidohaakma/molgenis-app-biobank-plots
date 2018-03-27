@@ -66,3 +66,12 @@ export const subjectMetadataToFilterMapper = (sampleMetadata) => {
     return accumulator
   }, {})
 }
+/**
+ * Map aggregate data to data usable by charts
+ */
+export const aggregateDataToChartData = (attribute, aggregates) => ({
+  [attribute]: {
+    data: aggregates.matrix.map(array => array[0]),
+    labels: aggregates.xLabels.map(label => label ? label.id ? label.id : label : 'Unknown')
+  }
+})
