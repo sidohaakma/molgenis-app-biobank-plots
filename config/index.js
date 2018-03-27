@@ -3,10 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const biobankResponse = require('./dev-responses/biobank-response.js')
 const sampleResponse = require('./dev-responses/sample-response.js')
-const sampleTable = 'leiden_RP'
-const biobankTable = 'leiden_biobanks'
 
 module.exports = {
   dev: {
@@ -47,10 +44,7 @@ module.exports = {
     cssSourceMap: true,
 
     before(app) {
-      app.get(`/api/v2/${biobankTable}`, function (request, response) {
-        response.json(biobankResponse)
-      })
-      app.get(`/api/v2/${sampleTable}`, function (request, response) {
+      app.get(`/api/v2/*`, function (request, response) {
         response.json(sampleResponse)
       })
     }
