@@ -13,6 +13,11 @@ const state: State = {
    */
   filters: {},
 
+  /**
+   * The currently selected biobank
+   */
+  selectedBiobank: '',
+
   aggs: [],
   biobanks: [],
   lookupList: []

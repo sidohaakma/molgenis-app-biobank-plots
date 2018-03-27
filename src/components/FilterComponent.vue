@@ -23,6 +23,16 @@
   export default {
     name: 'FilterComponent',
     props: ['filter'],
+    methods: {
+      onOptionSelect (value) {
+        this.$store.commit('SET_SELECTED_BIOBANK', value)
+      }
+    },
+    computed: {
+      selectedBiobank () {
+        return this.$store.state.selectedBiobank
+      }
+    },
     components: {
       DropdownFilterComponent,
       RangeFilterComponent
