@@ -4,6 +4,7 @@
 
 const path = require('path')
 const sampleResponse = require('./dev-responses/sample-response.js')
+const aggregateResponse = require('./dev-responses/aggregate-response.js')
 
 module.exports = {
   dev: {
@@ -11,7 +12,11 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api/v2': {
+        target: 'http://localhost:8080'
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -43,10 +48,10 @@ module.exports = {
 
     cssSourceMap: true,
 
-    before(app) {
-      app.get(`/api/v2/*`, function (request, response) {
-        response.json(sampleResponse)
-      })
+    before (app) {
+      // app.get('/api/v2/leiden_RP', function (request, response) {
+      //   response.json(sampleResponse)
+      // })
     }
   },
 
