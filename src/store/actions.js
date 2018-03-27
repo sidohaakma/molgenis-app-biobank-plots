@@ -30,5 +30,8 @@ export default {
       })
     })
   },
+
+  'UPDATE_SUBJECT_AGGREGATION' ({state, commit}: VuexContext) {
+    console.log('UPDATE AGGREGATES!')
   }
 }

@@ -16,9 +16,19 @@
 
   export default {
     name: 'BiobankAggregatesContainer',
+    computed: {
+      activeFilters () {
+        return this.$store.state.activeFilters
+      }
+    },
     created () {
       this.$store.dispatch('GET_SUBJECT_METADATA')
       this.$store.dispatch('GET_SUBJECT_AGGREGATION')
+    },
+    watch: {
+      activeFilters () {
+        this.$store.dispatch('UPDATE_SUBJECT_AGGREGATION')
+      }
     },
     components: {
       FilterContainer,
