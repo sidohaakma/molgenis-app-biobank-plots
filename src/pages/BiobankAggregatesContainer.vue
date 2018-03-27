@@ -1,34 +1,29 @@
 <template>
-  <div class="container">
+  <div class="row">
 
-    <div class="row">
-      <div class="col-3">
-        <filters :filters="filters"></filters>
-      </div>
-      <div class="col-9">
-        <plot-container></plot-container>
-      </div>
+    <!-- Filter container -->
+    <div class="col-3">
+      <filter-container/>
     </div>
 
+    <div class="col-9">
+      <plot-container></plot-container>
+    </div>
   </div>
 </template>
 
 <script>
-  import Filters from './Filters'
-  import PlotContainer from './PlotContainer'
+  import FilterContainer from '../components/FilterContainer'
+  import PlotContainer from '../components/PlotContainer'
 
   export default {
-    name: 'BiobankCounts',
-    components: {
-      Filters,
-      PlotContainer
-    },
-    computed: {
-      filters () {
-        return this.$store.state.filters
-      }
-    },
+    name: 'BiobankAggregatesContainer',
     created () {
+      this.$store.dispatch('GET_SUBJECT_DATA')
+    },
+    components: {
+      FilterContainer,
+      PlotContainer
     }
   }
 </script>

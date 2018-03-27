@@ -1,31 +1,53 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h4>Filters</h4>
+      <div class="row">
+        <div class="col-6">
+          <h4>Filters</h4>
+        </div>
+
+        <div class="col-6">
+          <button id="reset-filter-btn" class="btn btn-sm btn-primary float-right" @click="resetFilters">
+            Reset
+          </button>
+        </div>
+      </div>
     </div>
+
     <div class="card-body">
-      <p v-for="attribute in filters">
-        <span v-if="attribute.fieldType === 'CATEGORICAL'">
-          <categorical-filter :label="attribute.label" :id="attribute.name" :optionsRef="attribute.refEntity.href"></categorical-filter>
-        </span>
-        <span v-else>{{attribute.name}}</span>
-      </p>
+      <filter-component
+        v-for="filter in filters"
+        :filter="filter"
+        :key="filter.id">
+      </filter-component>
+      <!--<p v-for="attribute in filters">-->
+      <!--<span v-if="attribute.fieldType === 'CATEGORICAL'">-->
+      <!--<categorical-filter :label="attribute.label" :id="attribute.name"-->
+      <!--:optionsRef="attribute.refEntity.href"></categorical-filter>-->
+      <!--</span>-->
+      <!--<span v-else>{{attribute.name}}</span>-->
+      <!--</p>-->
     </div>
   </div>
 </template>
 
 <script>
-  import BooleanFilter from './BooleanFilter'
-  import CategoricalFilter from './CategoricalFilter'
+  import FilterComponent from './FilterComponent'
 
   export default {
-    name: 'filters',
-    components: {
-      CategoricalFilter,
-      BooleanFilter
+    name: 'FilterContainer',
+    methods: {
+      resetFilters () {
+        // go go reset filters
+      }
     },
-    props: [
-      'filters'
-    ]
+    computed: {
+      filters () {
+        return this.$store.state.filters
+      }
+    },
+    components: {
+      FilterComponent
+    }
   }
 </script>

@@ -1,13 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import state from './state'
 import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
 
-Vue.use(Vuex)
+import type { State } from '../flow.types'
 
+const state: State = {
+  /**
+   * A map containing the different types of filters and their specific option lists
+   */
+  filters: {},
+
+  aggs: [],
+  biobanks: [],
+  lookupList: []
+}
+
+Vue.use(Vuex)
 export default new Vuex.Store({
   state,
   mutations,
