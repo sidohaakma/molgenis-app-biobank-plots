@@ -1,20 +1,18 @@
 <template>
-  <div id="app">
+  <div id="application-container">
     <img src="./assets/img/bbmri-header.png" alt="bbmri header" id="bbmri-header"/>
-    <BiobankCounts/>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import BiobankCounts from './components/BiobankCounts'
-
 export default {
-  name: 'App',
-  components: {
-    BiobankCounts
-  }
+  name: 'App'
 }
 </script>
+
 <style>
   body {
     background-color: #E1E6EC;
@@ -23,13 +21,10 @@ export default {
   #bbmri-header{
     width: 100%;
   }
-  h4 {
+  h4, h5 {
     color: #184B8A;
   }
   .card-subtitle {
     color: #BDC8DD;
-  }
-  legend{
-    color: #184B8A;
   }
 </style>
