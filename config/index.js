@@ -8,7 +8,6 @@ const aggregateResponse = require('./dev-responses/aggregate-response.js')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -49,9 +48,13 @@ module.exports = {
     cssSourceMap: true,
 
     before (app) {
-      // app.get('/api/v2/leiden_RP', function (request, response) {
-      //   response.json(sampleResponse)
-      // })
+      app.get('/api/v2/leiden_RP', function(request, response) {
+        if(request.query.aggs) {
+          response.json(aggregateResponse)
+        } else {
+          response.json(sampleResponse)
+        }
+      })
     }
   },
 
