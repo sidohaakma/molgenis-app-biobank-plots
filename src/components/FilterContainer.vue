@@ -18,11 +18,8 @@
     </div>
 
     <div class="card-body">
-      <div v-for="filter in filterComponents" class="mb-4">
-        <filter-component
-          :filter="filter"
-          :key="filter.id">
-        </filter-component>
+      <div v-for="filter in filterComponents" class="mb-4" :key="filter.id">
+        <filter-component :filter="filter"/>
       </div>
     </div>
   </div>
@@ -35,7 +32,7 @@
     name: 'FilterContainer',
     methods: {
       resetFilters () {
-        // go go reset filters
+        this.$store.commit('RESET_ALL_ACTIVE_FILTERS')
       }
     },
     computed: {

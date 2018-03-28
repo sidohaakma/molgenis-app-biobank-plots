@@ -1,4 +1,8 @@
 export default {
+  'RESET_ALL_ACTIVE_FILTERS' (state) {
+    state.activeFilters = {}
+  },
+
   'SET_FILTER_COMPONENTS' (state, filterComponents) {
     state.filterComponents = filterComponents
   },
