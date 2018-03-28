@@ -3,7 +3,7 @@
     <div class="form-group">
       <template v-for="option in options">
         <div class="form-check" :class="{'form-check-inline': orientation === 'horizontal'}">
-          <input class="form-check-input" :value="option.value" type="checkbox" v-model="selectedOptions">
+          <input class="form-check-input" :value="option.value" type="checkbox" v-model="value">
           <label class="form-check-label">{{option.label}}</label>
         </div>
       </template>
@@ -19,12 +19,18 @@
         type: String,
         required: true
       },
-      options: {
+      initialValue: {
         type: Array,
-        required: true
+        required: false,
+        default: () => []
+
       },
       onOptionSelect: {
         type: Function,
+        required: true
+      },
+      options: {
+        type: Array,
         required: true
       },
       orientation: {
@@ -35,12 +41,16 @@
     },
     data () {
       return {
-        selectedOptions: []
+        value: this.initialValue
       }
     },
     watch: {
-      selectedOptions (value) {
+      value (value) {
         this.onOptionSelect(this.filter, value)
+      },
+
+      initialValue (value) {
+        this.value = value
       }
     }
   }

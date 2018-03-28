@@ -7,9 +7,9 @@
         class="form-control"
         list="range-filter-ticks"
         :min="minRange"
-        :max="maxRange"
+        :max="value.max"
         :step="steps"
-        v-model.lazy="minValue">
+        v-model.lazy="value.min">
     </div>
 
     <div class="form-group">
@@ -18,17 +18,17 @@
         type="range"
         class="form-control"
         list="range-filter-ticks"
-        :min="minRange"
+        :min="value.min"
         :max="maxRange"
         :step="steps"
-        v-model.lazy="maxValue">
+        v-model.lazy="value.max">
     </div>
 
     <datalist id="range-filter-ticks">
       <option v-for="tick in ticks" :value="tick" :label="tick"></option>
     </datalist>
 
-    From {{minValue}} to {{maxValue}}
+    {{range}}
   </div>
 </template>
 
@@ -40,44 +40,59 @@
         type: String,
         required: true
       },
-      minRange: {
-        type: Number,
+      initialValue: {
+        type: Object,
         required: false,
-        default: 0
+        default: () => ({min: 0, max: 100})
       },
       maxRange: {
         type: Number,
         required: false,
         default: 100
       },
+      minRange: {
+        type: Number,
+        required: false,
+        default: 0
+      },
+      onOptionSelect: {
+        type: Function,
+        required: true
+      },
       steps: {
         type: Number,
         required: false,
         default: 1
       },
-      onOptionSelect: {
-        type: Function,
-        required: true
+      ticks: {
+        type: Array,
+        required: false,
+        default: () => [0, 100]
       }
     },
     data () {
       return {
-        minValue: 0,
-        maxValue: 100
+        value: this.initialValue
       }
     },
     computed: {
-      ticks () {
-        return [this.minRange, this.maxRange]
+      range () {
+        return 'Between ' + this.value.min + ' and ' + this.value.max + ' years old'
       }
     },
     watch: {
-      minValue (value) {
-        this.onOptionSelect(this.filter, value)
+      value: {
+        handler (value) {
+          this.onOptionSelect(this.filter, value)
+        },
+        deep: true
       },
 
-      maxValue (value) {
-        this.onOptionSelect(this.filter, value)
+      initialValue: {
+        handler (value) {
+          this.value = value
+        },
+        deep: true
       }
     }
   }
