@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
       biobanks: 'leiden_biobanks',
       samples: 'leiden_RP'
     },
-    apiUrl: 'https://molgenis09.gcc.rug.nl/api',
+    apiUrl: 'http://localhost:8080/api',
     token: 'test'
   }
 } else if (process.env.NODE_ENV === 'production') {
