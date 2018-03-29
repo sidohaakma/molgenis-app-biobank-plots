@@ -4,7 +4,9 @@
 
 const path = require('path')
 const sampleResponse = require('./dev-responses/sample-response.js')
-const aggregateResponse = require('./dev-responses/aggregate-response.js')
+const biobankAggregateResponse = require('./dev-responses/biobank-aggregate-response.js')
+const smokingAggregateResponse = require('./dev-responses/smoking-aggregate-response.js')
+const sexAggregateResponse = require('./dev-responses/sex-aggregate-response.js')
 
 module.exports = {
   dev: {
@@ -50,7 +52,15 @@ module.exports = {
     before (app) {
       app.get('/api/v2/leiden_RP', function(request, response) {
         if(request.query.aggs) {
-          response.json(aggregateResponse)
+          const attr = request.query.aggs.split('==')[1]
+          switch(attr) {
+            case 'biobank':
+              response.json(biobankAggregateResponse)
+            case 'sex':
+              response.json(sexAggregateResponse)
+            case 'smoking':
+              response.json(smokingAggregateResponse)
+          }
         } else {
           response.json(sampleResponse)
         }
