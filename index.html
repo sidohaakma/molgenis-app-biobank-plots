@@ -13,7 +13,35 @@
       var server = 'http://localhost:8080'
       window.__INITIAL_STATE__ = {
         server: server,
-        sampleTable: 'leiden_RP'
+        sampleTable: 'leiden_RP',
+        // 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs'
+        attributes: [
+          {
+            name: 'biobank',
+            chartTitle: 'Number of samples per biobank',
+            chartType: 'HorizontalBarChart'
+          },
+          {
+            name: 'smoking',
+            chartTitle: 'Smoking data',
+            chartType: 'ColumnChart',
+            datasets: [
+              {label: 'Yes', backgroundColor: '#184B8A'},
+              {label: 'No', backgroundColor: '#ed660c'},
+              {label: 'Not available ', backgroundColor: '#cccccc'}
+            ]
+          },
+          {
+            name: 'sex',
+            chartTitle: 'Sex',
+            chartType: 'ColumnChart',
+            datasets: [
+              {label: 'Male', backgroundColor: '#184B8A'},
+              {label: 'Female', backgroundColor: '#ed660c'},
+              {label: 'Not available ', backgroundColor: '#cccccc'}
+            ]
+          }
+        ]
       }
     </script>
     <div id="app"></div>
