@@ -1,12 +1,12 @@
 <script>
-  import { HorizontalBar, mixins } from 'vue-chartjs'
+  import { Bar, mixins } from 'vue-chartjs'
 
   // Use reactiveProp to automatically watch a 'chartData' property
   const {reactiveProp} = mixins
 
   export default {
-    name: 'BarChartComponent',
-    extends: HorizontalBar,
+    name: 'ColumnChartComponent',
+    extends: Bar,
     mixins: [reactiveProp],
     props: {
       chartData: {
@@ -20,18 +20,13 @@
       chartTitle: {
         type: String,
         required: false,
-        default: 'Horizontal bar chart'
+        default: 'Column chart'
       }
     },
     mounted () {
       const data = {
         labels: this.chartLabels,
-        datasets: [
-          {
-            data: this.chartData,
-            backgroundColor: '#184B8A'
-          }
-        ]
+        datasets: this.chartData
       }
 
       const options = {
@@ -42,19 +37,14 @@
           display: true
         },
         tooltips: {
-          displayColors: false,
           titleFontSize: 14,
-          bodyFontSize: 12,
-          callbacks: {
-            label (tooltipItem) {
-              return 'Samples: ' + tooltipItem.xLabel
-            }
-          }
+          bodyFontSize: 12
         },
         maintainAspectRatio: false,
         responsive: true,
-        legend: {
-          display: false
+        scales: {
+          xAxes: [{stacked: true}],
+          yAxes: [{stacked: true}]
         }
       }
 
