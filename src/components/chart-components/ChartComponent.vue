@@ -1,8 +1,12 @@
 <template>
-  <horizontal-bar-chart-component v-if="chartType === 'BarChart'"
-  :chartLabels="chartLabels"
-  :chartData="chartData">
-  </horizontal-bar-chart-component>
+  <div class="horizontal-bar-chart-component-container" v-if="chartType === 'BarChart'">
+    <horizontal-bar-chart-component
+      :chartData="chartData"
+      :chartLabels="chartLabels"
+      :chartTitle="chartTitle">
+    </horizontal-bar-chart-component>
+  </div>
+
 </template>
 
 <script>
@@ -11,6 +15,10 @@
   export default {
     name: 'ChartComponent',
     props: {
+      chartTitle: {
+        type: String,
+        required: false
+      },
       chartType: {
         type: String,
         required: false,
@@ -24,11 +32,6 @@
       labels: {
         type: Array,
         required: true
-      },
-      options: {
-        type: Object,
-        required: false,
-        default: () => ({})
       }
     },
     computed: {
