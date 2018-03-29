@@ -1,3 +1,9 @@
+// ===============================================
+// ===============================================
+// ============== Private functions ==============
+// ===============================================
+// ===============================================
+
 const mapAttributesToFilters = (attribute) => {
   switch (attribute.name) {
     case 'biobank':
@@ -57,6 +63,71 @@ const mapAttributesToFilters = (attribute) => {
 }
 
 /**
+ * Return label value
+ */
+const getAggregateLabel = (label) => {
+  if (label === null) {
+    return 'Unknown'
+  }
+
+  if (label.id !== undefined) {
+    return label.id
+  }
+
+  return label
+}
+
+/**
+ * Generate data for a BarChart
+ *
+ * This type of data has multiple data rows: [label, value]
+ */
+const generateBarChartData = (attribute, aggregates) => {
+  const aggregateLabels = aggregates.xLabels
+  const labels = []
+  const data = aggregates.matrix.map((row, index) => {
+    labels.push(getAggregateLabel(aggregateLabels[index]))
+    return row[0]
+  })
+
+  return {
+    [attribute.name]: {
+      chartType: attribute.chartType,
+      data: data,
+      labels: labels,
+      options: attribute.options
+    }
+  }
+}
+
+/**
+ * Generate data for a ColumnChart
+ *
+ * This type of data has one data row: [label, value 1, value 2, ...values]
+ */
+const generateColumnChartData = (attribute, aggregates) => {
+  const data = aggregates.matrix.reduce((accumulator, row) => {
+    accumulator.push(row[0])
+    return accumulator
+  }, [])
+
+  return {
+    [attribute.name]: {
+      chartType: attribute.chartType,
+      data: data,
+      labels: attribute.labels,
+      options: attribute.options
+    }
+  }
+}
+
+// ===============================================
+// ===============================================
+// ============== Public functions ===============
+// ===============================================
+// ===============================================
+
+/**
  * Create a map of sample category as key, and id, label, options object as value
  */
 export const subjectMetadataToFilterMapper = (sampleMetadata) => {
@@ -66,28 +137,17 @@ export const subjectMetadataToFilterMapper = (sampleMetadata) => {
     return accumulator
   }, {})
 }
+
 /**
- * Create an object containing rows, columns, options, and chartType
- * which can be used by vue-charts
+ * Map aggregate data to specific types of chart data
  */
 export const aggregateDataToChartData = (attribute, aggregates) => {
-  const aggregateLabels = aggregates.xLabels
-  const data = aggregates.matrix.map((row, index) => {
-    row.unshift(aggregateLabels[index].id)
-    return row
-  })
-
-  const labels = [
-    {type: 'string', label: 'Biobank'},
-    {type: 'number', label: 'Samples'}
-  ]
-
-  return {
-    [attribute.name]: {
-      chartType: attribute.chartType,
-      data: data,
-      labels: labels,
-      options: attribute.options
-    }
+  switch (attribute.chartType) {
+    case 'BarChart':
+      return generateBarChartData(attribute, aggregates)
+    case 'ColumnChart':
+      return generateColumnChartData(attribute, aggregates)
+    default:
+      console.log('unsupported chart type')
   }
 }

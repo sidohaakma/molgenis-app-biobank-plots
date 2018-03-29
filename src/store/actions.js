@@ -14,7 +14,12 @@ const {sampleTable} = window.__INITIAL_STATE__ || {}
 const attributes = [
   {
     name: 'biobank',
+    label: 'Biobank',
     chartType: 'BarChart',
+    labels: [
+      {type: 'string', label: 'Biobank'},
+      {type: 'number', label: 'Samples'}
+    ],
     options: {
       hAxis: {
         title: 'Number of Samples',
@@ -28,8 +33,33 @@ const attributes = [
       legend: 'none'
     }
   },
-  {name: 'smoking', chartType: 'ColumnChart'},
-  {name: 'sex', chartType: 'ColumnChart'}
+  {
+    name: 'smoking',
+    label: 'Smoking',
+    chartType: 'ColumnChart',
+    options: {
+      title: 'Smoking data',
+      stacked: true
+    },
+    labels: [
+      {type: 'number', label: 'Available', key: 'T'},
+      {type: 'number', label: 'Not available', key: 'F'},
+      {type: 'number', label: 'Unknown', key: 'null'}
+    ]
+  },
+  {
+    name: 'sex',
+    label: 'Sex',
+    chartType: 'ColumnChart',
+    options: {
+      title: 'Sex'
+    },
+    labels: [
+      {type: 'number', label: 'Male', key: 'male'},
+      {type: 'number', label: 'Female', key: 'female'},
+      {type: 'number', label: 'Unknown', key: 'null'}
+    ]
+  }
 ]
 // 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs'
 
