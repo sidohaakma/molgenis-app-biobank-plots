@@ -66,14 +66,8 @@ const mapAttributesToFilters = (attribute) => {
  * Return label value
  */
 const getAggregateLabel = (label) => {
-  if (label === null) {
-    return 'Unknown'
-  }
-
-  if (label.id !== undefined) {
-    return label.id
-  }
-
+  if (label === null) return 'Unknown'
+  if (label.id !== undefined) return label.id
   return label
 }
 
@@ -92,10 +86,10 @@ const generateBarChartData = (attribute, aggregates) => {
 
   return {
     [attribute.name]: {
+      chartTitle: attribute.chartTitle,
       chartType: attribute.chartType,
       data: data,
-      labels: labels,
-      options: attribute.options
+      labels: labels
     }
   }
 }
@@ -106,17 +100,20 @@ const generateBarChartData = (attribute, aggregates) => {
  * This type of data has one data row: [label, value 1, value 2, ...values]
  */
 const generateColumnChartData = (attribute, aggregates) => {
-  const data = aggregates.matrix.reduce((accumulator, row) => {
-    accumulator.push(row[0])
-    return accumulator
-  }, [])
+  const data = aggregates.matrix.map((aggregate, index) => {
+    return {
+      data: aggregate,
+      label: attribute.datasets[index].label,
+      backgroundColor: attribute.datasets[index].backgroundColor
+    }
+  })
 
   return {
     [attribute.name]: {
+      chartTitle: attribute.chartTitle,
       chartType: attribute.chartType,
       data: data,
-      labels: attribute.labels,
-      options: attribute.options
+      labels: [attribute.chartTitle]
     }
   }
 }
@@ -143,7 +140,7 @@ export const subjectMetadataToFilterMapper = (sampleMetadata) => {
  */
 export const aggregateDataToChartData = (attribute, aggregates) => {
   switch (attribute.chartType) {
-    case 'BarChart':
+    case 'HorizontalBarChart':
       return generateBarChartData(attribute, aggregates)
     case 'ColumnChart':
       return generateColumnChartData(attribute, aggregates)
