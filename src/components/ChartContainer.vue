@@ -1,11 +1,11 @@
 <template>
   <div class="chart-container">
-    <div v-for="attribute in attributeChartData" class="mb-2 chart-component py-3">
+    <div v-for="attribute in attributeChartData" class="mb-3 chart-component py-3">
       <chart-component
-        :data="attribute.data"
         :chartType="attribute.chartType"
-        :labels="attribute.labels"
-        :options="attribute.options">
+        :chartTitle="attribute.chartTitle"
+        :data="attribute.data"
+        :labels="attribute.labels">
       </chart-component>
     </div>
   </div>
