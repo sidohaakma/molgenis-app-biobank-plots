@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-component">
+  <div class="filter-component pt-0">
     <h5>{{filter.label}}</h5>
 
     <template v-if="filter.filterType === 'dropdown'">

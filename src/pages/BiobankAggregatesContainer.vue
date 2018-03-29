@@ -5,14 +5,14 @@
     </div>
 
     <div class="col-9">
-      <plot-container/>
+      <chart-container/>
     </div>
   </div>
 </template>
 
 <script>
+  import ChartContainer from '../components/ChartContainer'
   import FilterContainer from '../components/FilterContainer'
-  import PlotContainer from '../components/PlotContainer'
 
   export default {
     name: 'BiobankAggregatesContainer',
@@ -31,8 +31,8 @@
       }
     },
     components: {
-      FilterContainer,
-      PlotContainer
+      ChartContainer,
+      FilterContainer
     }
   }
 </script>
