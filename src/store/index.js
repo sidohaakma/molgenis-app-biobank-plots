@@ -19,10 +19,10 @@ const state: State = {
   activeFilters: {},
 
   /**
-   * A map containing aggregate data and labels for different categories i.e. sex and smoking
+   * An array containing chart data objects
    * mapped to a format understandable for VueCharts.js
    */
-  attributeChartData: {},
+  chartData: [],
 
   /**
    * A map containing the different filter components and their specific option lists

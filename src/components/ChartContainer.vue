@@ -1,11 +1,11 @@
 <template>
   <div class="chart-container">
-    <div v-for="attribute in attributeChartData" class="mb-3 chart-component py-3">
+    <div v-for="chart in chartData" class="mb-3 chart-component py-3">
       <chart-component
-        :chartType="attribute.chartType"
-        :chartTitle="attribute.chartTitle"
-        :data="attribute.data"
-        :labels="attribute.labels">
+        :chartType="chart.chartType"
+        :chartTitle="chart.chartTitle"
+        :data="chart.data"
+        :labels="chart.labels">
       </chart-component>
     </div>
   </div>
@@ -24,8 +24,8 @@
   export default {
     name: 'ChartContainer',
     computed: {
-      attributeChartData () {
-        return this.$store.state.attributeChartData
+      chartData () {
+        return this.$store.state.chartData
       }
     },
     components: {

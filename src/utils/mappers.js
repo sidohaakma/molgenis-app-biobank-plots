@@ -85,12 +85,11 @@ const generateBarChartData = (attribute, aggregates) => {
   })
 
   return {
-    [attribute.name]: {
-      chartTitle: attribute.chartTitle,
-      chartType: attribute.chartType,
-      data: data,
-      labels: labels
-    }
+    name: attribute.name,
+    chartTitle: attribute.chartTitle,
+    chartType: attribute.chartType,
+    data: data,
+    labels: labels
   }
 }
 
@@ -109,12 +108,11 @@ const generateColumnChartData = (attribute, aggregates) => {
   })
 
   return {
-    [attribute.name]: {
-      chartTitle: attribute.chartTitle,
-      chartType: attribute.chartType,
-      data: data,
-      labels: [attribute.chartTitle]
-    }
+    name: attribute.name,
+    chartTitle: attribute.chartTitle,
+    chartType: attribute.chartType,
+    data: data,
+    labels: [attribute.chartTitle]
   }
 }
 
@@ -147,4 +145,8 @@ export const aggregateDataToChartData = (attribute, aggregates) => {
     default:
       console.log('unsupported chart type')
   }
+}
+
+export const mapActiveFiltersToRSQL = (activeFilters) => {
+  return 'sex==male'
 }
