@@ -7,6 +7,10 @@ export default {
     state.filterComponents = filterComponents
   },
 
+  'SET_TOTAL_NUMBER_OF_SAMPLES' (state, totalNumberOfSamples) {
+    state.totalNumberOfSamples = totalNumberOfSamples
+  },
+
   'UPDATE_ACTIVE_FILTERS' (state, update) {
     state.activeFilters = {...state.activeFilters, ...update}
   },

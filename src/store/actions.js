@@ -19,6 +19,7 @@ export default {
     api.get('/api/v2/' + sampleTable + '?includeCategories=true').then(response => {
       const filterComponents = mappers.subjectMetadataToFilterMapper(response.meta)
       commit('SET_FILTER_COMPONENTS', filterComponents)
+      commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.meta.total)
     })
   },
 
