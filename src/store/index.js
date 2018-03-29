@@ -1,4 +1,9 @@
+// @flow
+
+// $FlowFixMe
 import Vue from 'vue'
+
+// $FlowFixMe
 import Vuex from 'vuex'
 
 import actions from './actions'
@@ -22,7 +27,12 @@ const state: State = {
   /**
    * A map containing the different filter components and their specific option lists
    */
-  filterComponents: {}
+  filterComponents: {},
+
+  /**
+   * The total number of samples available in the database
+   */
+  totalNumberOfSamples: 0
 }
 
 Vue.use(Vuex)
