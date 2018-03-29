@@ -50,17 +50,12 @@ module.exports = {
     cssSourceMap: true,
 
     before (app) {
-      app.get('/api/v2/leiden_RP', function(request, response) {
-        if(request.query.aggs) {
+      app.get('/api/v2/leiden_RP', function (request, response) {
+        if (request.query.aggs) {
           const attr = request.query.aggs.split('==')[1]
-          switch(attr) {
-            case 'biobank':
-              response.json(biobankAggregateResponse)
-            case 'sex':
-              response.json(sexAggregateResponse)
-            case 'smoking':
-              response.json(smokingAggregateResponse)
-          }
+          if (attr === 'biobank') response.json(biobankAggregateResponse)
+          if (attr === 'sex') response.json(sexAggregateResponse)
+          if (attr === 'smoking') response.json(smokingAggregateResponse)
         } else {
           response.json(sampleResponse)
         }
