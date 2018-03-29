@@ -1,25 +1,30 @@
 <script>
-  import { Bar } from 'vue-chartjs'
+  import { HorizontalBar, mixins } from 'vue-chartjs'
+
+  const {reactiveProp} = mixins
 
   export default {
     name: 'BarChartComponent',
-    extends: Bar,
+    extends: HorizontalBar,
+    mixins: [reactiveProp],
+    props: {
+      chartLabels: {
+        type: Array,
+        required: true
+      },
+      chartData: {
+        type: Array,
+        required: true
+      }
+    },
     data () {
       return {
-        datacollection: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              pointBackgroundColor: 'white',
-              borderWidth: 1,
-              pointBorderColor: '#249EBF',
-              data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
-            }
-          ]
-        },
         options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          legend: {
+            display: false
+          },
           scales: {
             yAxes: [{
               ticks: {
@@ -34,17 +39,21 @@
                 display: false
               }
             }]
-          },
-          legend: {
-            display: false
-          },
-          responsive: true,
-          maintainAspectRatio: false
+          }
         }
       }
     },
     mounted () {
-      this.renderChart(this.datacollection, this.options)
+      const dataCollection = {
+        labels: this.chartLabels,
+        datasets: [
+          {
+            data: this.chartData,
+            backgroundColor: '#184B8A'
+          }
+        ]
+      }
+      this.renderChart(dataCollection, this.options)
     }
   }
 </script>

@@ -1,13 +1,13 @@
 <template>
-  <vue-chart
-    :chartType="chartType"
-    :columns="columns"
-    :rows="rows"
-    :options="options">
-  </vue-chart>
+  <horizontal-bar-chart-component v-if="chartType === 'BarChart'"
+  :chartLabels="chartLabels"
+  :chartData="chartData">
+  </horizontal-bar-chart-component>
 </template>
 
 <script>
+  import HorizontalBarChartComponent from './HorizontalBarChartComponent'
+
   export default {
     name: 'ChartComponent',
     props: {
@@ -32,12 +32,15 @@
       }
     },
     computed: {
-      columns () {
+      chartLabels () {
         return this.labels
       },
-      rows () {
+      chartData () {
         return this.data
       }
+    },
+    components: {
+      HorizontalBarChartComponent
     }
   }
 </script>
