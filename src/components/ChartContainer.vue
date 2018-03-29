@@ -13,7 +13,7 @@
 
 <style scoped>
   .chart-component {
-    box-shadow: -1px 6px 7px #d7dae0;
+    box-shadow: 4px 4px 7px 4px #d7dae0;
     border: none;
   }
 </style>

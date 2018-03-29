@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-container p-4">
+  <div class="filter-container p-4 mb-5">
     <div class="row">
 
       <div class="col-6">
