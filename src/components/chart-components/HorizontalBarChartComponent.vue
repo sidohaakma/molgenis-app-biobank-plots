@@ -1,6 +1,7 @@
 <script>
   import { HorizontalBar, mixins } from 'vue-chartjs'
 
+  // Use reactiveProp to automatically watch a 'chartData' property
   const {reactiveProp} = mixins
 
   export default {
@@ -8,39 +9,18 @@
     extends: HorizontalBar,
     mixins: [reactiveProp],
     props: {
+      chartData: {
+        type: Array,
+        required: true
+      },
       chartLabels: {
         type: Array,
         required: true
       },
-      chartData: {
-        type: Array,
-        required: true
-      }
-    },
-    data () {
-      return {
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: false
-          },
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              },
-              gridLines: {
-                display: true
-              }
-            }],
-            xAxes: [{
-              gridLines: {
-                display: false
-              }
-            }]
-          }
-        }
+      chartTitle: {
+        type: String,
+        required: false,
+        default: 'Horizontal bar chart'
       }
     },
     mounted () {
@@ -53,7 +33,32 @@
           }
         ]
       }
-      this.renderChart(dataCollection, this.options)
+
+      const options = {
+        title: {
+          text: this.chartTitle,
+          fontColor: '#184B8A',
+          fontSize: 20,
+          display: true
+        },
+        tooltips: {
+          displayColors: false,
+          titleFontSize: 14,
+          bodyFontSize: 12,
+          callbacks: {
+            label (tooltipItem) {
+              return 'Samples: ' + tooltipItem.xLabel
+            }
+          }
+        },
+        maintainAspectRatio: false,
+        responsive: true,
+        legend: {
+          display: false
+        }
+      }
+
+      this.renderChart(dataCollection, options)
     }
   }
 </script>
