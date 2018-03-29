@@ -21,8 +21,4 @@
   h4, h5 {
     color: #184B8A;
   }
-
-  .card-subtitle {
-    color: #BDC8DD;
-  }
 </style>
