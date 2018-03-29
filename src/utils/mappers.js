@@ -67,11 +67,27 @@ export const subjectMetadataToFilterMapper = (sampleMetadata) => {
   }, {})
 }
 /**
- * Map aggregate data to data usable by charts
+ * Create an object containing rows, columns, options, and chartType
+ * which can be used by vue-charts
  */
-export const aggregateDataToChartData = (attribute, aggregates) => ({
-  [attribute]: {
-    data: aggregates.matrix.map(array => array[0]),
-    labels: aggregates.xLabels.map(label => label ? label.id ? label.id : label : 'Unknown')
+export const aggregateDataToChartData = (attribute, aggregates) => {
+  const aggregateLabels = aggregates.xLabels
+  const data = aggregates.matrix.map((row, index) => {
+    row.unshift(aggregateLabels[index].id)
+    return row
+  })
+
+  const labels = [
+    {type: 'string', label: 'Biobank'},
+    {type: 'number', label: 'Samples'}
+  ]
+
+  return {
+    [attribute.name]: {
+      chartType: attribute.chartType,
+      data: data,
+      labels: labels,
+      options: attribute.options
+    }
   }
-})
+}

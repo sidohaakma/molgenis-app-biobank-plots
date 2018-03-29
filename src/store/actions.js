@@ -9,10 +9,29 @@ import type { VuexContext } from '../flow.types'
 const {sampleTable} = window.__INITIAL_STATE__ || {}
 
 /**
- * List of attributes used to fetch aggregate data
- * These attributes are all involved in one plot or another
+ * List of attributes used to create chart data
  */
-const attributes = ['biobank', 'smoking', 'sex', 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs']
+const attributes = [
+  {
+    name: 'biobank',
+    chartType: 'BarChart',
+    options: {
+      hAxis: {
+        title: 'Number of Samples',
+        maxValue: 5500
+      },
+      vAxis: {
+        title: 'Biobank'
+      },
+      height: 700,
+      width: '100%',
+      legend: 'none'
+    }
+  },
+  {name: 'smoking', chartType: 'ColumnChart'},
+  {name: 'sex', chartType: 'ColumnChart'}
+]
+// 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs'
 
 export default {
   'GET_SUBJECT_METADATA' ({commit}: VuexContext) {
@@ -25,7 +44,7 @@ export default {
 
   'GET_SUBJECT_AGGREGATION' ({commit}: VuexContext) {
     attributes.forEach(attribute => {
-      api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute).then(response => {
+      api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name).then(response => {
         const attributeChartData = mappers.aggregateDataToChartData(attribute, response.aggs)
         commit('UPDATE_ATTRIBUTE_CHART_DATA', attributeChartData)
       })
