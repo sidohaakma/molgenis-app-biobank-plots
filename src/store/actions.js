@@ -23,15 +23,31 @@ export default {
   },
 
   'GET_SUBJECT_AGGREGATION' ({commit}: VuexContext) {
+    const promises = []
+
     attributes.forEach(attribute => {
-      api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name).then(response => {
-        const attributeChartData = mappers.aggregateDataToChartData(attribute, response.aggs)
-        commit('UPDATE_ATTRIBUTE_CHART_DATA', attributeChartData)
-      })
+      promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name).then(response => {
+        return mappers.aggregateDataToChartData(attribute, response.aggs)
+      }))
+    })
+
+    Promise.all(promises).then(chartData => {
+      commit('UPDATE_ATTRIBUTE_CHART_DATA', chartData)
     })
   },
 
   'UPDATE_SUBJECT_AGGREGATION' ({state, commit}: VuexContext) {
-    console.log('UPDATE AGGREGATES!')
+    const promises = []
+
+    attributes.forEach(attribute => {
+      const rsql = mappers.mapActiveFiltersToRSQL(state.activeFilters)
+      promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + '&q=' + rsql).then(response => {
+        return mappers.aggregateDataToChartData(attribute, response.aggs)
+      }))
+    })
+
+    Promise.all(promises).then(chartData => {
+      commit('UPDATE_ATTRIBUTE_CHART_DATA', chartData)
+    })
   }
 }
