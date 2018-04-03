@@ -19,10 +19,20 @@
           {
             name: 'biobank',
             title: 'Number of samples per biobank',
-            type: 'HorizontalBarChart'
+            type: 'HorizontalBarChart',
+            inline: false,
+            sorted: false
+          },
+          {
+            name: 'age_years',
+            title: 'Age',
+            type: 'VerticalBarChart',
+            inline: false,
+            sorted: true
           },
           {
             name: 'smoking',
+            inline: true,
             title: 'Smoking data',
             type: 'ColumnChart',
             datasets: [
@@ -34,6 +44,7 @@
           {
             name: 'sex',
             title: 'Sex',
+            inline: true,
             type: 'ColumnChart',
             datasets: [
               {label: 'Male', backgroundColor: '#184B8A'},

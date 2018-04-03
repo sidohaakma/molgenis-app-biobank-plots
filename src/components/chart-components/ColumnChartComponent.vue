@@ -43,8 +43,8 @@
         maintainAspectRatio: false,
         responsive: true,
         scales: {
-          xAxes: [{stacked: true}],
-          yAxes: [{stacked: true}]
+          xAxes: [{stacked: true, barPercentage: 0.25}],
+          yAxes: [{stacked: true, barPercentage: 0.25}]
         }
       }
 

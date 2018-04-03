@@ -17,7 +17,7 @@ const mapAttributesToFilters = (attribute) => {
           value: option.id
         }))
       }
-    case 'age':
+    case 'age_years':
       return {
         id: attribute.name,
         label: attribute.label,
@@ -89,7 +89,8 @@ const generateBarChartData = (attribute, aggregates) => {
     title: attribute.title,
     type: attribute.type,
     data: data,
-    labels: labels
+    labels: labels,
+    inline: attribute.inline
   }
 }
 
@@ -112,7 +113,8 @@ const generateColumnChartData = (attribute, aggregates) => {
     title: attribute.title,
     type: attribute.type,
     data: data,
-    labels: [attribute.title]
+    labels: [attribute.title],
+    inline: attribute.inline
   }
 }
 
@@ -128,6 +130,7 @@ const generateColumnChartData = (attribute, aggregates) => {
 export const subjectMetadataToFilterMapper = (sampleMetadata) => {
   const filters = sampleMetadata.attributes.find(attribute => attribute.name === 'filters')
   return filters.attributes.reduce((accumulator, attribute) => {
+    if (attribute.name === 'age') return accumulator // skip age column, we use age_years
     accumulator[attribute.name] = mapAttributesToFilters(attribute)
     return accumulator
   }, {})
@@ -138,10 +141,11 @@ export const subjectMetadataToFilterMapper = (sampleMetadata) => {
  */
 export const aggregateDataToChartData = (attribute, aggregates) => {
   switch (attribute.type) {
-    case 'HorizontalBarChart':
-      return generateBarChartData(attribute, aggregates)
     case 'ColumnChart':
       return generateColumnChartData(attribute, aggregates)
+    case 'HorizontalBarChart':
+    case 'VerticalBarChart':
+      return generateBarChartData(attribute, aggregates)
     default:
       console.log('unsupported chart type')
   }

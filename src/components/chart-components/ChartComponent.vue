@@ -1,5 +1,13 @@
 <template>
   <div class="chart-component-container">
+    <div class="column-chart-component" v-if="type === 'ColumnChart'">
+      <column-chart-component
+        :chartData="chartData"
+        :chartLabels="chartLabels"
+        :chartTitle="chartTitle">
+      </column-chart-component>
+    </div>
+
     <div class="horizontal-bar-chart-component-container" v-if="type === 'HorizontalBarChart'">
       <horizontal-bar-chart-component
         :chartData="chartData"
@@ -8,12 +16,12 @@
       </horizontal-bar-chart-component>
     </div>
 
-    <div class="column-chart-component" v-if="type === 'ColumnChart'">
-      <column-chart-component
+    <div class="vertical-bar-chart-component-container" v-if="type === 'VerticalBarChart'">
+      <vertical-bar-chart-component
         :chartData="chartData"
         :chartLabels="chartLabels"
         :chartTitle="chartTitle">
-      </column-chart-component>
+      </vertical-bar-chart-component>
     </div>
   </div>
 </template>
@@ -21,6 +29,7 @@
 <script>
   import ColumnChartComponent from './ColumnChartComponent'
   import HorizontalBarChartComponent from './HorizontalBarChartComponent'
+  import VerticalBarChartComponent from './VerticalBarChartComponent'
 
   export default {
     name: 'ChartComponent',
@@ -61,7 +70,8 @@
     },
     components: {
       ColumnChartComponent,
-      HorizontalBarChartComponent
+      HorizontalBarChartComponent,
+      VerticalBarChartComponent
     }
   }
 </script>

@@ -1,12 +1,12 @@
 <script>
-  import { HorizontalBar, mixins } from 'vue-chartjs'
+  import { Bar, mixins } from 'vue-chartjs'
 
   // Use reactiveProp to automatically watch a 'chartData' property
   const {reactiveProp} = mixins
 
   export default {
-    name: 'HorizontalBarChartComponent',
-    extends: HorizontalBar,
+    name: 'VerticalBarChartComponent',
+    extends: Bar,
     mixins: [reactiveProp],
     props: {
       chartData: {
@@ -20,7 +20,7 @@
       chartTitle: {
         type: String,
         required: false,
-        default: 'Horizontal bar chart'
+        default: 'Vertical bar chart'
       }
     },
     mounted () {
@@ -34,6 +34,7 @@
         ]
       }
 
+      // TODO Fix xAxes scaling
       const options = {
         title: {
           text: this.chartTitle,
@@ -44,12 +45,7 @@
         tooltips: {
           displayColors: false,
           titleFontSize: 14,
-          bodyFontSize: 12,
-          callbacks: {
-            label (tooltipItem) {
-              return 'Samples: ' + tooltipItem.xLabel
-            }
-          }
+          bodyFontSize: 12
         },
         maintainAspectRatio: false,
         responsive: true,
