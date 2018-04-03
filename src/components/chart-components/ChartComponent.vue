@@ -1,6 +1,6 @@
 <template>
   <div class="chart-component-container">
-    <div class="horizontal-bar-chart-component-container" v-if="chartType === 'HorizontalBarChart'">
+    <div class="horizontal-bar-chart-component-container" v-if="type === 'HorizontalBarChart'">
       <horizontal-bar-chart-component
         :chartData="chartData"
         :chartLabels="chartLabels"
@@ -8,7 +8,7 @@
       </horizontal-bar-chart-component>
     </div>
 
-    <div class="column-chart-component" v-if="chartType === 'ColumnChart'">
+    <div class="column-chart-component" v-if="type === 'ColumnChart'">
       <column-chart-component
         :chartData="chartData"
         :chartLabels="chartLabels"
@@ -25,11 +25,11 @@
   export default {
     name: 'ChartComponent',
     props: {
-      chartTitle: {
+      title: {
         type: String,
         required: false
       },
-      chartType: {
+      type: {
         type: String,
         required: false,
         default: 'LineChart'
@@ -45,11 +45,18 @@
       }
     },
     computed: {
-      chartLabels () {
-        return this.labels
-      },
       chartData () {
-        return this.data
+        // Create a deep copy
+        // Prevents vuex outside store mutations
+        return JSON.parse(JSON.stringify(this.data))
+      },
+      chartLabels () {
+        // Create a deep copy
+        // Prevents vuex outside store mutations
+        return JSON.parse(JSON.stringify(this.labels))
+      },
+      chartTitle () {
+        return this.title
       }
     },
     components: {
