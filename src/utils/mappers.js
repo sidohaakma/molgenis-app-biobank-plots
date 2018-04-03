@@ -74,7 +74,7 @@ const getAggregateLabel = (label) => {
 /**
  * Generate data for a BarChart
  *
- * This type of data has multiple data rows: [label, value]
+ * This type of chart has multiple data rows: [label, value]
  */
 const generateBarChartData = (attribute, aggregates) => {
   const aggregateLabels = aggregates.xLabels
@@ -85,9 +85,9 @@ const generateBarChartData = (attribute, aggregates) => {
   })
 
   return {
-    name: attribute.name,
-    chartTitle: attribute.chartTitle,
-    chartType: attribute.chartType,
+    id: attribute.name,
+    title: attribute.title,
+    type: attribute.type,
     data: data,
     labels: labels
   }
@@ -96,7 +96,7 @@ const generateBarChartData = (attribute, aggregates) => {
 /**
  * Generate data for a ColumnChart
  *
- * This type of data has one data row: [label, value 1, value 2, ...values]
+ * This type of chart has one data row: [label, value 1, value 2, ...values]
  */
 const generateColumnChartData = (attribute, aggregates) => {
   const data = aggregates.matrix.map((aggregate, index) => {
@@ -108,11 +108,11 @@ const generateColumnChartData = (attribute, aggregates) => {
   })
 
   return {
-    name: attribute.name,
-    chartTitle: attribute.chartTitle,
-    chartType: attribute.chartType,
+    id: attribute.name,
+    title: attribute.title,
+    type: attribute.type,
     data: data,
-    labels: [attribute.chartTitle]
+    labels: [attribute.title]
   }
 }
 
@@ -137,7 +137,7 @@ export const subjectMetadataToFilterMapper = (sampleMetadata) => {
  * Map aggregate data to specific types of chart data
  */
 export const aggregateDataToChartData = (attribute, aggregates) => {
-  switch (attribute.chartType) {
+  switch (attribute.type) {
     case 'HorizontalBarChart':
       return generateBarChartData(attribute, aggregates)
     case 'ColumnChart':

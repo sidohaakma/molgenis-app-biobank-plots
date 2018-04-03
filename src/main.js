@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: '#biobank-aggregates-app-container',
   store,
   router,
   components: {App},

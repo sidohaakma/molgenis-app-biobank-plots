@@ -18,13 +18,13 @@
         attributes: [
           {
             name: 'biobank',
-            chartTitle: 'Number of samples per biobank',
-            chartType: 'HorizontalBarChart'
+            title: 'Number of samples per biobank',
+            type: 'HorizontalBarChart'
           },
           {
             name: 'smoking',
-            chartTitle: 'Smoking data',
-            chartType: 'ColumnChart',
+            title: 'Smoking data',
+            type: 'ColumnChart',
             datasets: [
               {label: 'Yes', backgroundColor: '#184B8A'},
               {label: 'No', backgroundColor: '#ed660c'},
@@ -33,8 +33,8 @@
           },
           {
             name: 'sex',
-            chartTitle: 'Sex',
-            chartType: 'ColumnChart',
+            title: 'Sex',
+            type: 'ColumnChart',
             datasets: [
               {label: 'Male', backgroundColor: '#184B8A'},
               {label: 'Female', backgroundColor: '#ed660c'},
@@ -44,6 +44,6 @@
         ]
       }
     </script>
-    <div id="app"></div>
+    <div id="biobank-aggregates-app-container"></div>
   </body>
 </html>

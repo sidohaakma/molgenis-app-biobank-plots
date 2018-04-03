@@ -1,15 +1,16 @@
 // @flow
 
-export type ChartData = {
-  chartTitle?: string,
-  chartType?: string,
+export type Chart = {
+  id?: string,
+  title?: string,
+  type?: string,
   data?: Array<*>,
   labels?: Array<String>
 }
 
 export type State = {
   activeFilters: Object,
-  chartData: Array<ChartData>,
+  charts: Array<Chart>,
   filterComponents: Object,
   totalNumberOfSamples: number
 }

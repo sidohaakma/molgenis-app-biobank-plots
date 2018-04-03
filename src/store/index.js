@@ -20,9 +20,8 @@ const state: State = {
 
   /**
    * An array containing chart data objects
-   * mapped to a format understandable for VueCharts.js
    */
-  chartData: [],
+  charts: [],
 
   /**
    * A map containing the different filter components and their specific option lists
