@@ -4,25 +4,26 @@ import td from 'testdouble'
 import utils from '@molgenis/molgenis-vue-test-utils'
 import mappers from 'src/mappers'
 
-describe('actions', () => {
-  const filters = {}
-  const charts = ['chart']
-  const rsql = 'biobank==ALPHA'
+window.__INITIAL_STATE__ = {
+  sampleTable: 'test',
+  attributes: [
+    {
+      name: 'test'
+    }
+  ]
+}
 
+describe('actions', () => {
   beforeEach(() => {
     td.reset()
 
     const activeFiltersToRsqlMapper = td.function('mappers.activeFiltersToRsqlMapper')
+    td.when(activeFiltersToRsqlMapper({})).thenReturn('biobank==ALPHA')
     td.replace(mappers, 'activeFiltersToRsqlMapper', activeFiltersToRsqlMapper)
-    td.when(activeFiltersToRsqlMapper(td.matchers.anything())).thenReturn(rsql)
 
     const aggregateDataToChartDataMapper = td.function('mappers.aggregateDataToChartDataMapper')
+    td.when(aggregateDataToChartDataMapper({name: 'test'}, {})).thenReturn('chart')
     td.replace(mappers, 'aggregateDataToChartDataMapper', aggregateDataToChartDataMapper)
-    td.when(aggregateDataToChartDataMapper(td.matchers.anything())).thenReturn(charts)
-
-    const subjectMetadataToFilterMapper = td.function('mappers.subjectMetadataToFilterMapper')
-    td.when(subjectMetadataToFilterMapper(td.matchers.anything())).thenReturn(filters)
-    td.replace(mappers, 'subjectMetadataToFilterMapper', subjectMetadataToFilterMapper)
   })
 
   describe('GET_SUBJECT_METADATA', () => {
@@ -33,6 +34,9 @@ describe('actions', () => {
       td.replace(api, 'get', get)
 
       const filters = {}
+      const subjectMetadataToFilterMapper = td.function('mappers.subjectMetadataToFilterMapper')
+      td.when(subjectMetadataToFilterMapper(response.meta)).thenReturn(filters)
+      td.replace(mappers, 'subjectMetadataToFilterMapper', subjectMetadataToFilterMapper)
 
       const options = {
         expectedMutations: [
@@ -54,7 +58,7 @@ describe('actions', () => {
 
       const options = {
         expectedMutations: [
-          {type: 'UPDATE_CHARTS', payload: charts}
+          {type: 'UPDATE_CHARTS', payload: ['chart']}
         ]
       }
 
@@ -64,7 +68,19 @@ describe('actions', () => {
 
   describe('UPDATE_SUBJECT_AGGREGATION', () => {
     it('should fetch aggregates with RSQL based on activeFilters and commit mapped chart data to the state', done => {
+      const response = {aggs: {}}
+      const get = td.function('api.get')
+      td.when(get(td.matchers.anything())).thenResolve(response)
+      td.replace(api, 'get', get)
 
+      const options = {
+        state: {activeFilters: {}},
+        expectedMutations: [
+          {type: 'UPDATE_CHARTS', payload: ['chart']}
+        ]
+      }
+
+      utils.testAction(actions.UPDATE_SUBJECT_AGGREGATION, options, done)
     })
   })
 })
