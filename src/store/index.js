@@ -16,7 +16,9 @@ const state: State = {
   /**
    * A map containing active filters and their selected filter values
    */
-  activeFilters: {},
+  activeFilters: {
+    age_years: [0, 120]
+  },
 
   /**
    * An array containing chart data objects

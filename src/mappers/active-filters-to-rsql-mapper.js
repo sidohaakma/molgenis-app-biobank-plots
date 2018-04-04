@@ -7,8 +7,8 @@ const activeFiltersToRsqlMapper = (activeFilters) => {
   return Object.keys(activeFilters).reduce((accumulator, filter) => {
     const values = activeFilters[filter]
     if (filter === 'age_years') {
-      accumulator.push(filter + '=ge=' + values.min)
-      accumulator.push(filter + '=le=' + values.max)
+      accumulator.push(filter + '=ge=' + values[0])
+      accumulator.push(filter + '=le=' + values[1])
     } else if (filter === 'data_type') {
       values.forEach(value => accumulator.push(value + '==true'))
     } else if (Array.isArray(values)) {

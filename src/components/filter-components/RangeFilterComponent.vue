@@ -1,59 +1,40 @@
 <template>
   <div class="range-filter-component">
-    <div class="form-group">
-      <label>Minimal age</label>
-      <input
-        type="range"
-        class="form-control"
-        list="range-filter-ticks"
-        :min="minRange"
-        :max="value.max"
-        :step="steps"
-        v-model.lazy="value.min">
-    </div>
-
-    <div class="form-group">
-      <label>Maximum age</label>
-      <input
-        type="range"
-        class="form-control"
-        list="range-filter-ticks"
-        :min="value.min"
-        :max="maxRange"
-        :step="steps"
-        v-model.lazy="value.max">
-    </div>
-
-    <datalist id="range-filter-ticks">
-      <option v-for="tick in ticks" :value="tick" :label="tick"></option>
-    </datalist>
-
-    {{range}}
+    <vue-slider v-model="value"
+                tooltipDir="bottom"
+                :sliderStyle="sliderStyle"
+                :bgStyle="bgStyle"
+                :processStyle="processStyle"
+                :tooltipStyle="tooltipStyle"
+                :lazy="true"
+                :min="range[0]"
+                :max="range[1]">
+    </vue-slider>
   </div>
 </template>
 
 <script>
+  import vueSlider from 'vue-slider-component'
+
   export default {
     name: 'RangeFilterComponent',
+    components: {
+      vueSlider
+    },
     props: {
       filter: {
         type: String,
         required: true
       },
+      range: {
+        type: Array,
+        required: false,
+        default: () => ([0, 100])
+      },
       initialValue: {
-        type: Object,
+        type: Array,
         required: false,
-        default: () => ({min: 0, max: 100})
-      },
-      maxRange: {
-        type: Number,
-        required: false,
-        default: 100
-      },
-      minRange: {
-        type: Number,
-        required: false,
-        default: 0
+        default: () => ([0, 100])
       },
       steps: {
         type: Number,
@@ -68,12 +49,32 @@
     },
     data () {
       return {
+        bgStyle: {
+          'backgroundColor': '#fff',
+          'boxShadow': 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'
+        },
+        processStyle: {
+          'backgroundImage': '-webkit-linear-gradient(left, #ed660c, #184B8A)'
+        },
+        sliderStyle: [
+          {
+            'backgroundColor': '#ed660c'
+          },
+          {
+            'backgroundColor': '#184B8A'
+          }
+        ],
+        tooltipStyle: [
+          {
+            'backgroundColor': '#ed660c',
+            'borderColor': '#ed660c'
+          },
+          {
+            'backgroundColor': '#184B8A',
+            'borderColor': '#184B8A'
+          }
+        ],
         value: this.initialValue
-      }
-    },
-    computed: {
-      range () {
-        return 'Between ' + this.value.min + ' and ' + this.value.max + ' years old'
       }
     },
     watch: {
