@@ -9,14 +9,6 @@
     extends: Bar,
     mixins: [reactiveProp],
     props: {
-      chartData: {
-        type: Array,
-        required: true
-      },
-      chartLabels: {
-        type: Array,
-        required: true
-      },
       chartTitle: {
         type: String,
         required: false,
@@ -24,11 +16,6 @@
       }
     },
     mounted () {
-      const data = {
-        labels: this.chartLabels,
-        datasets: this.chartData
-      }
-
       const options = {
         title: {
           text: this.chartTitle,
@@ -48,7 +35,7 @@
         }
       }
 
-      this.renderChart(data, options)
+      this.renderChart(this.chartData, options)
     }
   }
 </script>

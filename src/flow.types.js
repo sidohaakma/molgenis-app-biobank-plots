@@ -3,8 +3,7 @@
 export type Chart = {
   id?: string,
   title?: string,
-  type?: string,
-  data?: Array<*>,
+  dataCollection?: Object,
   labels?: Array<String>
 }
 

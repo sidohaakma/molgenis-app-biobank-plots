@@ -1,9 +1,8 @@
 <template>
   <div class="chart-component-container">
-    <div class="column-chart-component" v-if="type === 'ColumnChart'">
+    <div class="column-chart-component-container" v-if="type === 'ColumnChart'">
       <column-chart-component
         :chartData="chartData"
-        :chartLabels="chartLabels"
         :chartTitle="chartTitle">
       </column-chart-component>
     </div>
@@ -11,7 +10,6 @@
     <div class="horizontal-bar-chart-component-container" v-if="type === 'HorizontalBarChart'">
       <horizontal-bar-chart-component
         :chartData="chartData"
-        :chartLabels="chartLabels"
         :chartTitle="chartTitle">
       </horizontal-bar-chart-component>
     </div>
@@ -19,7 +17,6 @@
     <div class="vertical-bar-chart-component-container" v-if="type === 'VerticalBarChart'">
       <vertical-bar-chart-component
         :chartData="chartData"
-        :chartLabels="chartLabels"
         :chartTitle="chartTitle">
       </vertical-bar-chart-component>
     </div>
@@ -43,26 +40,14 @@
         required: false,
         default: 'LineChart'
       },
-      data: {
-        type: Array,
-        required: false,
-        default: () => []
-      },
-      labels: {
-        type: Array,
+      dataCollection: {
+        type: Object,
         required: true
       }
     },
     computed: {
       chartData () {
-        // Create a deep copy
-        // Prevents vuex outside store mutations
-        return JSON.parse(JSON.stringify(this.data))
-      },
-      chartLabels () {
-        // Create a deep copy
-        // Prevents vuex outside store mutations
-        return JSON.parse(JSON.stringify(this.labels))
+        return this.dataCollection
       },
       chartTitle () {
         return this.title

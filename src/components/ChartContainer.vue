@@ -6,8 +6,7 @@
           <chart-component
             :type="chart.type"
             :title="chart.title"
-            :data="chart.data"
-            :labels="chart.labels"
+            :dataCollection="getDataCollection(chart)"
             :key="chart.id">
           </chart-component>
         </div>
@@ -19,8 +18,7 @@
         <chart-component
           :type="chart.type"
           :title="chart.title"
-          :data="chart.data"
-          :labels="chart.labels"
+          :dataCollection="getDataCollection(chart)"
           :key="chart.id">
         </chart-component>
       </div>
@@ -40,6 +38,13 @@
 
   export default {
     name: 'ChartContainer',
+    methods: {
+      getDataCollection (chart) {
+        // Create a deep copy
+        // Prevents vuex outside store mutations
+        return JSON.parse(JSON.stringify(chart.dataCollection))
+      }
+    },
     computed: {
       charts () {
         return this.$store.getters.getCharts

@@ -9,14 +9,6 @@
     extends: Bar,
     mixins: [reactiveProp],
     props: {
-      chartData: {
-        type: Array,
-        required: true
-      },
-      chartLabels: {
-        type: Array,
-        required: true
-      },
       chartTitle: {
         type: String,
         required: false,
@@ -24,16 +16,6 @@
       }
     },
     mounted () {
-      const data = {
-        labels: this.chartLabels,
-        datasets: [
-          {
-            data: this.chartData,
-            backgroundColor: '#184B8A'
-          }
-        ]
-      }
-
       // TODO Fix xAxes scaling
       const options = {
         title: {
@@ -54,7 +36,7 @@
         }
       }
 
-      this.renderChart(data, options)
+      this.renderChart(this.chartData, options)
     }
   }
 </script>
