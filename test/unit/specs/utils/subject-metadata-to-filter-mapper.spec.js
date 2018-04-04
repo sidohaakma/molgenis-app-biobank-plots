@@ -22,6 +22,10 @@ describe('subjectMetadataToFilterMapper', () => {
               label: 'Age in years'
             },
             {
+              name: 'age',
+              label: 'Age'
+            },
+            {
               name: 'sex',
               label: 'Sex',
               enumOptions: ['male', 'female']
