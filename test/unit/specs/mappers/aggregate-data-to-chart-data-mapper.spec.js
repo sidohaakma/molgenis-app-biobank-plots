@@ -1,5 +1,7 @@
 import aggregateDataToChartDataMapper from 'src/mappers/aggregate-data-to-chart-data-mapper'
 
+const initialState = window.__INITIAL_STATE__ || {}
+
 describe('aggregateDataToChartDataMapper', () => {
   it('should map an aggregate result to a chart data object for a horizontal bar chart', () => {
     const attribute = {
@@ -32,7 +34,7 @@ describe('aggregateDataToChartDataMapper', () => {
       'dataCollection': {
         'datasets': [
           {
-            'backgroundColor': '#184B8A',
+            'backgroundColor': initialState.primaryColor,
             'data': [
               877,
               649
@@ -80,7 +82,7 @@ describe('aggregateDataToChartDataMapper', () => {
       'dataCollection': {
         'datasets': [
           {
-            'backgroundColor': '#184B8A',
+            'backgroundColor': initialState.primaryColor,
             'data': [
               877,
               649,
@@ -110,9 +112,9 @@ describe('aggregateDataToChartDataMapper', () => {
       title: 'Smoking data',
       type: 'ColumnChart',
       datasets: [
-        {label: 'Yes', backgroundColor: '#184B8A'},
-        {label: 'No', backgroundColor: '#ed660c'},
-        {label: 'Not available', backgroundColor: '#cccccc'}
+        {label: 'Yes', backgroundColor: initialState.primaryColor},
+        {label: 'No', backgroundColor: initialState.secondaryColor},
+        {label: 'Not available', backgroundColor: initialState.tertiaryColor}
       ]
     }
 
@@ -134,21 +136,21 @@ describe('aggregateDataToChartDataMapper', () => {
       'dataCollection': {
         'datasets': [
           {
-            'backgroundColor': '#184B8A',
+            'backgroundColor': initialState.primaryColor,
             'data': [
               877
             ],
             'label': 'Yes'
           },
           {
-            'backgroundColor': '#ed660c',
+            'backgroundColor': initialState.secondaryColor,
             'data': [
               649
             ],
             'label': 'No'
           },
           {
-            'backgroundColor': '#cccccc',
+            'backgroundColor': initialState.tertiaryColor,
             'data': [
               532
             ],
