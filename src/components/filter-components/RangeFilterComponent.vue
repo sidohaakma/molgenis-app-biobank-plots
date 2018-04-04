@@ -23,6 +23,21 @@
       vueSlider
     },
     props: {
+      primaryColor: {
+        type: String,
+        required: false,
+        default: () => ('#007bff')
+      },
+      secondaryColor: {
+        type: String,
+        required: false,
+        default: () => ('#007bff')
+      },
+      backgroundColor: {
+        type: String,
+        required: false,
+        default: () => ('#fff')
+      },
       filter: {
         type: String,
         required: true
@@ -41,28 +56,28 @@
     data () {
       return {
         bgStyle: {
-          'backgroundColor': '#fff',
+          'backgroundColor': this.backgroundColor,
           'boxShadow': 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'
         },
         processStyle: {
-          'backgroundImage': '-webkit-linear-gradient(left, #ed660c, #184B8A)'
+          'backgroundImage': `-webkit-linear-gradient(left, ${this.primaryColor}, ${this.secondaryColor})`
         },
         sliderStyle: [
           {
-            'backgroundColor': '#ed660c'
+            'backgroundColor': this.primaryColor
           },
           {
-            'backgroundColor': '#184B8A'
+            'backgroundColor': this.secondaryColor
           }
         ],
         tooltipStyle: [
           {
-            'backgroundColor': '#ed660c',
-            'borderColor': '#ed660c'
+            'backgroundColor': this.primaryColor,
+            'borderColor': this.primaryColor
           },
           {
-            'backgroundColor': '#184B8A',
-            'borderColor': '#184B8A'
+            'backgroundColor': this.secondaryColor,
+            'borderColor': this.secondaryColor
           }
         ],
         value: this.initialValue

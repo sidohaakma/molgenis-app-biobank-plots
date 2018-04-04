@@ -3,6 +3,8 @@ function UnsupportedChartTypeException (message) {
   this.name = 'UnsupportedChartTypeException'
 }
 
+const initialState = window.__INITIAL_STATE__ || {}
+
 /**
  * Return label value
  */
@@ -30,7 +32,7 @@ const generateBarChartData = (attribute, aggregates) => {
     datasets: [
       {
         data: data,
-        backgroundColor: '#184B8A'
+        backgroundColor: initialState.primaryColor
       }
     ]
   }

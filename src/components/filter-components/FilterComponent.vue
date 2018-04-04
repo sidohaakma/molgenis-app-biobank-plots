@@ -15,6 +15,8 @@
         :filter="filter.id"
         :initialValue="[0, 120]"
         :range="filter.options"
+        :primaryColor="primaryColor"
+        :secondaryColor="secondaryColor"
         @optionSelected="handleOptionSelect">
       </range-filter-component>
     </template>
@@ -42,6 +44,7 @@
   import CheckboxFilterComponent from './CheckboxFilterComponent'
   import DropdownFilterComponent from './DropdownFilterComponent'
   import RangeFilterComponent from './RangeFilterComponent'
+  const initialState = window.__INITIAL_STATE__ || {}
 
   export default {
     name: 'FilterComponent',
@@ -49,6 +52,13 @@
     methods: {
       handleOptionSelect (filter, value) {
         this.$store.commit('UPDATE_ACTIVE_FILTERS', {[filter]: value})
+      }
+    },
+    data () {
+      return {
+        primaryColor: initialState.primaryColor,
+        secondaryColor: initialState.secondaryColor,
+        tertiaryColor: initialState.tertiaryColor
       }
     },
     components: {

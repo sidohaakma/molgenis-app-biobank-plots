@@ -11,9 +11,15 @@
   <body>
     <script>
       var server = 'http://localhost:8080'
+      var primaryColor = '#184B8A'
+      var secondaryColor = '#ed660c'
+      var tertiaryColor = '#cccccc'
       window.__INITIAL_STATE__ = {
         server: server,
         sampleTable: 'leiden_RP',
+        primaryColor: primaryColor,
+        secondaryColor: secondaryColor,
+        tertiaryColor: tertiaryColor,
         // 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs'
         attributes: [
           {
@@ -36,9 +42,9 @@
             title: 'Smoking data',
             type: 'ColumnChart',
             datasets: [
-              {label: 'Yes', backgroundColor: '#184B8A'},
-              {label: 'No', backgroundColor: '#ed660c'},
-              {label: 'Not available', backgroundColor: '#cccccc'}
+              {label: 'Yes', backgroundColor: primaryColor},
+              {label: 'No', backgroundColor: secondaryColor},
+              {label: 'Not available ', backgroundColor: tertiaryColor}
             ]
           },
           {
@@ -47,9 +53,9 @@
             inline: true,
             type: 'ColumnChart',
             datasets: [
-              {label: 'Male', backgroundColor: '#184B8A'},
-              {label: 'Female', backgroundColor: '#ed660c'},
-              {label: 'Not available ', backgroundColor: '#cccccc'}
+              {label: 'Male', backgroundColor: primaryColor},
+              {label: 'Female', backgroundColor: secondaryColor},
+              {label: 'Not available ', backgroundColor: tertiaryColor}
             ]
           }
         ]

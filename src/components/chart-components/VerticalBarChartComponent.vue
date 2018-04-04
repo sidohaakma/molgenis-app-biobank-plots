@@ -4,6 +4,8 @@
   // Use reactiveProp to automatically watch a 'chartData' property
   const {reactiveProp} = mixins
 
+  const initialState = window.__INITIAL_STATE__ || {}
+
   export default {
     name: 'VerticalBarChartComponent',
     extends: Bar,
@@ -20,7 +22,7 @@
       const options = {
         title: {
           text: this.chartTitle,
-          fontColor: '#184B8A',
+          fontColor: initialState.primaryColor,
           fontSize: 20,
           display: true
         },
