@@ -1,4 +1,4 @@
-import subjectMetadataToFilterMapper from 'src/utils/subject-metadata-to-filter-mapper'
+import subjectMetadataToFilterMapper from 'src/mappers/subject-metadata-to-filter-mapper'
 
 describe('subjectMetadataToFilterMapper', () => {
   it('should map metadata to a category filter map', () => {

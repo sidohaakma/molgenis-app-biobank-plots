@@ -1,4 +1,4 @@
-import activeFilterToRsqlMapper from 'src/utils/active-filters-to-rsql-mapper'
+import activeFilterToRsqlMapper from 'src/mappers/active-filters-to-rsql-mapper'
 
 describe('mapActiveFiltersToRSQL', () => {
   it('should map an object of filters to an RSQL string', () => {

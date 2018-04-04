@@ -1,4 +1,4 @@
-import aggregateDataToChartDataMapper from 'src/utils/aggregate-data-to-chart-data-mapper'
+import aggregateDataToChartDataMapper from 'src/mappers/aggregate-data-to-chart-data-mapper'
 
 describe('aggregateDataToChartDataMapper', () => {
   it('should map an aggregate result to a chart data object for a horizontal bar chart', () => {
