@@ -13,7 +13,7 @@ module.exports = function karmaConfig (config) {
     // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
-    reporters: ['spec', 'coverage'],
+    reporters: ['coverage', 'mocha'],
     files: [
       '../../node_modules/babel-polyfill/dist/polyfill.js',
       '../../node_modules/es6-promise/dist/es6-promise.auto.js',
@@ -29,9 +29,12 @@ module.exports = function karmaConfig (config) {
     coverageReporter: {
       dir: './coverage',
       reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' }
+        {type: 'lcov', subdir: '.'},
+        {type: 'text-summary'}
       ]
+    },
+    mochaReporter: {
+      showDiff: true
     }
   })
 }
