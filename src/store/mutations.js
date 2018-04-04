@@ -3,8 +3,8 @@ export default {
     state.activeFilters = {}
   },
 
-  'SET_FILTER_COMPONENTS' (state, filterComponents) {
-    state.filterComponents = filterComponents
+  'SET_FILTERS' (state, filters) {
+    state.filters = filters
   },
 
   'SET_TOTAL_NUMBER_OF_SAMPLES' (state, totalNumberOfSamples) {
@@ -15,7 +15,7 @@ export default {
     state.activeFilters = {...state.activeFilters, ...update}
   },
 
-  'UPDATE_CHART_DATA' (state, charts) {
+  'UPDATE_CHARTS' (state, charts) {
     state.charts = charts
   }
 }

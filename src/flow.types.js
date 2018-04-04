@@ -10,7 +10,7 @@ export type Chart = {
 export type State = {
   activeFilters: Object,
   charts: Array<Chart>,
-  filterComponents: Object,
+  filters: Object,
   totalNumberOfSamples: number
 }
 

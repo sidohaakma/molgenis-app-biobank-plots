@@ -19,7 +19,7 @@
 
     <div class="row">
       <div class="col-12">
-        <div v-for="filter in filterComponents" :key="filter.id">
+        <div v-for="filter in filters" :key="filter.id">
           <filter-component :filter="filter"/>
           <hr class="mt-4">
         </div>
@@ -47,8 +47,8 @@
       }
     },
     computed: {
-      filterComponents () {
-        return this.$store.state.filterComponents
+      filters () {
+        return this.$store.state.filters
       }
     },
     components: {

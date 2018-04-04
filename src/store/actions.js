@@ -15,8 +15,8 @@ const {attributes, sampleTable} = window.__INITIAL_STATE__ || {}
 export default {
   'GET_SUBJECT_METADATA' ({commit}: VuexContext) {
     api.get('/api/v2/' + sampleTable + '?includeCategories=true').then(response => {
-      const filterComponents = mappers.subjectMetadataToFilterMapper(response.meta)
-      commit('SET_FILTER_COMPONENTS', filterComponents)
+      const filters = mappers.subjectMetadataToFilterMapper(response.meta)
+      commit('SET_FILTERS', filters)
       commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
     })
   },
@@ -31,7 +31,7 @@ export default {
     })
 
     Promise.all(promises).then(charts => {
-      commit('UPDATE_CHART_DATA', charts)
+      commit('UPDATE_CHARTS', charts)
     })
   },
 
@@ -48,7 +48,7 @@ export default {
     })
 
     Promise.all(promises).then(charts => {
-      commit('UPDATE_CHART_DATA', charts)
+      commit('UPDATE_CHARTS', charts)
     })
   }
 }

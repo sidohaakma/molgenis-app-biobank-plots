@@ -9,11 +9,11 @@ describe('mutations', () => {
     })
   })
 
-  describe('SET_FILTER_COMPONENTS', () => {
-    it('should set the filterComponents in the state', () => {
-      const state = {filterComponents: {}}
-      mutations.SET_FILTER_COMPONENTS(state, {filter: 'component'})
-      expect(state.filterComponents).to.deep.equal({filter: 'component'})
+  describe('SET_FILTERS', () => {
+    it('should set the filters in the state', () => {
+      const state = {filters: {}}
+      mutations.SET_FILTERS(state, {filter: 'component'})
+      expect(state.filters).to.deep.equal({filter: 'component'})
     })
   })
 
@@ -33,10 +33,10 @@ describe('mutations', () => {
     })
   })
 
-  describe('UPDATE_CHART_DATA', () => {
+  describe('UPDATE_CHARTS', () => {
     it('should update the charts in the state', () => {
       const state = {charts: []}
-      mutations.UPDATE_CHART_DATA(state, ['new chart'])
+      mutations.UPDATE_CHARTS(state, ['new chart'])
       expect(state.charts).to.deep.equal(['new chart'])
     })
   })

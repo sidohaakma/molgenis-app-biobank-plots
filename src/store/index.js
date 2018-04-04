@@ -24,9 +24,9 @@ const state: State = {
   charts: [],
 
   /**
-   * A map containing the different filter components and their specific option lists
+   * A map containing the different filters and their specific option lists
    */
-  filterComponents: {},
+  filters: {},
 
   /**
    * The total number of samples available in the database
