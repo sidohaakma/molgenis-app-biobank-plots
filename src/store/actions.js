@@ -2,9 +2,7 @@
 
 // $FlowFixMe
 import api from '@molgenis/molgenis-api-client'
-import activeFiltersToRsqlMapper from '../mappers/active-filters-to-rsql-mapper'
-import aggregateDataToChartDataMapper from '../mappers/aggregate-data-to-chart-data-mapper'
-import subjectMetadataToFilterMapper from '../mappers/subject-metadata-to-filter-mapper'
+import mappers from 'src/mappers'
 
 import type { VuexContext } from '../flow.types'
 
@@ -17,7 +15,7 @@ const {attributes, sampleTable} = window.__INITIAL_STATE__ || {}
 export default {
   'GET_SUBJECT_METADATA' ({commit}: VuexContext) {
     api.get('/api/v2/' + sampleTable + '?includeCategories=true').then(response => {
-      const filterComponents = subjectMetadataToFilterMapper(response.meta)
+      const filterComponents = mappers.subjectMetadataToFilterMapper(response.meta)
       commit('SET_FILTER_COMPONENTS', filterComponents)
       commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
     })
@@ -28,7 +26,7 @@ export default {
 
     attributes.forEach(attribute => {
       promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name).then(response => {
-        return aggregateDataToChartDataMapper(attribute, response.aggs)
+        return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
       }))
     })
 
@@ -41,10 +39,11 @@ export default {
     const promises = []
 
     attributes.forEach(attribute => {
-      const filters = activeFiltersToRsqlMapper(state.activeFilters)
-      const rsql = filters === '' ? '' : '&q=' + filters
+      const filters = mappers.activeFiltersToRsqlMapper(state.activeFilters)
+      console.log(filters)
+      const rsql = !filters ? '' : '&q=' + filters
       promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + rsql).then(response => {
-        return aggregateDataToChartDataMapper(attribute, response.aggs)
+        return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
       }))
     })
 
