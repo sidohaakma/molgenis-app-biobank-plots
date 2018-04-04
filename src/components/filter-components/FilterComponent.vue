@@ -15,6 +15,7 @@
       <range-filter-component
         :filter="filter.id"
         :initialValue="activeFilterValue"
+        :range="filter.options"
         @optionSelected="handleOptionSelect">
       </range-filter-component>
     </template>

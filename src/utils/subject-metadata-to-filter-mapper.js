@@ -16,10 +16,7 @@ const mapAttributesToFilters = (attribute) => {
         id: attribute.name,
         label: attribute.label,
         filterType: 'range',
-        options: {
-          min: 0,
-          max: 120
-        }
+        options: [0, 120]
       }
     case 'sex':
       return {
