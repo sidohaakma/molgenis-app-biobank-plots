@@ -65,10 +65,7 @@ describe('subjectMetadataToFilterMapper', () => {
         filterType: 'range',
         id: 'age_years',
         label: 'Age in years',
-        options: {
-          min: 0,
-          max: 120
-        }
+        options: [0, 120]
       },
       sex: {
         filterType: 'checkbox-row',

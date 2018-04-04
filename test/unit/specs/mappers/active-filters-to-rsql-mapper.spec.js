@@ -6,10 +6,7 @@ describe('mapActiveFiltersToRSQL', () => {
       biobank: 'CHECK',
       sex: ['male'],
       smoking: [true],
-      age_years: {
-        min: 25,
-        max: 50
-      },
+      age_years: [25, 50],
       data_type: ['genotypes', 'metabolome', 'methylome']
     }
 
