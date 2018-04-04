@@ -6,8 +6,8 @@
       <dropdown-filter-component
         :filter="filter.id"
         :initialValue="activeFilterValue"
-        :onOptionSelect="onOptionSelect"
-        :options="filter.options">
+        :options="filter.options"
+        @optionSelected="handleOptionSelect">
       </dropdown-filter-component>
     </template>
 
@@ -15,7 +15,7 @@
       <range-filter-component
         :filter="filter.id"
         :initialValue="activeFilterValue"
-        :onOptionSelect="onOptionSelect">
+        @optionSelected="handleOptionSelect">
       </range-filter-component>
     </template>
 
@@ -23,9 +23,9 @@
       <checkbox-filter-component
         :filter="filter.id"
         :initialValue="activeFilterValue"
-        :onOptionSelect="onOptionSelect"
         :options="filter.options"
-        orientation="horizontal">
+        orientation="horizontal"
+        @optionSelected="handleOptionSelect">
       </checkbox-filter-component>
     </template>
 
@@ -33,8 +33,8 @@
       <checkbox-filter-component
         :filter="filter.id"
         :initialValue="activeFilterValue"
-        :onOptionSelect="onOptionSelect"
-        :options="filter.options">
+        :options="filter.options"
+        @optionSelected="handleOptionSelect">
       </checkbox-filter-component>
     </template>
   </div>
@@ -54,7 +54,7 @@
       }
     },
     methods: {
-      onOptionSelect (filter, value) {
+      handleOptionSelect (filter, value) {
         this.$store.commit('UPDATE_ACTIVE_FILTERS', {[filter]: value})
       }
     },

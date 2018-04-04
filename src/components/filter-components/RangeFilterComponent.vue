@@ -55,10 +55,6 @@
         required: false,
         default: 0
       },
-      onOptionSelect: {
-        type: Function,
-        required: true
-      },
       steps: {
         type: Number,
         required: false,
@@ -83,7 +79,7 @@
     watch: {
       value: {
         handler (value) {
-          this.onOptionSelect(this.filter, value)
+          this.$emit('optionSelected', this.filter, value)
         },
         deep: true
       },

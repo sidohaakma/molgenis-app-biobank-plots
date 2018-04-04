@@ -3,7 +3,7 @@
     <div class="form-group">
       <select class="form-control" v-model="value">
         <!-- Include a pre-select option to make select work in safari -->
-        <option value="no-option-pre-select" selected disabled>Please select an option...</option>
+        <option value="" selected>--All biobanks--</option>
         <option v-for="option in options" :value="option.value">
           {{option.label}}
         </option>
@@ -26,10 +26,6 @@
         default: ''
 
       },
-      onOptionSelect: {
-        type: Function,
-        required: true
-      },
       options: {
         type: Array,
         required: true
@@ -42,7 +38,7 @@
     },
     watch: {
       value (value) {
-        this.onOptionSelect(this.filter, value)
+        this.$emit('optionSelected', this.filter, value)
       },
 
       initialValue (value) {

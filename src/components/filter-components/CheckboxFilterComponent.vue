@@ -1,10 +1,10 @@
 <template>
   <div class="checkbox-filter-component">
     <div class="form-group">
-      <template v-for="option in options">
+      <template v-for="(option, index) in options">
         <div class="form-check" :class="{'form-check-inline': orientation === 'horizontal'}">
-          <input class="form-check-input" :value="option.value" type="checkbox" v-model="value">
-          <label class="form-check-label">{{option.label}}</label>
+          <input class="form-check-input" :id="option.id + '-' + index" :value="option.value" type="checkbox" v-model="value">
+          <label class="form-check-label" :for="option.id + '-' + index">{{option.label}}</label>
         </div>
       </template>
     </div>
@@ -25,10 +25,6 @@
         default: () => []
 
       },
-      onOptionSelect: {
-        type: Function,
-        required: true
-      },
       options: {
         type: Array,
         required: true
@@ -46,7 +42,7 @@
     },
     watch: {
       value (value) {
-        this.onOptionSelect(this.filter, value)
+        this.$emit('optionSelected', this.filter, value)
       },
 
       initialValue (value) {
