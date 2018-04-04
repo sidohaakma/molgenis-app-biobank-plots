@@ -15,7 +15,7 @@ export default {
     state.activeFilters = {...state.activeFilters, ...update}
   },
 
-  'UPDATE_ATTRIBUTE_CHART_DATA' (state, charts) {
+  'UPDATE_CHART_DATA' (state, charts) {
     state.charts = charts
   }
 }

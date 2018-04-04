@@ -33,7 +33,7 @@ export default {
     })
 
     Promise.all(promises).then(charts => {
-      commit('UPDATE_ATTRIBUTE_CHART_DATA', charts)
+      commit('UPDATE_CHART_DATA', charts)
     })
   },
 
@@ -49,7 +49,7 @@ export default {
     })
 
     Promise.all(promises).then(charts => {
-      commit('UPDATE_ATTRIBUTE_CHART_DATA', charts)
+      commit('UPDATE_CHART_DATA', charts)
     })
   }
 }
