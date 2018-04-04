@@ -1,4 +1,4 @@
-import activeFilterToRsqlMapper from 'src/utils/active-filters-to-rsql-mapper'
+import activeFilterToRsqlMapper from 'src/mappers/active-filters-to-rsql-mapper'
 
 describe('mapActiveFiltersToRSQL', () => {
   it('should map an object of filters to an RSQL string', () => {
@@ -6,10 +6,7 @@ describe('mapActiveFiltersToRSQL', () => {
       biobank: 'CHECK',
       sex: ['male'],
       smoking: [true],
-      age_years: {
-        min: 25,
-        max: 50
-      },
+      age_years: [25, 50],
       data_type: ['genotypes', 'metabolome', 'methylome']
     }
 

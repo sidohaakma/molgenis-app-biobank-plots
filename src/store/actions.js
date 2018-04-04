@@ -2,9 +2,9 @@
 
 // $FlowFixMe
 import api from '@molgenis/molgenis-api-client'
-import activeFiltersToRsqlMapper from '../utils/active-filters-to-rsql-mapper'
-import aggregateDataToChartDataMapper from '../utils/aggregate-data-to-chart-data-mapper'
-import subjectMetadataToFilterMapper from '../utils/subject-metadata-to-filter-mapper'
+import activeFiltersToRsqlMapper from '../mappers/active-filters-to-rsql-mapper'
+import aggregateDataToChartDataMapper from '../mappers/aggregate-data-to-chart-data-mapper'
+import subjectMetadataToFilterMapper from '../mappers/subject-metadata-to-filter-mapper'
 
 import type { VuexContext } from '../flow.types'
 
@@ -33,7 +33,7 @@ export default {
     })
 
     Promise.all(promises).then(charts => {
-      commit('UPDATE_ATTRIBUTE_CHART_DATA', charts)
+      commit('UPDATE_CHART_DATA', charts)
     })
   },
 
@@ -49,7 +49,7 @@ export default {
     })
 
     Promise.all(promises).then(charts => {
-      commit('UPDATE_ATTRIBUTE_CHART_DATA', charts)
+      commit('UPDATE_CHART_DATA', charts)
     })
   }
 }

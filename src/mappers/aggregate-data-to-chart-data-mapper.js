@@ -1,3 +1,8 @@
+function UnsupportedChartTypeException (message) {
+  this.message = 'Unsupported chart type: ' + message
+  this.name = 'UnsupportedChartTypeException'
+}
+
 /**
  * Return label value
  */
@@ -78,7 +83,7 @@ const aggregateDataToChartDataMapper = (attribute, aggregates) => {
     case 'VerticalBarChart':
       return generateBarChartData(attribute, aggregates)
     default:
-      console.log('unsupported chart type')
+      throw new UnsupportedChartTypeException(attribute.type)
   }
 }
 
