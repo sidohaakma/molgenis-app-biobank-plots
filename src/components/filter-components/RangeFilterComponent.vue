@@ -1,14 +1,15 @@
 <template>
   <div class="range-filter-component">
-    <vue-slider v-model="value"
-                tooltipDir="bottom"
-                :sliderStyle="sliderStyle"
-                :bgStyle="bgStyle"
-                :processStyle="processStyle"
-                :tooltipStyle="tooltipStyle"
-                :lazy="true"
-                :min="range[0]"
-                :max="range[1]">
+    <vue-slider
+      v-model="value"
+      tooltipDir="bottom"
+      :sliderStyle="sliderStyle"
+      :bgStyle="bgStyle"
+      :processStyle="processStyle"
+      :tooltipStyle="tooltipStyle"
+      :lazy="true"
+      :min="range[0]"
+      :max="range[1]">
     </vue-slider>
   </div>
 </template>
@@ -35,16 +36,6 @@
         type: Array,
         required: false,
         default: () => ([0, 100])
-      },
-      steps: {
-        type: Number,
-        required: false,
-        default: 1
-      },
-      ticks: {
-        type: Array,
-        required: false,
-        default: () => [0, 100]
       }
     },
     data () {
