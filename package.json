@@ -2,7 +2,12 @@
   "name": "biobank",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "sido <sido@haakma.org>",
+  "contributors": [
+    "connor <c.stroomberg@gmail.com",
+    "mariska <mariska-karina@hotmail.com>",
+    "mark <markdehaan90@gmail.com>",
+    "sido <sido@haakma.org>"
+  ],
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
