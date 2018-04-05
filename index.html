@@ -14,28 +14,55 @@
       var primaryColor = '#184B8A'
       var secondaryColor = '#ed660c'
       var tertiaryColor = '#cccccc'
+
       window.__INITIAL_STATE__ = {
         server: server,
         sampleTable: 'leiden_RP',
         primaryColor: primaryColor,
         secondaryColor: secondaryColor,
         tertiaryColor: tertiaryColor,
-        // 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs'
         attributes: [
           {
             name: 'biobank',
             title: 'Number of samples per biobank',
             type: 'HorizontalBarChart',
+            inline: false
+          },
+          {
+            name: 'wbcc',
+            title: 'Whole bloodcell counts',
+            type: 'ColumnChart',
             inline: false,
-            sorted: false
+            datasets: [
+              {label: 'Yes', backgroundColor: primaryColor},
+              {label: 'No', backgroundColor: secondaryColor},
+              {label: 'Not available ', backgroundColor: tertiaryColor}
+            ]
           },
           {
             name: 'age_years',
-            title: 'Age',
+            title: 'Age in years',
             type: 'VerticalBarChart',
-            inline: false,
-            sorted: true
+            inline: false
           },
+          // {
+          //   names: ['transcriptome', 'genotypes', 'metabolome', 'methylome', 'wgs'],
+          //   inline: false,
+          //   columns: [
+          //     {id: 'transcriptome', label: 'Transcriptome'},
+          //     {id: 'wbcc', label: 'Whole bloodcell count'},
+          //     {id: 'genotypes', label: 'Genotypes'},
+          //     {id: 'metabolome', label: 'Metabolome'},
+          //     {id: 'methylome', label: 'Methylome'},
+          //     {id: 'wgs', label: 'Whole genome sequence'}
+          //   ],
+          //   type: 'MultiColumnChart',
+          //   datasets: [
+          //     {label: 'Yes', backgroundColor: primaryColor},
+          //     {label: 'No', backgroundColor: secondaryColor},
+          //     {label: 'Not available ', backgroundColor: tertiaryColor}
+          //   ]
+          // },
           {
             name: 'smoking',
             inline: true,
