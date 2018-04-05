@@ -2,6 +2,8 @@
 
 // $FlowFixMe
 import api from '@molgenis/molgenis-api-client'
+
+// $FlowFixMe
 import mappers from 'src/mappers'
 
 import type { VuexContext } from '../flow.types'
