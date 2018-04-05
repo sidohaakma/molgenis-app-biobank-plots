@@ -9,7 +9,8 @@
       :tooltipStyle="tooltipStyle"
       :lazy="true"
       :min="range[0]"
-      :max="range[1]">
+      :max="range[1]"
+      @callback="handleOptionSelect">
     </vue-slider>
   </div>
 </template>
@@ -50,10 +51,17 @@
         default: () => [0, 120]
       }
     },
+    data () {
+      return {
+        value: this.initialValue
+      }
+    },
+    methods: {
+      handleOptionSelect (value) {
+        this.$emit('optionSelected', this.filter, value)
+      }
+    },
     created () {
-      // By setting the value here,
-      // we prevent the watcher from being triggered if there is an initialValue set
-      this.value = this.initialValue
       this.tooltipStyle = [{
         'backgroundColor': this.primaryColor,
         'borderColor': this.primaryColor
@@ -61,11 +69,6 @@
       this.bgStyle = {'backgroundColor': this.backgroundColor, 'boxShadow': 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'}
       this.processStyle = {'backgroundImage': `-webkit-linear-gradient(left, ${this.primaryColor}, ${this.secondaryColor})`}
       this.sliderStyle = [{'backgroundColor': this.primaryColor}, {'backgroundColor': this.secondaryColor}]
-    },
-    watch: {
-      value (value) {
-        this.$emit('optionSelected', this.filter, value)
-      }
     },
     components: {
       vueSlider
