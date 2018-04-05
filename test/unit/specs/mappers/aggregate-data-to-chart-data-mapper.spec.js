@@ -15,17 +15,17 @@ describe('mappers', () => {
 
       const aggregates = {
         matrix: [
-          [877],
-          [649]
+          [649],
+          [877]
         ],
         xLabels: [
           {
-            'id': 'ALPHAOMEGA',
-            'abbr': 'ALPHAOMEGA'
-          },
-          {
             'id': 'BIOMARCS',
             'abbr': 'BIOMARCS'
+          },
+          {
+            'id': 'ALPHAOMEGA',
+            'abbr': 'ALPHAOMEGA'
           }
         ]
       }

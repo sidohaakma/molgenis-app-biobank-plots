@@ -1,3 +1,5 @@
+import naturalSort from 'javascript-natural-sort'
+
 const {primaryColor} = window.__INITIAL_STATE__ || {}
 
 function UnsupportedChartTypeException (message) {
@@ -21,10 +23,20 @@ const getAggregateLabel = (label) => {
  */
 const generateBarChartData = (attribute, aggregates) => {
   const aggregateLabels = aggregates.xLabels
-  const labels = []
-  const data = aggregates.matrix.map((row, index) => {
-    labels.push(getAggregateLabel(aggregateLabels[index]))
-    return row[0]
+  let labels = []
+  const dataObj = aggregates.matrix.map((row, index) => {
+    return {
+      data: row[0],
+      label: getAggregateLabel(aggregateLabels[index])
+    }
+  })
+  dataObj.sort((item1, item2) => {
+    return naturalSort(item1.label, item2.label)
+  })
+
+  const data = dataObj.map((item) => {
+    labels.push(item.label)
+    return item.data
   })
 
   const dataCollection = {
