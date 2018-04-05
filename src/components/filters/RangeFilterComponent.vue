@@ -23,17 +23,17 @@
       primaryColor: {
         type: String,
         required: false,
-        default: () => ('#007bff')
+        default: '#007bff'
       },
       secondaryColor: {
         type: String,
         required: false,
-        default: () => ('#007bff')
+        default: '#007bff'
       },
       backgroundColor: {
         type: String,
         required: false,
-        default: () => ('#fff')
+        default: '#fff'
       },
       filter: {
         type: String,
@@ -42,20 +42,18 @@
       range: {
         type: Array,
         required: false,
-        default: () => ([0, 100])
+        default: () => [0, 120]
       },
       initialValue: {
         type: Array,
         required: false,
-        default: () => ([0, 100])
-      }
-    },
-    data () {
-      return {
-        value: this.initialValue
+        default: () => [0, 120]
       }
     },
     created () {
+      // By setting the value here,
+      // we prevent the watcher from being triggered if there is an initialValue set
+      this.value = this.initialValue
       this.tooltipStyle = [{
         'backgroundColor': this.primaryColor,
         'borderColor': this.primaryColor

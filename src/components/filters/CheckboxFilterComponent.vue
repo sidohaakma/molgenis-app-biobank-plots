@@ -23,7 +23,6 @@
         type: Array,
         required: false,
         default: () => []
-
       },
       options: {
         type: Array,

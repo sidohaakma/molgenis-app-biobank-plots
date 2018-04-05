@@ -13,7 +13,6 @@
     <template v-if="filter.filterType === 'range'">
       <range-filter-component
         :filter="filter.id"
-        :initialValue="[0, 120]"
         :range="filter.options"
         :primaryColor="primaryColor"
         :secondaryColor="secondaryColor"
