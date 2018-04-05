@@ -44,7 +44,8 @@
   import CheckboxFilterComponent from './CheckboxFilterComponent'
   import DropdownFilterComponent from './DropdownFilterComponent'
   import RangeFilterComponent from './RangeFilterComponent'
-  const initialState = window.__INITIAL_STATE__ || {}
+
+  const {primaryColor, secondaryColor, tertiaryColor} = window.__INITIAL_STATE__ || {}
 
   export default {
     name: 'FilterComponent',
@@ -56,9 +57,9 @@
     },
     data () {
       return {
-        primaryColor: initialState.primaryColor,
-        secondaryColor: initialState.secondaryColor,
-        tertiaryColor: initialState.tertiaryColor
+        primaryColor: primaryColor,
+        secondaryColor: secondaryColor,
+        tertiaryColor: tertiaryColor
       }
     },
     components: {

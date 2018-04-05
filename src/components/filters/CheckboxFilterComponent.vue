@@ -43,10 +43,6 @@
     watch: {
       value (value) {
         this.$emit('optionSelected', this.filter, value)
-      },
-
-      initialValue (value) {
-        this.value = value
       }
     }
   }

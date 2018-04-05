@@ -19,9 +19,6 @@
 
   export default {
     name: 'RangeFilterComponent',
-    components: {
-      vueSlider
-    },
     props: {
       primaryColor: {
         type: String,
@@ -55,48 +52,25 @@
     },
     data () {
       return {
-        bgStyle: {
-          'backgroundColor': this.backgroundColor,
-          'boxShadow': 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'
-        },
-        processStyle: {
-          'backgroundImage': `-webkit-linear-gradient(left, ${this.primaryColor}, ${this.secondaryColor})`
-        },
-        sliderStyle: [
-          {
-            'backgroundColor': this.primaryColor
-          },
-          {
-            'backgroundColor': this.secondaryColor
-          }
-        ],
-        tooltipStyle: [
-          {
-            'backgroundColor': this.primaryColor,
-            'borderColor': this.primaryColor
-          },
-          {
-            'backgroundColor': this.secondaryColor,
-            'borderColor': this.secondaryColor
-          }
-        ],
         value: this.initialValue
       }
     },
+    created () {
+      this.tooltipStyle = [{
+        'backgroundColor': this.primaryColor,
+        'borderColor': this.primaryColor
+      }, {'backgroundColor': this.secondaryColor, 'borderColor': this.secondaryColor}]
+      this.bgStyle = {'backgroundColor': this.backgroundColor, 'boxShadow': 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'}
+      this.processStyle = {'backgroundImage': `-webkit-linear-gradient(left, ${this.primaryColor}, ${this.secondaryColor})`}
+      this.sliderStyle = [{'backgroundColor': this.primaryColor}, {'backgroundColor': this.secondaryColor}]
+    },
     watch: {
-      value: {
-        handler (value) {
-          this.$emit('optionSelected', this.filter, value)
-        },
-        deep: true
-      },
-
-      initialValue: {
-        handler (value) {
-          this.value = value
-        },
-        deep: true
+      value (value) {
+        this.$emit('optionSelected', this.filter, value)
       }
+    },
+    components: {
+      vueSlider
     }
   }
 </script>
