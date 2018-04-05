@@ -16,8 +16,7 @@ describe('pages', () => {
 
       actions = {
         GET_SUBJECT_METADATA: td.function(),
-        GET_SUBJECT_AGGREGATION: td.function(),
-        UPDATE_SUBJECT_AGGREGATION: td.function()
+        FETCH_SUBJECT_AGGREGATES: td.function()
       }
 
       state = {
@@ -30,7 +29,7 @@ describe('pages', () => {
     it('should dispatch GET_SUBJECT_METADATA and GET_SUBJECT_AGGREGATION when created', () => {
       shallow(BiobankAggregatesContainer, {store, localVue})
       td.verify(actions.GET_SUBJECT_METADATA(td.matchers.anything(), undefined, undefined))
-      td.verify(actions.GET_SUBJECT_AGGREGATION(td.matchers.anything(), undefined, undefined))
+      td.verify(actions.FETCH_SUBJECT_AGGREGATES(td.matchers.anything(), undefined, undefined))
     })
 
     it('should compute activeFilters based on the store', () => {
@@ -41,7 +40,7 @@ describe('pages', () => {
     it('should watch the activeFilters and dispatch UPDATE_SUBJECT_AGGREGATION on change', () => {
       shallow(BiobankAggregatesContainer, {store, localVue})
       store.state.activeFilters = {filter: 'value'}
-      td.verify(actions.UPDATE_SUBJECT_AGGREGATION(td.matchers.anything(), undefined, undefined))
+      td.verify(actions.FETCH_SUBJECT_AGGREGATES(td.matchers.anything(), undefined, undefined))
     })
   })
 })

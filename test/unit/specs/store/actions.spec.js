@@ -49,25 +49,8 @@ describe('actions', () => {
     })
   })
 
-  describe('GET_SUBJECT_AGGREGATION', () => {
+  describe('FETCH_SUBJECT_AGGREGATES', () => {
     it('should fetch aggregates for every attribute and commit mapped chart data to the state', done => {
-      const response = {aggs: {}}
-      const get = td.function('api.get')
-      td.when(get(td.matchers.anything())).thenResolve(response)
-      td.replace(api, 'get', get)
-
-      const options = {
-        expectedMutations: [
-          {type: 'UPDATE_CHARTS', payload: ['chart']}
-        ]
-      }
-
-      utils.testAction(actions.GET_SUBJECT_AGGREGATION, options, done)
-    })
-  })
-
-  describe('UPDATE_SUBJECT_AGGREGATION', () => {
-    it('should fetch aggregates with RSQL based on activeFilters and commit mapped chart data to the state', done => {
       const response = {aggs: {}}
       const get = td.function('api.get')
       td.when(get(td.matchers.anything())).thenResolve(response)
@@ -80,7 +63,7 @@ describe('actions', () => {
         ]
       }
 
-      utils.testAction(actions.UPDATE_SUBJECT_AGGREGATION, options, done)
+      utils.testAction(actions.FETCH_SUBJECT_AGGREGATES, options, done)
     })
   })
 })

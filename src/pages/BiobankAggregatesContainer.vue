@@ -23,11 +23,11 @@
     },
     created () {
       this.$store.dispatch('GET_SUBJECT_METADATA')
-      this.$store.dispatch('GET_SUBJECT_AGGREGATION')
+      this.$store.dispatch('FETCH_SUBJECT_AGGREGATES')
     },
     watch: {
       activeFilters () {
-        this.$store.dispatch('UPDATE_SUBJECT_AGGREGATION')
+        this.$store.dispatch('FETCH_SUBJECT_AGGREGATES')
       }
     },
     components: {
