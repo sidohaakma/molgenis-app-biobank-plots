@@ -1,9 +1,9 @@
+const {primaryColor} = window.__INITIAL_STATE__ || {}
+
 function UnsupportedChartTypeException (message) {
   this.message = 'Unsupported chart type: ' + message
   this.name = 'UnsupportedChartTypeException'
 }
-
-const initialState = window.__INITIAL_STATE__ || {}
 
 /**
  * Return label value
@@ -32,7 +32,7 @@ const generateBarChartData = (attribute, aggregates) => {
     datasets: [
       {
         data: data,
-        backgroundColor: initialState.primaryColor
+        backgroundColor: primaryColor
       }
     ]
   }
