@@ -18,7 +18,6 @@
       }
     },
     mounted () {
-      // TODO Fix xAxes scaling
       const options = {
         title: {
           text: this.chartTitle,

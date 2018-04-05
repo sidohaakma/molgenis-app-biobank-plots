@@ -30,6 +30,7 @@ const generateBarChartData = (attribute, aggregates) => {
       label: getAggregateLabel(aggregateLabels[index])
     }
   })
+
   dataObj.sort((item1, item2) => {
     return naturalSort(item1.label, item2.label)
   })

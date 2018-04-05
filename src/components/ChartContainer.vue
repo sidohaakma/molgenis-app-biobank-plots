@@ -1,5 +1,8 @@
 <template>
   <div class="chart-container">
+    <div class="total-number-of-samples-container">
+      <legend>Total number of samples: {{totalNumberOfSamples}}</legend>
+    </div>
     <div v-for="chart in charts" class="mb-3 chart-component py-3">
       <div class="row">
         <div class="col-12">
@@ -51,6 +54,9 @@
       },
       inlineCharts () {
         return this.$store.getters.getInlineCharts
+      },
+      totalNumberOfSamples () {
+        return this.$store.state.totalNumberOfSamples
       }
     },
     components: {
