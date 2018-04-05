@@ -37,7 +37,7 @@
 </style>
 
 <script>
-  import FilterComponent from './filter-components/FilterComponent'
+  import FilterComponent from './filters/FilterComponent'
 
   export default {
     name: 'FilterContainer',

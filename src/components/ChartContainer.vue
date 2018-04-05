@@ -34,7 +34,7 @@
 </style>
 
 <script>
-  import ChartComponent from './chart-components/ChartComponent'
+  import ChartComponent from './charts/ChartComponent'
 
   export default {
     name: 'ChartContainer',
