@@ -43,5 +43,17 @@ export default {
     Promise.all(promises).then(charts => {
       commit('UPDATE_CHARTS', charts)
     })
+
+    dispatch('FETCH_TOTAL_NUMBER_OF_SAMPLES', rsql)
+  },
+
+  'FETCH_TOTAL_NUMBER_OF_SAMPLES' ({commit}: VuexContext, rsql: string) {
+    // Deconstruct inside action to enable testing
+    const {sampleTable} = window.__INITIAL_STATE__ || {}
+
+    rsql = rsql !== '' ? '?q=' + rsql : rsql
+    api.get('/api/v2/' + sampleTable + rsql).then(response => {
+      commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
+    })
   }
 }

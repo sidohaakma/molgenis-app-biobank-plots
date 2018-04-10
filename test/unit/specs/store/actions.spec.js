@@ -26,7 +26,7 @@ describe('actions', () => {
     td.replace(mappers, 'aggregateDataToChartDataMapper', aggregateDataToChartDataMapper)
   })
 
-  describe('GET_SUBJECT_METADATA', () => {
+  describe('FETCH_METADATA', () => {
     it('should fetch metadata and commit the total number of samples and filter components to the state', done => {
       const response = {meta: {attributes: []}, total: 100}
       const get = td.function('api.get')
@@ -41,15 +41,16 @@ describe('actions', () => {
       const options = {
         expectedMutations: [
           {type: 'SET_FILTERS', payload: filters},
-          {type: 'SET_TOTAL_NUMBER_OF_SAMPLES', payload: 100}
+          {type: 'SET_TOTAL_NUMBER_OF_SAMPLES', payload: 100},
+          {type: 'SET_LOADING', payload: false}
         ]
       }
 
-      utils.testAction(actions.GET_SUBJECT_METADATA, options, done)
+      utils.testAction(actions.FETCH_METADATA, options, done)
     })
   })
 
-  describe('FETCH_SUBJECT_AGGREGATES', () => {
+  describe('FETCH_AGGREGATES', () => {
     it('should fetch aggregates for every attribute and commit mapped chart data to the state', done => {
       const response = {aggs: {}}
       const get = td.function('api.get')
@@ -60,10 +61,31 @@ describe('actions', () => {
         state: {activeFilters: {}},
         expectedMutations: [
           {type: 'UPDATE_CHARTS', payload: ['chart']}
+        ],
+        expectedActions: [
+          {type: 'FETCH_TOTAL_NUMBER_OF_SAMPLES', payload: 'biobank==ALPHA'}
         ]
       }
 
-      utils.testAction(actions.FETCH_SUBJECT_AGGREGATES, options, done)
+      utils.testAction(actions.FETCH_AGGREGATES, options, done)
+    })
+  })
+
+  describe('FETCH_TOTAL_NUMBER_OF_SAMPLES', () => {
+    it('should fetch total number of samples with a filter', done => {
+      const response = {meta: {attributes: []}, total: 50}
+      const get = td.function('api.get')
+      td.when(get('/api/v2/test?q=biobank==ALPHA')).thenResolve(response)
+      td.replace(api, 'get', get)
+
+      const options = {
+        payload: 'biobank==ALPHA',
+        expectedMutations: [
+          {type: 'SET_TOTAL_NUMBER_OF_SAMPLES', payload: 50}
+        ]
+      }
+
+      utils.testAction(actions.FETCH_TOTAL_NUMBER_OF_SAMPLES, options, done)
     })
   })
 })
