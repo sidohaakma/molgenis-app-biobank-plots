@@ -17,7 +17,7 @@
     </div>
 
     <div class="row mx-0 mb-3 chart-component py-3">
-      <div v-for="chart in inlineCharts" class="col-md-6">
+      <div v-for="chart in inlineCharts" :class="{'col-4': inlineCharts.length === 3, 'col-6': inlineCharts.length === 2}">
         <chart-component
           :type="chart.type"
           :title="chart.title"
