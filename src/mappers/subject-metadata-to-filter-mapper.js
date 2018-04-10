@@ -25,7 +25,7 @@ const mapAttributesToFilters = (attribute) => {
         filterType: 'checkbox-row',
         options: attribute.enumOptions.map(option => ({
           id: option,
-          label: option,
+          label: option, // TODO Uppercase first letter
           value: option
         }))
       }
