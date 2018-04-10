@@ -13,6 +13,7 @@ const fetchAttributeAggregates = (rsql) => {
   const {attributes, sampleTable} = window.__INITIAL_STATE__ || {}
 
   const promises = []
+  rsql = rsql !== '' ? '&q=' + rsql : rsql
   attributes.forEach(attribute => {
     promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + rsql).then(response => {
       return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
@@ -22,7 +23,7 @@ const fetchAttributeAggregates = (rsql) => {
 }
 
 export default {
-  'GET_SUBJECT_METADATA' ({commit}: VuexContext) {
+  'FETCH_METADATA' ({commit}: VuexContext) {
     // Deconstruct inside action to enable testing
     const {sampleTable} = window.__INITIAL_STATE__ || {}
 
@@ -34,9 +35,9 @@ export default {
     })
   },
 
-  'FETCH_SUBJECT_AGGREGATES' ({state, commit}: VuexContext) {
+  'FETCH_AGGREGATES' ({state, commit, dispatch}: VuexContext) {
     const filters = mappers.activeFiltersToRsqlMapper(state.activeFilters)
-    const rsql = !filters ? '' : '&q=' + filters
+    const rsql = !filters ? '' : filters
 
     const promises = fetchAttributeAggregates(rsql)
     Promise.all(promises).then(charts => {

@@ -44,12 +44,12 @@
       }
     },
     created () {
-      this.$store.dispatch('GET_SUBJECT_METADATA')
-      this.$store.dispatch('FETCH_SUBJECT_AGGREGATES')
+      this.$store.dispatch('FETCH_METADATA')
+      this.$store.dispatch('FETCH_AGGREGATES')
     },
     watch: {
       activeFilters () {
-        this.$store.dispatch('FETCH_SUBJECT_AGGREGATES')
+        this.$store.dispatch('FETCH_AGGREGATES')
       }
     },
     components: {
