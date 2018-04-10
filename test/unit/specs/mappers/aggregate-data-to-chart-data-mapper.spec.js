@@ -9,8 +9,7 @@ describe('mappers', () => {
         name: 'biobank',
         title: 'Number of samples per biobank',
         type: 'HorizontalBarChart',
-        inline: false,
-        sorted: false
+        inline: false
       }
 
       const aggregates = {
@@ -61,8 +60,7 @@ describe('mappers', () => {
         name: 'age_years',
         title: 'Age',
         type: 'VerticalBarChart',
-        inline: false,
-        sorted: true
+        inline: false
       }
 
       const aggregates = {
@@ -166,6 +164,82 @@ describe('mappers', () => {
         'inline': true,
         'title': 'Smoking data',
         'type': 'ColumnChart'
+      }
+
+      expect(actual).to.deep.equal(expected)
+    })
+
+    it('should map an aggregate result to a chart data object for a MultiColumnChart', () => {
+      const attribute = {
+        name: 'data_type',
+        title: 'Data types',
+        inline: false,
+        columns: [
+          {id: 'transcriptome', label: 'Transcriptome'},
+          {id: 'genotypes', label: 'Genotypes'},
+        ],
+        type: 'MultiColumnChart',
+        datasets: [
+          {label: 'Available', backgroundColor: '#000'},
+          {label: 'Unavailable', backgroundColor: '#000'}
+        ]
+      }
+
+      const aggregates = [
+        {
+          aggs: {
+            matrix: [
+              [877],
+              [649]
+            ]
+          },
+          xAttr: {
+            name: 'transcriptome'
+          }
+        },
+        {
+          aggs: {
+            matrix: [
+              [200],
+              [300]
+            ]
+          },
+          xAttr: {
+            name: 'genotypes'
+          }
+        }
+      ]
+
+      const actual = aggregateDataToChartDataMapper(attribute, aggregates)
+      const expected = {
+        'dataCollection': {
+          'datasets': [
+            {
+              'backgroundColor': '#000',
+              'data': [
+                877,
+                200
+              ],
+              'label': 'Available'
+            },
+            {
+              'backgroundColor': '#000',
+              'data': [
+                649,
+                300
+              ],
+              'label': 'Unavailable'
+            }
+          ],
+          'labels': [
+            'Transcriptome',
+            'Genotypes'
+          ]
+        },
+        'id': 'data_type',
+        'inline': false,
+        'title': 'Data types',
+        'type': 'MultiColumnChart'
       }
 
       expect(actual).to.deep.equal(expected)

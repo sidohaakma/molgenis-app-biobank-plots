@@ -32,7 +32,7 @@
             name: 'wbcc',
             title: 'Whole bloodcell counts',
             type: 'ColumnChart',
-            inline: false,
+            inline: true,
             datasets: [
               {label: 'Yes', backgroundColor: primaryColor},
               {label: 'No', backgroundColor: secondaryColor},
@@ -45,24 +45,23 @@
             type: 'VerticalBarChart',
             inline: false
           },
-          // {
-          //   names: ['transcriptome', 'genotypes', 'metabolome', 'methylome', 'wgs'],
-          //   inline: false,
-          //   columns: [
-          //     {id: 'transcriptome', label: 'Transcriptome'},
-          //     {id: 'wbcc', label: 'Whole bloodcell count'},
-          //     {id: 'genotypes', label: 'Genotypes'},
-          //     {id: 'metabolome', label: 'Metabolome'},
-          //     {id: 'methylome', label: 'Methylome'},
-          //     {id: 'wgs', label: 'Whole genome sequence'}
-          //   ],
-          //   type: 'MultiColumnChart',
-          //   datasets: [
-          //     {label: 'Yes', backgroundColor: primaryColor},
-          //     {label: 'No', backgroundColor: secondaryColor},
-          //     {label: 'Not available ', backgroundColor: tertiaryColor}
-          //   ]
-          // },
+          {
+            name: 'data_type',
+            title: 'Data types',
+            inline: false,
+            columns: [
+              {id: 'transcriptome', label: 'Transcriptome'},
+              {id: 'genotypes', label: 'Genotypes'},
+              {id: 'metabolome', label: 'Metabolome'},
+              {id: 'methylome', label: 'Methylome'},
+              {id: 'wgs', label: 'Whole genome sequence'}
+            ],
+            type: 'MultiColumnChart', <!-- Use MultiColumnChart for COMPOUND types -->
+            datasets: [
+              {label: 'Available', backgroundColor: primaryColor},
+              {label: 'Unavailable', backgroundColor: secondaryColor}
+            ]
+          },
           {
             name: 'smoking',
             inline: true,

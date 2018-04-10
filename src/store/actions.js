@@ -8,16 +8,35 @@ import mappers from 'src/mappers'
 
 import type { VuexContext } from '../flow.types'
 
-const fetchAttributeAggregates = (rsql) => {
-  // Deconstruct inside action to enable testing
-  const {attributes, sampleTable} = window.__INITIAL_STATE__ || {}
-
+/**
+ * Return aggregates for all attributes specified in window.__INITIAL_STATE__.attributes
+ *
+ * @param attributes list of attributes for which aggregates should be fetched
+ * @param sampleTable the table containing data for all attributes
+ * @param rsql optional RSQL string used to apply filters
+ * @returns {Array}
+ */
+const fetchAttributeAggregates = (attributes, sampleTable, rsql) => {
   const promises = []
   rsql = rsql !== '' ? '&q=' + rsql : rsql
+
   attributes.forEach(attribute => {
-    promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + rsql).then(response => {
-      return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
-    }))
+    if (attribute.type === 'MultiColumnChart') {
+      const columns = []
+      attribute.columns.forEach(column => {
+        columns.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + column.id + rsql).then(response => {
+          return response
+        }))
+      })
+
+      promises.push(Promise.all(columns).then(responses => {
+        return mappers.aggregateDataToChartDataMapper(attribute, responses)
+      }))
+    } else {
+      promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + rsql).then(response => {
+        return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
+      }))
+    }
   })
   return promises
 }
@@ -36,10 +55,13 @@ export default {
   },
 
   'FETCH_AGGREGATES' ({state, commit, dispatch}: VuexContext) {
+    // Deconstruct inside action to enable testing
+    const {attributes, sampleTable} = window.__INITIAL_STATE__ || {}
+
     const filters = mappers.activeFiltersToRsqlMapper(state.activeFilters)
     const rsql = !filters ? '' : filters
 
-    const promises = fetchAttributeAggregates(rsql)
+    const promises = fetchAttributeAggregates(attributes, sampleTable, rsql)
     Promise.all(promises).then(charts => {
       commit('UPDATE_CHARTS', charts)
     })

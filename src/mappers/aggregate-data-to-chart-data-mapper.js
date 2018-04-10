@@ -65,9 +65,9 @@ const generateBarChartData = (attribute, aggregates) => {
  * This type of chart has one data row: [label, value 1, value 2, ...values]
  */
 const generateColumnChartData = (attribute, aggregates) => {
-  const datasets = aggregates.matrix.map((aggregate, index) => {
+  const datasets = aggregates.matrix.map((aggregateValue, index) => {
     return {
-      data: aggregate,
+      data: aggregateValue,
       label: attribute.datasets[index].label,
       backgroundColor: attribute.datasets[index].backgroundColor
     }
@@ -75,6 +75,38 @@ const generateColumnChartData = (attribute, aggregates) => {
 
   const dataCollection = {
     labels: [attribute.title],
+    datasets: datasets
+  }
+
+  return {
+    id: attribute.name,
+    title: attribute.title,
+    type: attribute.type,
+    dataCollection: dataCollection,
+    inline: attribute.inline
+  }
+}
+
+/**
+ * Generate data for a MultiColumnChart
+ *
+ * This type of chart has an array of labels, and for each label generates n number of datasets
+ */
+const generateMultiColumnChart = (attribute, aggregates) => {
+  const labels = attribute.columns.map(column => column.label)
+  const datasets = attribute.datasets.map((dataset, index) => {
+    return {
+      label: dataset.label,
+      backgroundColor: dataset.backgroundColor,
+      data: attribute.columns.map(column => {
+        const aggregate = aggregates.find(aggregate => aggregate.xAttr.name === column.id).aggs
+        return aggregate.matrix[index][0]
+      })
+    }
+  })
+
+  const dataCollection = {
+    labels: labels,
     datasets: datasets
   }
 
@@ -97,6 +129,8 @@ const aggregateDataToChartDataMapper = (attribute, aggregates) => {
     case 'HorizontalBarChart':
     case 'VerticalBarChart':
       return generateBarChartData(attribute, aggregates)
+    case 'MultiColumnChart':
+      return generateMultiColumnChart(attribute, aggregates)
     default:
       throw new UnsupportedChartTypeException(attribute.type)
   }

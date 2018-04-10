@@ -14,6 +14,13 @@
       </horizontal-bar-chart-component>
     </div>
 
+    <div class="multi-column-chart-component-container" v-if="type === 'MultiColumnChart'">
+      <column-chart-component
+        :chartData="chartData"
+        :chartTitle="chartTitle">
+      </column-chart-component>
+    </div>
+
     <div class="vertical-bar-chart-component-container" v-if="type === 'VerticalBarChart'">
       <vertical-bar-chart-component
         :chartData="chartData"

@@ -9,6 +9,11 @@ window.__INITIAL_STATE__ = {
   attributes: [
     {
       name: 'test'
+    },
+    {
+      name: 'compound_test',
+      type: 'MultiColumnChart',
+      columns: [{id: 'test_column'}]
     }
   ]
 }
@@ -23,6 +28,11 @@ describe('actions', () => {
 
     const aggregateDataToChartDataMapper = td.function('mappers.aggregateDataToChartDataMapper')
     td.when(aggregateDataToChartDataMapper({name: 'test'}, {})).thenReturn('chart')
+    td.when(aggregateDataToChartDataMapper({
+      name: 'compound_test',
+      type: 'MultiColumnChart',
+      columns: [{id: 'test_column'}]
+    }, [{aggs: {}}])).thenReturn('chart2')
     td.replace(mappers, 'aggregateDataToChartDataMapper', aggregateDataToChartDataMapper)
   })
 
@@ -60,7 +70,7 @@ describe('actions', () => {
       const options = {
         state: {activeFilters: {}},
         expectedMutations: [
-          {type: 'UPDATE_CHARTS', payload: ['chart']}
+          {type: 'UPDATE_CHARTS', payload: ['chart', 'chart2']}
         ],
         expectedActions: [
           {type: 'FETCH_TOTAL_NUMBER_OF_SAMPLES', payload: 'biobank==ALPHA'}
