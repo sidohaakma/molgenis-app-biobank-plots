@@ -20,7 +20,8 @@ describe('pages', () => {
       }
 
       state = {
-        activeFilters: {}
+        activeFilters: {},
+        loading: false
       }
 
       store = new Vuex.Store({actions, state})
@@ -35,6 +36,11 @@ describe('pages', () => {
     it('should compute activeFilters based on the store', () => {
       const wrapper = shallow(BiobankAggregatesContainer, {store, localVue})
       expect(wrapper.vm.activeFilters).to.deep.equal(state.activeFilters)
+    })
+
+    it('should compute loading based on the store', () => {
+      const wrapper = shallow(BiobankAggregatesContainer, {store, localVue})
+      expect(wrapper.vm.loading).to.equal(false)
     })
 
     it('should watch the activeFilters and dispatch FETCH_AGGREGATES on change', () => {
