@@ -11,6 +11,7 @@ export type State = {
   activeFilters: Object,
   charts: Array<Chart>,
   filters: Object,
+  loading: boolean,
   totalNumberOfSamples: number
 }
 

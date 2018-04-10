@@ -7,6 +7,10 @@ export default {
     state.filters = filters
   },
 
+  'SET_LOADING' (state, loading) {
+    state.loading = loading
+  },
+
   'SET_TOTAL_NUMBER_OF_SAMPLES' (state, totalNumberOfSamples) {
     state.totalNumberOfSamples = totalNumberOfSamples
   },

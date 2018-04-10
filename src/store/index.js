@@ -29,6 +29,11 @@ const state: State = {
   filters: {},
 
   /**
+   * A boolean setting the global loading state of the application
+   */
+  loading: true,
+
+  /**
    * The total number of samples available in the database
    */
   totalNumberOfSamples: 0

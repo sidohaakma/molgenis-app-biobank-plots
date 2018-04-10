@@ -30,6 +30,7 @@ export default {
       const filters = mappers.subjectMetadataToFilterMapper(response.meta)
       commit('SET_FILTERS', filters)
       commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
+      commit('SET_LOADING', false)
     })
   },
 
