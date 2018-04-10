@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-container p-4 mb-5">
+  <div class="filter-container p-4 mb-5" :style="{ 'background-color': backgroundColor }">
     <div class="row">
 
       <div class="col-6">
@@ -9,6 +9,7 @@
         <button
           id="reset-filter-btn"
           class="btn btn-sm btn-primary float-right"
+          :style="{ 'background-color': primaryColor, 'border-color':primaryColor}"
           @click="resetFilters">
           Reset
         </button>
@@ -30,7 +31,6 @@
 
 <style scoped>
   .filter-container {
-    background-color: #e6e9ef;
     box-shadow: 5px 5px 7px #d7dae0;
     border: none;
   }
@@ -38,9 +38,16 @@
 
 <script>
   import FilterComponent from './filters/FilterComponent'
+  const {backgroundColor, primaryColor} = window.__INITIAL_STATE__ || {}
 
   export default {
     name: 'FilterContainer',
+    data () {
+      return {
+        backgroundColor: backgroundColor,
+        primaryColor: primaryColor
+      }
+    },
     methods: {
       resetFilters () {
         this.$store.commit('RESET_ALL_ACTIVE_FILTERS')

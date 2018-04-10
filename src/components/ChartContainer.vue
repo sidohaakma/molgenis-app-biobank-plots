@@ -1,7 +1,8 @@
 <template>
   <div class="chart-container">
-    <div class="total-number-of-samples-container">
-      <legend>Total number of samples: {{totalNumberOfSamples}}</legend>
+    <div class="total-number-of-samples-container text-right">
+      Total number of samples: <span class="badge badge-secondary">{{totalNumberOfSamples}}</span>
+      <hr/>
     </div>
     <div v-for="chart in charts" class="mb-3 chart-component py-3">
       <div class="row">

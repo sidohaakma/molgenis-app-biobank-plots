@@ -5,6 +5,7 @@
     <template v-if="filter.filterType === 'dropdown'">
       <dropdown-filter-component
         :filter="filter.id"
+        :initialValue="activeFilterValue"
         :options="filter.options"
         @optionSelected="handleOptionSelect">
       </dropdown-filter-component>
@@ -13,6 +14,7 @@
     <template v-if="filter.filterType === 'range'">
       <range-filter-component
         :filter="filter.id"
+        :initialValue="activeFilterValue"
         :range="filter.options"
         :primaryColor="primaryColor"
         :secondaryColor="secondaryColor"
@@ -23,6 +25,7 @@
     <template v-if="filter.filterType === 'checkbox-row'">
       <checkbox-filter-component
         :filter="filter.id"
+        :initialValue="activeFilterValue"
         :options="filter.options"
         orientation="horizontal"
         @optionSelected="handleOptionSelect">
@@ -32,6 +35,7 @@
     <template v-if="filter.filterType === 'checkbox-list'">
       <checkbox-filter-component
         :filter="filter.id"
+        :initialValue="activeFilterValue"
         :options="filter.options"
         @optionSelected="handleOptionSelect">
       </checkbox-filter-component>
@@ -52,6 +56,11 @@
     methods: {
       handleOptionSelect (filter, value) {
         this.$store.commit('UPDATE_ACTIVE_FILTERS', {[filter]: value})
+      }
+    },
+    computed: {
+      activeFilterValue () {
+        return this.$store.getters.getActiveFilterValueById(this.filter.id)
       }
     },
     data () {
