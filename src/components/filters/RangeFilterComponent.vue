@@ -72,6 +72,11 @@
     },
     components: {
       vueSlider
+    },
+    watch: {
+      initialValue (value) {
+        this.value = value
+      }
     }
   }
 </script>
