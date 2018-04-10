@@ -17,8 +17,18 @@
         default: 'Column chart'
       }
     },
+    data () {
+      return {
+        options: {}
+      }
+    },
+    computed: {
+      chart () {
+        this.renderChart(this.chartData, this.options)
+      }
+    },
     mounted () {
-      const options = {
+      this.options = {
         title: {
           text: this.chartTitle,
           fontColor: initialState.primaryColor,
@@ -32,12 +42,11 @@
         maintainAspectRatio: false,
         responsive: true,
         scales: {
-          xAxes: [{stacked: true, barPercentage: 0.25}],
-          yAxes: [{stacked: true, barPercentage: 0.25}]
+          xAxes: [{stacked: false}],
+          yAxes: [{stacked: false}]
         }
       }
-
-      this.renderChart(this.chartData, options)
+      this.renderChart(this.chartData, this.options)
     }
   }
 </script>

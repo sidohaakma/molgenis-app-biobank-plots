@@ -17,8 +17,18 @@
         default: 'Horizontal bar chart'
       }
     },
+    data () {
+      return {
+        options: {}
+      }
+    },
+    computed: {
+      chart () {
+        this.renderChart(this.chartData, this.options)
+      }
+    },
     mounted () {
-      const options = {
+      this.options = {
         title: {
           text: this.chartTitle,
           fontColor: initialState.primaryColor,
@@ -41,8 +51,7 @@
           display: false
         }
       }
-
-      this.renderChart(this.chartData, options)
+      this.renderChart(this.chartData, this.options)
     }
   }
 </script>
