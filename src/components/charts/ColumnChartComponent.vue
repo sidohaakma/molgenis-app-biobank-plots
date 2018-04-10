@@ -42,8 +42,8 @@
         maintainAspectRatio: false,
         responsive: true,
         scales: {
-          xAxes: [{stacked: false}],
-          yAxes: [{stacked: false}]
+          xAxes: [{stacked: true}],
+          yAxes: [{stacked: true}]
         }
       }
       this.renderChart(this.chartData, this.options)
