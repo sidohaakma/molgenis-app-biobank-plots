@@ -14,7 +14,7 @@ const activeFiltersToRsqlMapper = (activeFilters) => {
     } else if (Array.isArray(values)) {
       values.forEach(value => accumulator.push(filter + '==' + value))
     } else {
-      accumulator.push(filter + '==' + values)
+      if (values) accumulator.push(filter + '==' + values)
     }
     return accumulator
   }, []).join(';')
