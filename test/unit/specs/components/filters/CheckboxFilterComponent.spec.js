@@ -32,6 +32,12 @@ describe('components', () => {
         const wrapper = shallow(CheckboxFilterComponent, {propsData})
         expect(wrapper.contains('.form-check-inline')).to.equal(true)
       })
+
+      it('should update value when initialValue changes', () => {
+        const wrapper = shallow(CheckboxFilterComponent, {propsData})
+        wrapper.setProps({initialValue: ['new value']})
+        expect(wrapper.vm.value).to.deep.equal(['new value'])
+      })
     })
   })
 })

@@ -17,6 +17,14 @@ describe('mutations', () => {
     })
   })
 
+  describe('SET_LOADING', () => {
+    it('should set loading in the state', () => {
+      const state = {loading: true}
+      mutations.SET_LOADING(state, false)
+      expect(state.loading).to.equal(false)
+    })
+  })
+
   describe('SET_TOTAL_NUMBER_OF_SAMPLES', () => {
     it('should set the totalNumberOfSamples in the state', () => {
       const state = {totalNumberOfSamples: 0}

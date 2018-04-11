@@ -6,6 +6,7 @@ import td from 'testdouble'
 describe('components', () => {
   describe('filters', () => {
     describe('FilterComponent', () => {
+      let getters
       let localVue
       let mutations
       let state
@@ -15,6 +16,7 @@ describe('components', () => {
         localVue = createLocalVue()
         localVue.use(Vuex)
 
+
         mutations = {
           UPDATE_ACTIVE_FILTERS: td.function()
         }
@@ -23,7 +25,11 @@ describe('components', () => {
           filters: []
         }
 
-        store = new Vuex.Store({mutations, state})
+        getters = {
+          getActiveFilterValueById: (state) => (id) => id
+        }
+
+        store = new Vuex.Store({getters, mutations, state})
       })
 
       const propsData = {
@@ -38,6 +44,11 @@ describe('components', () => {
         const wrapper = shallow(FilterComponent, {propsData, store, localVue})
         wrapper.vm.handleOptionSelect('filter', ['test'])
         td.verify(mutations.UPDATE_ACTIVE_FILTERS(state, {filter: ['test']}))
+      })
+
+      it('should return the filter value for a filter by ID from a getter', () => {
+        const wrapper = shallow(FilterComponent, {propsData, store, localVue})
+        expect(wrapper.vm.activeFilterValue).to.equal('test')
       })
     })
   })

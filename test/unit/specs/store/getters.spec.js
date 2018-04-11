@@ -2,6 +2,7 @@ import getters from 'src/store/getters'
 
 describe('getters', () => {
   const state = {
+    activeFilters: {test: 'value'},
     charts: [
       {
         id: '1',
@@ -17,6 +18,15 @@ describe('getters', () => {
       }
     ]
   }
+
+  describe('getActiveFilterValueById', () => {
+    it('should return a filter value based on ID', () => {
+      const getActiveFilterValueById = getters.getActiveFilterValueById(state)
+      const actual = getActiveFilterValueById('test')
+      const expected = 'value'
+      expect(actual).to.equal(expected)
+    })
+  })
 
   describe('getCharts', () => {
     it('should return charts that are not inline', () => {

@@ -26,6 +26,12 @@ describe('components', () => {
         wrapper.setData({value: 'new value'})
         expect(wrapper.emitted('optionSelected')).to.deep.equal([['test', 'new value']])
       })
+
+      it('should update value when initialValue changes', () => {
+        const wrapper = shallow(DropdownFilterComponent, {propsData})
+        wrapper.setProps({initialValue: 'new value'})
+        expect(wrapper.vm.value).to.equal('new value')
+      })
     })
   })
 })

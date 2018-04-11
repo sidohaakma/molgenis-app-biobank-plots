@@ -19,6 +19,12 @@ describe('components', () => {
         wrapper.vm.handleOptionSelect([0, 100])
         expect(wrapper.emitted('optionSelected')).to.deep.equal([['test', [0, 100]]])
       })
+
+      it('should update value when initialValue changes', () => {
+        const wrapper = shallow(RangeFilterComponent, {propsData})
+        wrapper.setProps({initialValue: [20, 40]})
+        expect(wrapper.vm.value).to.deep.equal([20, 40])
+      })
     })
   })
 })
