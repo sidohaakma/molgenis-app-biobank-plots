@@ -1,12 +1,57 @@
 <template>
   <div class="chart-container">
     <div class="total-number-of-samples-container text-right">
-      Total number of samples: <span class="badge badge-secondary">{{totalNumberOfSamples}}</span>
+      Matching samples: <span class="badge badge-secondary">{{totalNumberOfSamples}}</span>
       <hr/>
     </div>
-    <div v-for="chart in charts" class="mb-3 chart-component py-3">
-      <div class="row">
-        <div class="col-12">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" v-for="(chart, index) in charts">
+        <a class="nav-link"
+           :class="{'active': index === 0}"
+           :id="chart.id + '-tab'"
+           data-toggle="tab"
+           :href="'#' + chart.id"
+           role="tab" :aria-controls="chart.id"
+           :aria-selected="index === 0"
+           @click="setSelectedChartId(chart.id)">
+
+          {{ chart.title }}
+
+        </a>
+
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div v-for="(chart, index) in charts"
+           class="tab-pane"
+           :class="{'active': index === 0}"
+           :id="chart.id"
+           role="tabpanel"
+           :aria-labelledby="chart.id + '-tab'"
+           :ref="chart.id">
+
+        <div class="my-3 chart-component py-2">
+          <div class="row">
+            <div class="col-12">
+              <chart-component v-if="chart.id === selectedChartId"
+                               :type="chart.type"
+                               :title="chart.title"
+                               :dataCollection="getDataCollection(chart)"
+                               :key="chart.id">
+              </chart-component>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row mx-0 my-3 chart-component py-2">
+        <div v-for="chart in inlineCharts"
+             :class="{'col-4': inlineCharts.length === 3, 'col-6': inlineCharts.length === 2}">
           <chart-component
             :type="chart.type"
             :title="chart.title"
@@ -15,17 +60,7 @@
           </chart-component>
         </div>
       </div>
-    </div>
 
-    <div class="row mx-0 mb-3 chart-component py-3">
-      <div v-for="chart in inlineCharts" :class="{'col-4': inlineCharts.length === 3, 'col-6': inlineCharts.length === 2}">
-        <chart-component
-          :type="chart.type"
-          :title="chart.title"
-          :dataCollection="getDataCollection(chart)"
-          :key="chart.id">
-        </chart-component>
-      </div>
     </div>
   </div>
 </template>
@@ -42,11 +77,20 @@
 
   export default {
     name: 'ChartContainer',
+    data () {
+      return {
+        selectedChartId: null
+      }
+    },
     methods: {
       getDataCollection (chart) {
         // Create a deep copy
         // Prevents vuex outside store mutations
         return JSON.parse(JSON.stringify(chart.dataCollection))
+      },
+
+      setSelectedChartId (chartId) {
+        this.selectedChartId = chartId
       }
     },
     computed: {
@@ -59,6 +103,9 @@
       totalNumberOfSamples () {
         return this.$store.state.totalNumberOfSamples
       }
+    },
+    created () {
+      this.selectedChartId = this.charts[0].id
     },
     components: {
       ChartComponent
