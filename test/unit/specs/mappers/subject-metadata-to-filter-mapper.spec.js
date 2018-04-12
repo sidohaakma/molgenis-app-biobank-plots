@@ -42,6 +42,10 @@ describe('mappers', () => {
                   {
                     name: 'wbcc',
                     label: 'Whole bloodcell count'
+                  },
+                  {
+                    name: 'genotypes',
+                    label: 'Genotypes (Imputed)'
                   }
                 ]
               }
@@ -106,11 +110,17 @@ describe('mappers', () => {
           filterType: 'checkbox-list',
           id: 'data_type',
           label: 'Data types',
-          options: [{
-            id: 'wbcc',
-            label: 'Whole bloodcell count',
-            value: 'wbcc'
-          }]
+          options: [
+            {
+              id: 'genotypes',
+              label: 'Genotypes (Imputed)',
+              value: 'genotypes'
+            },
+            {
+              id: 'wbcc',
+              label: 'Whole bloodcell count',
+              value: 'wbcc'
+            }]
         }
       }
 
