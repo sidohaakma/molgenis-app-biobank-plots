@@ -20,7 +20,8 @@ describe('mappers', () => {
         xLabels: [
           {
             'id': 'BIOMARCS',
-            'abbr': 'BIOMARCS'
+            'abbr': 'BIOMARCS',
+            'description': 'test'
           },
           {
             'id': 'ALPHAOMEGA',
@@ -38,7 +39,8 @@ describe('mappers', () => {
               'data': [
                 877,
                 649
-              ]
+              ],
+              'descriptions': ['', 'test']
             }
           ],
           'labels': [
@@ -86,6 +88,11 @@ describe('mappers', () => {
                 877,
                 649,
                 231
+              ],
+              'descriptions': [
+                '',
+                '',
+                'Unknown'
               ]
             }
           ],
@@ -176,7 +183,7 @@ describe('mappers', () => {
         inline: false,
         columns: [
           {id: 'transcriptome', label: 'Transcriptome'},
-          {id: 'genotypes', label: 'Genotypes'},
+          {id: 'genotypes', label: 'Genotypes'}
         ],
         type: 'MultiColumnChart',
         datasets: [

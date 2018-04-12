@@ -17,6 +17,15 @@ const getAggregateLabel = (label) => {
 }
 
 /**
+ * Return description
+ */
+const getAggregateDescription = (label) => {
+  if (label === null) return 'Unknown'
+  let description = label.description !== undefined ? label.description : ''
+  return description
+}
+
+/**
  * Generate data for a BarChart
  *
  * This type of chart has multiple data rows: [label, value]
@@ -24,10 +33,12 @@ const getAggregateLabel = (label) => {
 const generateBarChartData = (attribute, aggregates) => {
   const aggregateLabels = aggregates.xLabels
   let labels = []
+  let descriptions = []
   const dataObj = aggregates.matrix.map((row, index) => {
     return {
       data: row[0],
-      label: getAggregateLabel(aggregateLabels[index])
+      label: getAggregateLabel(aggregateLabels[index]),
+      description: getAggregateDescription(aggregateLabels[index])
     }
   })
 
@@ -37,6 +48,7 @@ const generateBarChartData = (attribute, aggregates) => {
 
   const data = dataObj.map((item) => {
     labels.push(item.label)
+    descriptions.push(item.description)
     return item.data
   })
 
@@ -45,6 +57,7 @@ const generateBarChartData = (attribute, aggregates) => {
     datasets: [
       {
         data: data,
+        descriptions: descriptions,
         backgroundColor: primaryColor
       }
     ]
