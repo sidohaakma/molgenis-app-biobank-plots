@@ -11,11 +11,27 @@
     </template>
 
     <template v-else>
-      <div class="col-3">
-        <filter-container/>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+        <div class="toggle-filter-container d-lg-none">
+          <div class="col-xs-1 offset-xs-11 col-sm-1 offset-sm-11 col-md-1 offset-md-11 mb-2">
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#filter-container"
+                    aria-expanded="true" aria-controls="filter-container">
+              <i class="fa fa-expand"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="filter-container" class="d-lg-none filter-container p-4 mb-5 collapse show"
+             :style="{ 'background-color': backgroundColor }">
+          <filter-container/>
+        </div>
+
+        <div class="d-none d-lg-block filter-container p-4 mb-5" :style="{ 'background-color': backgroundColor }">
+          <filter-container/>
+        </div>
       </div>
 
-      <div class="col-9">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
         <chart-container/>
       </div>
     </template>
@@ -23,6 +39,11 @@
 </template>
 
 <style>
+  .filter-container {
+    box-shadow: 5px 5px 7px #d7dae0;
+    border: none;
+  }
+
   /* Centers the loading spinner */
   .spinner-container {
     height: 80vh;
@@ -33,8 +54,15 @@
   import ChartContainer from '../components/ChartContainer'
   import FilterContainer from '../components/FilterContainer'
 
+  const {backgroundColor} = window.__INITIAL_STATE__ || {}
+
   export default {
     name: 'BiobankAggregatesContainer',
+    data () {
+      return {
+        backgroundColor: backgroundColor
+      }
+    },
     computed: {
       activeFilters () {
         return this.$store.state.activeFilters

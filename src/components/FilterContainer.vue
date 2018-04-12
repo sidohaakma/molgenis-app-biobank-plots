@@ -1,10 +1,10 @@
 <template>
-  <div class="filter-container p-4 mb-5" :style="{ 'background-color': backgroundColor }">
+  <div>
     <div class="row">
-
       <div class="col-6">
         <h4>Filters</h4>
       </div>
+
       <div class="col-6">
         <button
           id="reset-filter-btn"
@@ -29,15 +29,9 @@
   </div>
 </template>
 
-<style scoped>
-  .filter-container {
-    box-shadow: 5px 5px 7px #d7dae0;
-    border: none;
-  }
-</style>
-
 <script>
   import FilterComponent from './filters/FilterComponent'
+
   const {backgroundColor, primaryColor} = window.__INITIAL_STATE__ || {}
 
   export default {
