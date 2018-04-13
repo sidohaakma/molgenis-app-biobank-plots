@@ -103,7 +103,7 @@
         return this.$store.state.totalNumberOfSamples
       }
     },
-    created () {
+    mounted () {
       this.selectedChartId = this.charts[0].id
     },
     components: {

@@ -7,6 +7,13 @@ const sampleResponse = require('./dev-responses/sample-response.js')
 const biobankAggregateResponse = require('./dev-responses/biobank-aggregate-response.js')
 const smokingAggregateResponse = require('./dev-responses/smoking-aggregate-response.js')
 const sexAggregateResponse = require('./dev-responses/sex-aggregate-response.js')
+const ageYearsAggregateResponse = require('./dev-responses/age-years-aggregate-response.js')
+const wbccAggregateResponse = require('./dev-responses/wbcc-aggregate-response.js')
+const genotypesAggregateResponse = require('./dev-responses/genotypes-aggregate-response.js')
+const metabolomeAggregateResponse = require('./dev-responses/metabolome-aggregate-response.js')
+const methylomeAggregateResponse = require('./dev-responses/methylome-aggregate-response.js')
+const transcriptomeAggregateResponse = require('./dev-responses/transcriptome-aggregate-response.js')
+const wgsAggregateResponse = require('./dev-responses/wgs-aggregate-response.js')
 
 module.exports = {
   dev: {
@@ -56,6 +63,13 @@ module.exports = {
           if (attr === 'biobank') response.json(biobankAggregateResponse)
           if (attr === 'sex') response.json(sexAggregateResponse)
           if (attr === 'smoking') response.json(smokingAggregateResponse)
+          if (attr === 'age_years') response.json(ageYearsAggregateResponse)
+          if (attr === 'wbcc') response.json(wbccAggregateResponse)
+          if (attr === 'genotypes') response.json(genotypesAggregateResponse)
+          if (attr === 'metabolome') response.json(metabolomeAggregateResponse)
+          if (attr === 'methylome') response.json(methylomeAggregateResponse)
+          if (attr === 'transcriptome') response.json(transcriptomeAggregateResponse)
+          if (attr === 'wgs') response.json(wgsAggregateResponse)
         } else {
           response.json(sampleResponse)
         }

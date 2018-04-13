@@ -32,7 +32,7 @@
       </div>
 
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
-        <chart-container/>
+        <chart-container v-if="charts.length > 0"/>
       </div>
     </template>
   </div>
@@ -67,6 +67,11 @@
       activeFilters () {
         return this.$store.state.activeFilters
       },
+
+      charts () {
+        return this.$store.getters.getCharts
+      },
+
       loading () {
         return this.$store.state.loading
       }
