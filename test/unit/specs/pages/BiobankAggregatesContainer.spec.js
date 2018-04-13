@@ -6,6 +6,7 @@ import Vuex from 'vuex'
 describe('pages', () => {
   describe('BiobankAggregatesContainer', () => {
     let actions
+    let getters
     let localVue
     let state
     let store
@@ -19,12 +20,16 @@ describe('pages', () => {
         FETCH_AGGREGATES: td.function()
       }
 
+      getters = {
+        getCharts: () => []
+      }
+
       state = {
         activeFilters: {},
         loading: false
       }
 
-      store = new Vuex.Store({actions, state})
+      store = new Vuex.Store({actions, getters, state})
     })
 
     it('should dispatch FETCH_METADATA and FETCH_AGGREGATES when created', () => {
@@ -41,6 +46,11 @@ describe('pages', () => {
     it('should compute loading based on the store', () => {
       const wrapper = shallow(BiobankAggregatesContainer, {store, localVue})
       expect(wrapper.vm.loading).to.equal(false)
+    })
+
+    it('should compute charts based on the store', () => {
+      const wrapper = shallow(BiobankAggregatesContainer, {store, localVue})
+      expect(wrapper.vm.charts).to.deep.equal([])
     })
 
     it('should watch the activeFilters and dispatch FETCH_AGGREGATES on change', () => {
