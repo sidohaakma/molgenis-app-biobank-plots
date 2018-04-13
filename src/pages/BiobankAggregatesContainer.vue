@@ -13,7 +13,7 @@
     <template v-else>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
         <div class="toggle-filter-container d-lg-none">
-          <div class="col-xs-1 offset-xs-11 col-sm-1 offset-sm-11 col-md-1 offset-md-11 mb-2">
+          <div class="col-xs-12 col-sm-12 col-md-12 mb-2 pr-0 text-right">
             <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#filter-container"
                     aria-expanded="true" aria-controls="filter-container">
               <i class="fa fa-expand"></i>
