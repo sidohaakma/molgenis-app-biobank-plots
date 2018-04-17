@@ -6,16 +6,94 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <title>Biobank Aggregates</title>
   </head>
   <body>
     <script>
       var server = 'http://localhost:8080'
+      var primaryColor = '#184B8A'
+      var secondaryColor = '#ed660c'
+      var tertiaryColor = '#cccccc'
+      var backgroundColor = '#e6e9ef'
+
       window.__INITIAL_STATE__ = {
         server: server,
-        sampleTable: 'leiden_RP'
+        sampleTable: 'leiden_RP',
+        primaryColor: primaryColor,
+        secondaryColor: secondaryColor,
+        tertiaryColor: tertiaryColor,
+        backgroundColor: backgroundColor,
+        attributes: [
+          {
+            name: 'biobank',
+            title: 'Number of samples per biobank',
+            type: 'HorizontalBarChart',
+            inline: false
+          },
+          {
+            name: 'wbcc',
+            title: 'Whole bloodcell counts',
+            type: 'ColumnChart',
+            inline: true,
+            datasets: [
+              {label: 'Yes', backgroundColor: primaryColor},
+              {label: 'No', backgroundColor: secondaryColor},
+              {label: 'Not available ', backgroundColor: tertiaryColor}
+            ]
+          },
+          {
+            name: 'age_years',
+            title: 'Age in years',
+            type: 'VerticalBarChart',
+            inline: false
+          },
+          {
+            name: 'data_type',
+            title: 'Data available',
+            inline: false,
+            columns: [
+              {id: 'genotypes', label: 'Genotypes'},
+              {id: 'metabolome', label: 'Metabolome'},
+              {id: 'methylome', label: 'Methylome'},
+              {id: 'transcriptome', label: 'Transcriptome'},
+              {id: 'wgs', label: 'Whole genome sequence'}
+            ],
+            type: 'MultiColumnChart', <!-- Use MultiColumnChart for COMPOUND types -->
+            datasets: [
+              {label: 'Available', backgroundColor: primaryColor},
+              {label: 'Unavailable', backgroundColor: secondaryColor}
+            ]
+          },
+          {
+            name: 'smoking',
+            inline: true,
+            title: 'Ever smoked',
+            type: 'ColumnChart',
+            datasets: [
+              {label: 'Yes', backgroundColor: primaryColor},
+              {label: 'No', backgroundColor: secondaryColor},
+              {label: 'Not available ', backgroundColor: tertiaryColor}
+            ]
+          },
+          {
+            name: 'sex',
+            title: 'Sex',
+            inline: true,
+            type: 'ColumnChart',
+            datasets: [
+              {label: 'Male', backgroundColor: primaryColor},
+              {label: 'Female', backgroundColor: secondaryColor},
+              {label: 'Not available ', backgroundColor: tertiaryColor}
+            ]
+          }
+        ]
       }
     </script>
-    <div id="app"></div>
+    <div id="biobank-aggregates-app-container"></div>
   </body>
 </html>

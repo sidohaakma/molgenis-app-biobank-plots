@@ -1,8 +1,14 @@
+// @flow
+
+// $FlowFixMe
 import Vue from 'vue'
+
+// $FlowFixMe
 import Vuex from 'vuex'
 
-import mutations from './mutations'
 import actions from './actions'
+import getters from './getters'
+import mutations from './mutations'
 
 import type { State } from '../flow.types'
 
@@ -13,21 +19,31 @@ const state: State = {
   activeFilters: {},
 
   /**
-   * A map containing aggregate data and labels for different categories i.e. sex and smoking
-   * mapped to a format understandable for VueCharts.js
+   * An array containing chart data objects
    */
-  attributeChartData: {},
+  charts: [],
 
   /**
-   * A map containing the different filter components and their specific option lists
+   * A map containing the different filters and their specific option lists
    */
-  filterComponents: {}
+  filters: {},
+
+  /**
+   * A boolean setting the global loading state of the application
+   */
+  loading: true,
+
+  /**
+   * The total number of samples available in the database
+   */
+  totalNumberOfSamples: 0
 }
 
 Vue.use(Vuex)
 export default new Vuex.Store({
-  state,
-  mutations,
   actions,
+  getters,
+  mutations,
+  state,
   strict: true
 })

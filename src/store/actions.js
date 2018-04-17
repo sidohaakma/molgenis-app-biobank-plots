@@ -2,36 +2,80 @@
 
 // $FlowFixMe
 import api from '@molgenis/molgenis-api-client'
-import * as mappers from '../utils/mappers'
+
+// $FlowFixMe
+import mappers from 'src/mappers'
 
 import type { VuexContext } from '../flow.types'
 
-const {sampleTable} = window.__INITIAL_STATE__ || {}
-
 /**
- * List of attributes used to fetch aggregate data
- * These attributes are all involved in one plot or another
+ * Return aggregates for all attributes specified in window.__INITIAL_STATE__.attributes
+ *
+ * @param attributes list of attributes for which aggregates should be fetched
+ * @param sampleTable the table containing data for all attributes
+ * @param rsql optional RSQL string used to apply filters
+ * @returns {Array}
  */
-const attributes = ['biobank', 'smoking', 'sex', 'transcriptome', 'wbcc', 'genotypes', 'metabolome', 'methylome', 'wgs']
+const fetchAttributeAggregates = (attributes, sampleTable, rsql) => {
+  const promises = []
+  rsql = rsql !== '' ? '&q=' + rsql : rsql
+
+  attributes.forEach(attribute => {
+    if (attribute.type === 'MultiColumnChart') {
+      const columns = []
+      attribute.columns.forEach(column => {
+        columns.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + column.id + rsql).then(response => {
+          return response
+        }))
+      })
+
+      promises.push(Promise.all(columns).then(responses => {
+        return mappers.aggregateDataToChartDataMapper(attribute, responses)
+      }))
+    } else {
+      promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + rsql).then(response => {
+        return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
+      }))
+    }
+  })
+  return promises
+}
 
 export default {
-  'GET_SUBJECT_METADATA' ({commit}: VuexContext) {
+  'FETCH_METADATA' ({commit}: VuexContext) {
+    // Deconstruct inside action to enable testing
+    const {sampleTable} = window.__INITIAL_STATE__ || {}
+
     api.get('/api/v2/' + sampleTable + '?includeCategories=true').then(response => {
-      const filterComponents = mappers.subjectMetadataToFilterMapper(response.meta)
-      commit('SET_FILTER_COMPONENTS', filterComponents)
+      const filters = mappers.subjectMetadataToFilterMapper(response.meta)
+      commit('SET_FILTERS', filters)
+      commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
+      commit('SET_LOADING', false)
     })
   },
 
-  'GET_SUBJECT_AGGREGATION' ({commit}: VuexContext) {
-    attributes.forEach(attribute => {
-      api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute).then(response => {
-        const attributeChartData = mappers.aggregateDataToChartData(attribute, response.aggs)
-        commit('UPDATE_ATTRIBUTE_CHART_DATA', attributeChartData)
-      })
+  'FETCH_AGGREGATES' ({state, commit, dispatch}: VuexContext) {
+    // Deconstruct inside action to enable testing
+    const {attributes, sampleTable} = window.__INITIAL_STATE__ || {}
+
+    const filters = mappers.activeFiltersToRsqlMapper(state.activeFilters)
+    const rsql = !filters ? '' : filters
+
+    const promises = fetchAttributeAggregates(attributes, sampleTable, rsql)
+    Promise.all(promises).then(charts => {
+      commit('UPDATE_CHARTS', charts)
     })
+
+    dispatch('FETCH_TOTAL_NUMBER_OF_SAMPLES', rsql)
   },
 
-  'UPDATE_SUBJECT_AGGREGATION' ({state, commit}: VuexContext) {
-    console.log('UPDATE AGGREGATES!')
+  'FETCH_TOTAL_NUMBER_OF_SAMPLES' ({commit}: VuexContext, rsql: string) {
+    // Deconstruct inside action to enable testing
+    const {sampleTable} = window.__INITIAL_STATE__ || {}
+
+    rsql = rsql !== '' ? '?q=' + rsql : rsql
+    api.get('/api/v2/' + sampleTable + rsql).then(response => {
+      commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
+    })
   }
 }

@@ -1,9 +1,18 @@
 // @flow
 
+export type Chart = {
+  id?: string,
+  title?: string,
+  dataCollection?: Object,
+  labels?: Array<String>
+}
+
 export type State = {
   activeFilters: Object,
-  attributeChartData: Object,
-  filterComponents: Object
+  charts: Array<Chart>,
+  filters: Object,
+  loading: boolean,
+  totalNumberOfSamples: number
 }
 
 export type VuexContext = {

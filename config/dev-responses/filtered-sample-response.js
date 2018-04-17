@@ -90,105 +90,7 @@ module.exports = {
             'unique': false,
             'visible': true,
             'lookupAttribute': false,
-            'isAggregatable': true,
-            'categoricalOptions': [
-              {
-                'id': 'ALPHAOMEGA',
-                'label': 'ALPHAOMEGA'
-              },
-              {
-                'id': 'BIOMARCS',
-                'label': 'BIOMARCS'
-              },
-              {
-                'id': 'CHARM',
-                'label': 'CHARM'
-              },
-              {
-                'id': 'CHECK',
-                'label': 'CHECK'
-              },
-              {
-                'id': 'CODAM',
-                'label': 'CODAM'
-              },
-              {
-                'id': 'CSF',
-                'label': 'CSF'
-              },
-              {
-                'id': 'DMS',
-                'label': 'DMS'
-              },
-              {
-                'id': 'DZS_WF',
-                'label': 'DZS_WF'
-              },
-              {
-                'id': 'FUNCTGENOMICS',
-                'label': 'FUNCTGENOMICS'
-              },
-              {
-                'id': 'GARP',
-                'label': 'GARP'
-              },
-              {
-                'id': 'HELIUS',
-                'label': 'HELIUS'
-              },
-              {
-                'id': 'LL',
-                'label': 'LL'
-              },
-              {
-                'id': 'LLS',
-                'label': 'LLS'
-              },
-              {
-                'id': 'MRS',
-                'label': 'MRS'
-              },
-              {
-                'id': 'NESDA',
-                'label': 'NESDA'
-              },
-              {
-                'id': 'NTR',
-                'label': 'NTR'
-              },
-              {
-                'id': 'PAN',
-                'label': 'PAN'
-              },
-              {
-                'id': 'PROSPER',
-                'label': 'PROSPER'
-              },
-              {
-                'id': 'RAAK',
-                'label': 'RAAK'
-              },
-              {
-                'id': 'RS',
-                'label': 'RS'
-              },
-              {
-                'id': 'STEMI_GIPS-III',
-                'label': 'STEMI_GIPS-III'
-              },
-              {
-                'id': 'TACTICS',
-                'label': 'TACTICS'
-              },
-              {
-                'id': 'TOMAAT',
-                'label': 'TOMAAT'
-              },
-              {
-                'id': 'UCORBIO',
-                'label': 'UCORBIO'
-              }
-            ]
+            'isAggregatable': true
           },
           {
             'href': '/api/v2/leiden_RP/meta/age',
@@ -384,7 +286,7 @@ module.exports = {
   },
   'start': 0,
   'num': 100,
-  'total': 26227,
-  'nextHref': 'http://localhost:8080/api/v2/leiden_RP?start=100',
+  'total': 11518,
+  'nextHref': 'http://localhost:8080/api/v2/leiden_RP?q=sex==male&start=100',
   'items': []
 }
