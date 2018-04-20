@@ -1,3 +1,4 @@
+/* eslint no-unused-expressions: 0 */
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
@@ -19,7 +20,6 @@ module.exports = {
     const bodySelector = 'body'
     const canvasSelector = 'canvas'
     const maleCheckboxSelector = '#application-container > div > div > div.col-xs-12.col-sm-12.col-md-12.col-lg-3.col-xl-3 > div.d-none.d-lg-block.filter-container.p-4.mb-5 > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div:nth-child(1) > label'
-    const resetFilterBtnSelector = '#reset-filter-btn'
     const totalNumberOfSamplesContainerSelector = '.total-number-of-samples-container'
 
     // ======= tests =======

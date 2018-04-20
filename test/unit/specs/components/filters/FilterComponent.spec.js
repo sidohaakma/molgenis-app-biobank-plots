@@ -16,7 +16,6 @@ describe('components', () => {
         localVue = createLocalVue()
         localVue.use(Vuex)
 
-
         mutations = {
           UPDATE_ACTIVE_FILTERS: td.function()
         }
