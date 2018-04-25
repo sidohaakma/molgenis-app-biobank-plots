@@ -14,6 +14,7 @@
     <title>Biobank Aggregates</title>
   </head>
   <body>
+    <div id="biobank-aggregates-app-container"></div>
     <script>
       var server = 'http://localhost:8080'
       var primaryColor = '#184B8A'
@@ -23,6 +24,7 @@
 
       window.__INITIAL_STATE__ = {
         server: server,
+        baseUrl: '/',
         sampleTable: 'leiden_RP',
         primaryColor: primaryColor,
         secondaryColor: secondaryColor,
@@ -63,7 +65,7 @@
               {id: 'transcriptome', label: 'Transcriptome'},
               {id: 'wgs', label: 'Whole genome sequence'}
             ],
-            type: 'MultiColumnChart', <!-- Use MultiColumnChart for COMPOUND types -->
+            type: 'MultiColumnChart',
             datasets: [
               {label: 'Available', backgroundColor: primaryColor},
               {label: 'Unavailable', backgroundColor: secondaryColor}
@@ -94,6 +96,5 @@
         ]
       }
     </script>
-    <div id="biobank-aggregates-app-container"></div>
   </body>
 </html>
