@@ -1,29 +1,10 @@
 # MOLGENIS biobank plots
-
 This app plots aggregate sample information for biobanks.
 
-## Build Setup
-
-``` bash
-# install dependencies
-yarn install
-
-# serve with hot reload at localhost:8080
-yarn run dev
-
-# build for production with minification
-# The created artifacts can be uploaded to the MOLGENIS app store.
-yarn run build
-
-# run unit tests
-yarn run unit
-
-# run all tests
-yarn test
-```
 ## Data model
-  The data model required for these plots should consist of aggregateable attributes.
-  An example attributes sheet:  
+The data model required for these plots should consist of aggregateable attributes. 
+
+An example attributes sheet:  
 
 | entity           | name          | label                                    | dataType    | refEntity        | idAttribute | enumOptions | labelAttribute | aggregateable | visible | partOfAttribute | expression | nillable | 
 |------------------|---------------|------------------------------------------|-------------|------------------|-------------|-------------|----------------|---------------|---------|-----------------|------------|----------| 
@@ -45,12 +26,12 @@ yarn test
 | project_biobanks | abbr          | Abbreviation                             | string      |                  | false       |             | true           | false         | true    |                 |            | true     | 
 | project_biobanks | description   | Description                              | string      |                  | false       |             | false          | false         | true    |                 |            | true     | 
 
-Download the complete model [here](../../raw/master/example/example-model.xlsx) 
+Download the complete model [here](./docs/data/example-model.xlsx) 
    
 ## Configuration
-Colors and attributes used to create the plots can be configured in the ```index.html```
-as follows:
-``` javascript
+Colors and attributes used to create the plots can be configured in the `index.html` as follows:
+
+```js
   <script>
       var server = 'https://yourfancyserverhere'
       var primaryColor = '#184B8A'
@@ -131,4 +112,24 @@ as follows:
         ]
       }
     </script>
+```
+
+## Build Setup
+
+```bash
+# install dependencies
+yarn install
+
+# serve with hot reload at localhost:8080
+yarn run dev
+
+# build for production with minification
+# The created artifacts can be uploaded to the MOLGENIS app store.
+yarn run build
+
+# run unit tests
+yarn run unit
+
+# run all tests
+yarn test
 ```
