@@ -5,11 +5,12 @@ install: true
 addons:
   sauce_connect: true
 script:
-- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash .travis/run_on_pull_requests.sh; fi'
-- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash .travis/run_on_non_pull_requests.sh; fi'
+- if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash .travis/run_on_pull_requests.sh;
+  fi
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash .travis/run_on_non_pull_requests.sh;
+  fi
 notifications:
   slack:
-    rooms:
-      secure: blnxfapt6aAdRDjNvy2Ykp3yPxhRqo0srfz9MI2obKGXFOO2ee+AF0TNosmz9aZG0J3u4e3YI+z9BvjcNMvTzzPCjiLiC3MSbtB9w0SHwhg6q7s1ehVoYKqB22++8S6GEYy5FgBpBLQ+jXEnwiglHfKLowJjvQS8s2NBMhAwEqY=
+    secure: VH4wCWOQbV2Ddqfmp3Dw/kje2cKQZvwv6+OoVigHmZOZybDBzcKanrYtsVePfndZWHRzPqunfJGS8eB+ewQIGkRKCIzsHAp6lp+rJaZnrTJs/nRxg2/uwqYzUv7h3DFCszzjP2VAncrEYYlRzvFbj9rPTjRbyYuCCEiMj/9szfTeedl8SkDdJew5wOhXhGTyuxIUwQtEGmSmFfS7BOWuJr497d1fpHbYUHnx5E+nf8uMIsgybItcaq4O4u0bfZi/lYRLyopwVDTLlZeY5rb82I8vQPm6wnl1zkTTOIptzlJRynP4aK88VvTzqjyoRFKHwicyOAkJNmL4EpXwC3VtVGNVxqYjtg8keV67x/U/xt+BLjTkg2YzqFmEaNk1ut9GA9XDEcHoGDwXD9f+PORRfGQfWG4CPuPxg/UB27rvQ6s2GD+bGteIl7CUuDiX4mJeslGr4yFVDh2f+EyaslS0aj27V+HJe+ZZx4uWvXpRUJlZwEiaeB3C34tR9MGktqumGGZEajk1tavYvxvScNbef2rs00FR3LnD0U9RsAe6lg2C4oRcvPebC6e7TAzhdNVUC31KgEO++TJnNbs1UpFHNJnMcSWmkzIuTFq/Msu3f0jevkIG+KBJDJtDeP6kax++bVNN9pJmY38Ut5+TErgQxWLxi4fhLbN91HdtzVLdc8w=
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
