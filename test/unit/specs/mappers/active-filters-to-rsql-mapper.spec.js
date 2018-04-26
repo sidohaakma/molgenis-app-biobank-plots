@@ -7,12 +7,12 @@ describe('mappers', () => {
         biobank: 'CHECK',
         sex: ['male'],
         smoking: [true],
-        age_years: [25, 50],
+        age: [25, 50],
         data_type: ['genotypes', 'metabolome', 'methylome']
       }
 
       const actual = activeFilterToRsqlMapper(activeFilters)
-      const expected = 'biobank==CHECK;sex==male;smoking==true;age_years=ge=25;age_years=le=50;genotypes==true;metabolome==true;methylome==true'
+      const expected = 'biobank==CHECK;sex==male;smoking==true;age=ge=25;age=le=50;genotypes==true;metabolome==true;methylome==true'
 
       expect(actual).to.equal(expected)
     })
@@ -22,12 +22,12 @@ describe('mappers', () => {
         biobank: '',
         sex: ['male'],
         smoking: [true],
-        age_years: [25, 50],
+        age: [25, 50],
         data_type: ['genotypes', 'metabolome', 'methylome']
       }
 
       const actual = activeFilterToRsqlMapper(activeFilters)
-      const expected = 'sex==male;smoking==true;age_years=ge=25;age_years=le=50;genotypes==true;metabolome==true;methylome==true'
+      const expected = 'sex==male;smoking==true;age=ge=25;age=le=50;genotypes==true;metabolome==true;methylome==true'
 
       expect(actual).to.equal(expected)
     })

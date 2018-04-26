@@ -59,7 +59,7 @@ describe('mappers', () => {
 
     it('should map an aggregate result to a chart data object for a vertical bar chart', () => {
       const attribute = {
-        name: 'age_years',
+        name: 'age',
         title: 'Age',
         type: 'VerticalBarChart',
         inline: false
@@ -92,17 +92,17 @@ describe('mappers', () => {
               'descriptions': [
                 '',
                 '',
-                'Unknown'
+                'Not available'
               ]
             }
           ],
           'labels': [
             25,
             50,
-            'Unknown'
+            'Not available'
           ]
         },
-        'id': 'age_years',
+        'id': 'age',
         'inline': false,
         'title': 'Age',
         'type': 'VerticalBarChart'
@@ -131,8 +131,8 @@ describe('mappers', () => {
           [532]
         ],
         xLabels: [
-          true,
-          false,
+          1,
+          0,
           null
         ]
       }
