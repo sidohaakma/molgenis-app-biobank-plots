@@ -72,7 +72,6 @@ const mapAttributesToFilters = (attribute) => {
 const subjectMetadataToFilterMapper = (metadata) => {
   const filters = metadata.attributes.find(attribute => attribute.name === 'filters')
   return filters.attributes.reduce((accumulator, attribute) => {
-    if (attribute.name === 'age') return accumulator // skip age column, we use age_years
     accumulator[attribute.name] = mapAttributesToFilters(attribute)
     return accumulator
   }, {})
