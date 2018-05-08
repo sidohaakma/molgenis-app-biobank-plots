@@ -18,7 +18,7 @@
     width: 100%;
   }
 
-  h4, h5 {
+  h4, h5, a {
     color: #184B8A;
   }
 </style>

@@ -11,7 +11,10 @@ function UnsupportedChartTypeException (message) {
  * Return label value
  */
 const getAggregateLabel = (label) => {
-  if (label === null) return 'Unknown'
+  if (label === null) return 'Not available'
+  if (label.label !== undefined) return label.label
+  if (label === 1) return 'Yes'
+  if (label === 0) return 'No'
   if (label.id !== undefined) return label.id
   return label
 }
@@ -20,7 +23,7 @@ const getAggregateLabel = (label) => {
  * Return description
  */
 const getAggregateDescription = (label) => {
-  if (label === null) return 'Unknown'
+  if (label === null) return 'Not available'
   let description = label.description !== undefined ? label.description : ''
   return description
 }
@@ -79,10 +82,14 @@ const generateBarChartData = (attribute, aggregates) => {
  */
 const generateColumnChartData = (attribute, aggregates) => {
   const datasets = aggregates.matrix.map((aggregateValue, index) => {
+    const label = getAggregateLabel(aggregates.xLabels[index])
+    const color = attribute.datasets.find((attrLabel) => {
+      return attrLabel.label === label
+    }).backgroundColor
     return {
       data: aggregateValue,
-      label: attribute.datasets[index].label,
-      backgroundColor: attribute.datasets[index].backgroundColor
+      label: label,
+      backgroundColor: color
     }
   })
 
@@ -113,7 +120,7 @@ const generateMultiColumnChart = (attribute, aggregates) => {
       backgroundColor: dataset.backgroundColor,
       data: attribute.columns.map(column => {
         const aggregate = aggregates.find(aggregate => aggregate.xAttr.name === column.id).aggs
-        return aggregate.matrix[index][0]
+        return aggregate.matrix[index] ? aggregate.matrix[index][0] : 0
       })
     }
   })

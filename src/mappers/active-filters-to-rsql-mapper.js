@@ -6,7 +6,7 @@
 const activeFiltersToRsqlMapper = (activeFilters) => {
   return Object.keys(activeFilters).reduce((accumulator, filter) => {
     const values = activeFilters[filter]
-    if (filter === 'age_years') {
+    if (filter === 'age') {
       accumulator.push(filter + '=ge=' + values[0])
       accumulator.push(filter + '=le=' + values[1])
     } else if (filter === 'data_type') {

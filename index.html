@@ -33,8 +33,7 @@
 
       window.__INITIAL_STATE__ = {
         server: server,
-        baseUrl: '/',
-        sampleTable: 'leiden_RP',
+        sampleTable: 'bbmri_subjects',
         primaryColor: primaryColor,
         secondaryColor: secondaryColor,
         tertiaryColor: tertiaryColor,
@@ -47,18 +46,18 @@
             inline: false
           },
           {
-            name: 'wbcc',
-            title: 'Whole bloodcell counts',
+            name: 'cell_counts',
+            title: 'Cell counts',
             type: 'ColumnChart',
             inline: true,
             datasets: [
               {label: 'Yes', backgroundColor: primaryColor},
               {label: 'No', backgroundColor: secondaryColor},
-              {label: 'Not available ', backgroundColor: tertiaryColor}
+              {label: 'Not available', backgroundColor: tertiaryColor}
             ]
           },
           {
-            name: 'age_years',
+            name: 'age',
             title: 'Age in years',
             type: 'VerticalBarChart',
             inline: false
@@ -72,23 +71,23 @@
               {id: 'metabolome', label: 'Metabolome'},
               {id: 'methylome', label: 'Methylome'},
               {id: 'transcriptome', label: 'Transcriptome'},
-              {id: 'wgs', label: 'Whole genome sequence'}
+              {id: 'whole_genome_sequencing', label: 'Whole genome sequence'}
             ],
-            type: 'MultiColumnChart',
+            type: 'MultiColumnChart', // Use MultiColumnChart for COMPOUND types
             datasets: [
               {label: 'Available', backgroundColor: primaryColor},
               {label: 'Unavailable', backgroundColor: secondaryColor}
             ]
           },
           {
-            name: 'smoking',
+            name: 'ever_smoked',
             inline: true,
             title: 'Ever smoked',
             type: 'ColumnChart',
             datasets: [
               {label: 'Yes', backgroundColor: primaryColor},
               {label: 'No', backgroundColor: secondaryColor},
-              {label: 'Not available ', backgroundColor: tertiaryColor}
+              {label: 'Not available', backgroundColor: tertiaryColor}
             ]
           },
           {
@@ -99,7 +98,7 @@
             datasets: [
               {label: 'Male', backgroundColor: primaryColor},
               {label: 'Female', backgroundColor: secondaryColor},
-              {label: 'Not available ', backgroundColor: tertiaryColor}
+              {label: 'Unknown', backgroundColor: tertiaryColor}
             ]
           }
         ]

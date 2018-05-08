@@ -3,18 +3,20 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const sampleResponse = require('./dev-responses/sample-response.js')
+
+const biobankSubjectsResponse = require('./dev-responses/biobank-subjects-response.js')
+const biobankSubjectsIncludeCategoriesResponse = require('./dev-responses/biobank-subjects-include-categories-response.js')
+const filteredBiobankSubjectsResponse = require('./dev-responses/filtered-biobank-subjects-response.js')
 const biobankAggregateResponse = require('./dev-responses/biobank-aggregate-response.js')
 const smokingAggregateResponse = require('./dev-responses/smoking-aggregate-response.js')
 const sexAggregateResponse = require('./dev-responses/sex-aggregate-response.js')
 const ageYearsAggregateResponse = require('./dev-responses/age-years-aggregate-response.js')
-const wbccAggregateResponse = require('./dev-responses/wbcc-aggregate-response.js')
 const genotypesAggregateResponse = require('./dev-responses/genotypes-aggregate-response.js')
 const metabolomeAggregateResponse = require('./dev-responses/metabolome-aggregate-response.js')
 const methylomeAggregateResponse = require('./dev-responses/methylome-aggregate-response.js')
 const transcriptomeAggregateResponse = require('./dev-responses/transcriptome-aggregate-response.js')
 const wgsAggregateResponse = require('./dev-responses/wgs-aggregate-response.js')
-const filteredSampleResponse = require('./dev-responses/filtered-sample-response')
+const cellcountsAggregateResponse= require('./dev-responses/cellcounts-aggregate-response.js')
 
 module.exports = {
   dev: {
@@ -57,23 +59,25 @@ module.exports = {
     cacheBusting: true,
     cssSourceMap: true,
     before (app) {
-      app.get('/api/v2/leiden_RP', function (request, response) {
+      app.get('/api/v2/bbmri_subjects', function (request, response) {
         if (request.query.aggs) {
           const attr = request.query.aggs.split('==')[1]
           if (attr === 'biobank') response.json(biobankAggregateResponse)
           if (attr === 'sex') response.json(sexAggregateResponse)
-          if (attr === 'smoking') response.json(smokingAggregateResponse)
-          if (attr === 'age_years') response.json(ageYearsAggregateResponse)
-          if (attr === 'wbcc') response.json(wbccAggregateResponse)
+          if (attr === 'ever_smoked') response.json(smokingAggregateResponse)
+          if (attr === 'age') response.json(ageYearsAggregateResponse)
           if (attr === 'genotypes') response.json(genotypesAggregateResponse)
           if (attr === 'metabolome') response.json(metabolomeAggregateResponse)
           if (attr === 'methylome') response.json(methylomeAggregateResponse)
           if (attr === 'transcriptome') response.json(transcriptomeAggregateResponse)
-          if (attr === 'wgs') response.json(wgsAggregateResponse)
+          if (attr === 'whole_genome_sequencing') response.json(wgsAggregateResponse)
+          if (attr === 'cell_counts') response.json(cellcountsAggregateResponse)
         } else if (request.query.q) {
-          response.json(filteredSampleResponse)
+          response.json(filteredBiobankSubjectsResponse)
+        } else if (request.query.includeCategories) {
+          response.json(biobankSubjectsIncludeCategoriesResponse)
         } else {
-          response.json(sampleResponse)
+          response.json(biobankSubjectsResponse)
         }
       })
     }

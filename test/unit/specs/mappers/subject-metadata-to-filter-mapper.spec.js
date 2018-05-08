@@ -19,20 +19,20 @@ describe('mappers', () => {
                 ]
               },
               {
-                name: 'age_years',
-                label: 'Age in years'
-              },
-              {
                 name: 'age',
-                label: 'Age'
+                label: 'Age in years'
               },
               {
                 name: 'sex',
                 label: 'Sex',
-                enumOptions: ['male', 'female']
+                categoricalOptions: [
+                  {id: 'male', label: 'male'},
+                  {id: 'unk', label: 'unknown'},
+                  {id: 'female', label: 'female'}
+                ]
               },
               {
-                name: 'smoking',
+                name: 'ever_smoked',
                 label: 'Smoking?'
               },
               {
@@ -66,9 +66,9 @@ describe('mappers', () => {
             value: 'id1'
           }]
         },
-        age_years: {
+        age: {
           filterType: 'range',
-          id: 'age_years',
+          id: 'age',
           label: 'Age in years',
           options: [0, 120]
         },
@@ -89,9 +89,9 @@ describe('mappers', () => {
             }
           ]
         },
-        smoking: {
+        ever_smoked: {
           filterType: 'checkbox-row',
-          id: 'smoking',
+          id: 'ever_smoked',
           label: 'Smoking?',
           options: [
             {

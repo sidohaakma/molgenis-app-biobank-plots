@@ -2,7 +2,7 @@ module.exports = {
   'aggs':
     {
       'matrix':
-        [[34932], [879], [0]], 'xLabels':
+        [[16036], [19775], [0]], 'xLabels':
         [0, 1, null], 'yLabels':
         []
     }
@@ -10,10 +10,10 @@ module.exports = {
   'xAttr':
     {
       'href':
-        '/api/v2/bbmri_subjects/meta/whole_genome_sequencing', 'fieldType':
+        '/api/v2/bbmri_subjects/meta/cell_counts', 'fieldType':
         'BOOL', 'name':
-        'whole_genome_sequencing', 'label':
-        'Whole Genome Sequencing (Illumina Hiseq)', 'attributes':
+        'cell_counts', 'label':
+        'Cell count', 'attributes':
         [], 'auto':
         false, 'nillable':
         true, 'readOnly':

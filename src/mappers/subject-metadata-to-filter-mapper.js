@@ -11,7 +11,7 @@ const mapAttributesToFilters = (attribute) => {
           value: option.id
         }))
       }
-    case 'age_years':
+    case 'age':
       return {
         id: attribute.name,
         label: attribute.label,
@@ -23,13 +23,18 @@ const mapAttributesToFilters = (attribute) => {
         id: attribute.name,
         label: attribute.label,
         filterType: 'checkbox-row',
-        options: attribute.enumOptions.map(option => ({
-          id: option,
-          label: option, // TODO Uppercase first letter
-          value: option
-        }))
+        options: attribute.categoricalOptions.reduce((accumulator, option) => {
+          if (option.id !== 'unk') {
+            accumulator.push({
+              id: option.id,
+              label: option.label,
+              value: option.id
+            })
+          }
+          return accumulator
+        }, [])
       }
-    case 'smoking':
+    case 'ever_smoked':
       return {
         id: attribute.name,
         label: attribute.label,
@@ -67,7 +72,6 @@ const mapAttributesToFilters = (attribute) => {
 const subjectMetadataToFilterMapper = (metadata) => {
   const filters = metadata.attributes.find(attribute => attribute.name === 'filters')
   return filters.attributes.reduce((accumulator, attribute) => {
-    if (attribute.name === 'age') return accumulator // skip age column, we use age_years
     accumulator[attribute.name] = mapAttributesToFilters(attribute)
     return accumulator
   }, {})
