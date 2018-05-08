@@ -26,12 +26,12 @@ module.exports = {
     browser.expect.element(applicationContainerSelector).to.be.visible
     browser.expect.element(bodySelector).to.be.visible
     browser.expect.element(canvasSelector).to.be.visible
-    browser.expect.element(totalNumberOfSamplesContainerSelector).text.to.contain('Matching samples: 26227')
+    browser.expect.element(totalNumberOfSamplesContainerSelector).text.to.contain('Matching samples: 35811')
 
     browser.click(maleCheckboxSelector)
-    browser.expect.element(totalNumberOfSamplesContainerSelector).text.to.contain('Matching samples: 11518')
+    browser.expect.element(totalNumberOfSamplesContainerSelector).text.to.contain('Matching samples: 16408')
 
     browser.click(maleCheckboxSelector)
-    browser.expect.element(totalNumberOfSamplesContainerSelector).text.to.contain('Matching samples: 26227')
+    browser.expect.element(totalNumberOfSamplesContainerSelector).text.to.contain('Matching samples: 35811')
   }
 }
