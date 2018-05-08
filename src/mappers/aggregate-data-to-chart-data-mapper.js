@@ -120,7 +120,7 @@ const generateMultiColumnChart = (attribute, aggregates) => {
       backgroundColor: dataset.backgroundColor,
       data: attribute.columns.map(column => {
         const aggregate = aggregates.find(aggregate => aggregate.xAttr.name === column.id).aggs
-        return aggregate.matrix[index][0]
+        return aggregate.matrix[index] ? aggregate.matrix[index][0] : 0
       })
     }
   })
