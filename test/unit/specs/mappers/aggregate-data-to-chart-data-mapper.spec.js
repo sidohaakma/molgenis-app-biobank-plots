@@ -198,7 +198,8 @@ describe('mappers', () => {
             matrix: [
               [877],
               [649]
-            ]
+            ],
+            xLabels: [0, 1]
           },
           xAttr: {
             name: 'transcriptome'
@@ -209,7 +210,8 @@ describe('mappers', () => {
             matrix: [
               [200],
               [300]
-            ]
+            ],
+            xLabels: [0, 1]
           },
           xAttr: {
             name: 'genotypes'
@@ -224,16 +226,16 @@ describe('mappers', () => {
             {
               'backgroundColor': '#000',
               'data': [
-                877,
-                200
+                649,
+                300
               ],
               'label': 'Available'
             },
             {
               'backgroundColor': '#000',
               'data': [
-                649,
-                300
+                877,
+                200
               ],
               'label': 'Unavailable'
             }

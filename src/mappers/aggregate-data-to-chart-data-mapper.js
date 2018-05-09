@@ -20,6 +20,15 @@ const getAggregateLabel = (label) => {
 }
 
 /**
+ * Return xLabel value of boolean types in the aggregates API
+ */
+const getBooleanAggregateLabel = (label) => {
+  if (label === 'Unavailable') return 0
+  if (label === 'Available') return 1
+  return label
+}
+
+/**
  * Return description
  */
 const getAggregateDescription = (label) => {
@@ -120,7 +129,9 @@ const generateMultiColumnChart = (attribute, aggregates) => {
       backgroundColor: dataset.backgroundColor,
       data: attribute.columns.map(column => {
         const aggregate = aggregates.find(aggregate => aggregate.xAttr.name === column.id).aggs
-        return aggregate.matrix[index] ? aggregate.matrix[index][0] : 0
+        const aggLabel = getBooleanAggregateLabel(dataset.label)
+        const aggIndex = aggregate.xLabels.indexOf(aggLabel)
+        return aggregate.matrix[aggIndex] ? aggregate.matrix[aggIndex][0] : 0
       })
     }
   })
