@@ -22,11 +22,6 @@
         options: {}
       }
     },
-    computed: {
-      chart () {
-        this.renderChart(this.chartData, this.options)
-      }
-    },
     methods: {
       getDescriptionParts (description) {
         const charsOnFirstRow = 130
@@ -49,7 +44,6 @@
       }
     },
     mounted () {
-      const descriptions = this.chartData.datasets[0].descriptions
       const self = this
       this.options = {
         title: {
@@ -68,12 +62,14 @@
             },
             beforeLabel (tooltipItem) {
               // Get description of selected tooltip
+              const descriptions = self.chartData.datasets[0].descriptions
               const description = descriptions[tooltipItem.index]
               const descriptionParts = self.getDescriptionParts(description)
               return descriptionParts.firstPart
             },
             label (tooltipItem) {
               // Get description of selected tooltip
+              const descriptions = self.chartData.datasets[0].descriptions
               const description = descriptions[tooltipItem.index]
               const descriptionParts = self.getDescriptionParts(description)
               return descriptionParts.lastPart
