@@ -24,7 +24,7 @@ const fetchAttributeAggregates = (attributes, sampleTable, rsql) => {
     if (attribute.type === 'MultiColumnChart') {
       const columns = []
       attribute.columns.forEach(column => {
-        columns.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + column.id + rsql).then(response => {
+        columns.push(api.get('/api/v2/' + encodeURIComponent(sampleTable) + '?aggs=x==' + encodeURIComponent(column.id) + rsql).then(response => {
           return response
         }))
       })
@@ -33,7 +33,7 @@ const fetchAttributeAggregates = (attributes, sampleTable, rsql) => {
         return mappers.aggregateDataToChartDataMapper(attribute, responses)
       }))
     } else {
-      promises.push(api.get('/api/v2/' + sampleTable + '?aggs=x==' + attribute.name + rsql).then(response => {
+      promises.push(api.get('/api/v2/' + encodeURIComponent(sampleTable) + '?aggs=x==' + encodeURIComponent(attribute.name) + rsql).then(response => {
         return mappers.aggregateDataToChartDataMapper(attribute, response.aggs)
       }))
     }
@@ -46,7 +46,7 @@ export default {
     // Deconstruct inside action to enable testing
     const {sampleTable} = window.__INITIAL_STATE__ || {}
 
-    api.get('/api/v2/' + sampleTable + '?includeCategories=true').then(response => {
+    api.get('/api/v2/' + encodeURIComponent(sampleTable) + '?includeCategories=true').then(response => {
       const filters = mappers.subjectMetadataToFilterMapper(response.meta)
       commit('SET_FILTERS', filters)
       commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
@@ -74,7 +74,7 @@ export default {
     const {sampleTable} = window.__INITIAL_STATE__ || {}
 
     rsql = rsql !== '' ? '?q=' + rsql : rsql
-    api.get('/api/v2/' + sampleTable + rsql).then(response => {
+    api.get('/api/v2/' + encodeURIComponent(sampleTable) + rsql).then(response => {
       commit('SET_TOTAL_NUMBER_OF_SAMPLES', response.total)
     })
   }
