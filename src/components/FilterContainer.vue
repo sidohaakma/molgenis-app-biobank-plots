@@ -16,13 +16,16 @@
       </div>
     </div>
 
-    <hr>
+    <div class="row mb-4">
+      <div class="col">
+        <span id="total-number-of-samples" class="small text-secondary">{{totalNumberOfSamples}} samples</span>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-12">
         <div v-for="filter in filters" :key="filter.id">
-          <filter-component :filter="filter"/>
-          <hr class="mt-4">
+          <filter-component :filter="filter" class="mb-1"></filter-component>
         </div>
       </div>
     </div>
@@ -50,6 +53,9 @@
     computed: {
       filters () {
         return this.$store.state.filters
+      },
+      totalNumberOfSamples () {
+        return this.$store.state.totalNumberOfSamples
       }
     },
     components: {

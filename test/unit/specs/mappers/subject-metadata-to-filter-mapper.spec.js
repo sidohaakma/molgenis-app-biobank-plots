@@ -73,7 +73,7 @@ describe('mappers', () => {
           options: [0, 120]
         },
         sex: {
-          filterType: 'checkbox-row',
+          filterType: 'checkbox-list',
           id: 'sex',
           label: 'Sex',
           options: [
@@ -83,6 +83,11 @@ describe('mappers', () => {
               value: 'male'
             },
             {
+              id: 'unk',
+              label: 'unknown',
+              value: 'unk'
+            },
+            {
               id: 'female',
               label: 'female',
               value: 'female'
@@ -90,7 +95,7 @@ describe('mappers', () => {
           ]
         },
         ever_smoked: {
-          filterType: 'checkbox-row',
+          filterType: 'checkbox-list',
           id: 'ever_smoked',
           label: 'Smoking?',
           options: [

@@ -1,6 +1,7 @@
 <template>
   <div class="filter-component pt-0">
     <h5>{{filter.label}}</h5>
+    <hr class="mt-0">
 
     <template v-if="filter.filterType === 'dropdown'">
       <dropdown-filter-component
