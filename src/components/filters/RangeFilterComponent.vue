@@ -1,5 +1,5 @@
 <template>
-  <div class="range-filter-component">
+  <div class="range-filter-component mb-4">
     <vue-slider
       v-model="value"
       tooltipDir="bottom"

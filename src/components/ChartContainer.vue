@@ -1,9 +1,5 @@
 <template>
   <div class="chart-container">
-    <div class="total-number-of-samples-container text-right">
-      Matching samples: <span class="badge badge-secondary">{{totalNumberOfSamples}}</span>
-      <hr/>
-    </div>
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -98,9 +94,6 @@
       },
       inlineCharts () {
         return this.$store.getters.getInlineCharts
-      },
-      totalNumberOfSamples () {
-        return this.$store.state.totalNumberOfSamples
       }
     },
     mounted () {
