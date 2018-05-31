@@ -22,15 +22,13 @@ const mapAttributesToFilters = (attribute) => {
       return {
         id: attribute.name,
         label: attribute.label,
-        filterType: 'checkbox-row',
+        filterType: 'checkbox-list',
         options: attribute.categoricalOptions.reduce((accumulator, option) => {
-          if (option.id !== 'unk') {
-            accumulator.push({
-              id: option.id,
-              label: option.label,
-              value: option.id
-            })
-          }
+          accumulator.push({
+            id: option.id,
+            label: option.label,
+            value: option.id
+          })
           return accumulator
         }, [])
       }
@@ -38,7 +36,7 @@ const mapAttributesToFilters = (attribute) => {
       return {
         id: attribute.name,
         label: attribute.label,
-        filterType: 'checkbox-row',
+        filterType: 'checkbox-list',
         options: [
           {id: 'yes', label: 'Yes', value: true},
           {id: 'no', label: 'No', value: false}
