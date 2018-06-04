@@ -16,7 +16,7 @@ const activeFiltersToRsqlMapper = (activeFilters) => {
     } else if (Array.isArray(values)) {
       if (values.length > 0) {
         if (filter === 'data_type') {
-          accumulator.push(values.map(value => value + '==true').join(OR_OPERATOR))
+          accumulator.push(values.map(value => value + '==true').join(AND_OPERATOR))
         } else {
           accumulator.push(values.map(value => filter + '==' + value).join(OR_OPERATOR))
         }
