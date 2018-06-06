@@ -39,7 +39,8 @@ const mapAttributesToFilters = (attribute) => {
         filterType: 'checkbox-list',
         options: [
           {id: 'yes', label: 'Yes', value: true},
-          {id: 'no', label: 'No', value: false}
+          {id: 'no', label: 'No', value: false},
+          {id: 'na', label: 'Not available', value: 'N/A'}
         ]
       }
     case 'data_type':
