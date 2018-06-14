@@ -17,6 +17,18 @@ const activeFiltersToRsqlMapper = (activeFilters) => {
       if (values.length > 0) {
         if (filter === 'data_type') {
           accumulator.push(values.map(value => value + '==true').join(AND_OPERATOR))
+        } else if (filter === 'ever_smoked') {
+          const everSmoked = []
+          if (values.includes(true)) {
+            everSmoked.push('ever_smoked==true')
+          }
+          if (values.includes(false)) {
+            everSmoked.push('ever_smoked==false')
+          }
+          if (values.includes('N/A')) {
+            everSmoked.push('(ever_smoked!=false' + AND_OPERATOR + 'ever_smoked!=true)')
+          }
+          accumulator.push(everSmoked.join(OR_OPERATOR))
         } else {
           accumulator.push(values.map(value => filter + '==' + value).join(OR_OPERATOR))
         }

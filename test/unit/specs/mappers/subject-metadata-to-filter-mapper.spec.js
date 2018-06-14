@@ -108,6 +108,11 @@ describe('mappers', () => {
               id: 'no',
               label: 'No',
               value: false
+            },
+            {
+              id: 'na',
+              label: 'Not available',
+              value: 'N/A'
             }
           ]
         },
