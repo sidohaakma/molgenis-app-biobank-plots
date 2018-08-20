@@ -14,7 +14,7 @@ if (window.__webpack_public_path__) {
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#biobank-aggregates-app-container',
+  el: '#app',
   store,
   router,
   components: {App},

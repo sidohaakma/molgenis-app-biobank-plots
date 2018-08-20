@@ -26,6 +26,8 @@ module.exports = {
     // ======= tests =======
     browser.expect.element(applicationContainerSelector).to.be.visible
     browser.expect.element(bodySelector).to.be.visible
+
+    browser.pause(20000)
     browser.expect.element(canvasSelector).to.be.visible
 
   }
