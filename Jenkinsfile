@@ -37,7 +37,8 @@ pipeline {
           sh "daemon --name=sauceconnect -- /usr/local/bin/sc -u ${SAUCE_CRED_USR} -k ${SAUCE_CRED_PSW} -i ${TUNNEL_IDENTIFIER}"
           sh "yarn install"
           sh "yarn unit"
-          sh "yarn e2e --env ci_chrome,ci_safari,ci_ie11,ci_firefox"
+          sh "yarn e2e --env ci_chrome,ci_safari,ci_firefox"
+          // add ci_ie11, when https://github.com/molgenis/molgenis-app-biobank-plots/issues/2 is fixed
         }
       }
       post {
@@ -62,7 +63,8 @@ pipeline {
           sh "daemon --name=sauceconnect -- /usr/local/bin/sc -u ${SAUCE_CRED_USR} -k ${SAUCE_CRED_PSW} -i ${TUNNEL_IDENTIFIER}"
           sh "yarn install"
           sh "yarn unit"
-          sh "yarn e2e --env ci_chrome,ci_safari,ci_ie11,ci_firefox"
+          sh "yarn e2e --env ci_chrome,ci_safari,ci_firefox"
+          // add ci_ie11, when https://github.com/molgenis/molgenis-app-biobank-plots/issues/2 is fixed
         }
       }
       post {
