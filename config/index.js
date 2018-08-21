@@ -3,6 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const packageJson = require('../package')
 
 const biobankSubjectsResponse = require('./dev-responses/biobank-subjects-response.js')
 const biobankSubjectsIncludeCategoriesResponse = require('./dev-responses/biobank-subjects-include-categories-response.js')
@@ -23,15 +24,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api/v2': {
-        target: 'http://localhost:8080'
-      }
-    },
+    // proxyTable: {
+    //   '/api/v2': {
+    //     target: 'http://localhost:8080'
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 3000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -58,6 +59,7 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
     cssSourceMap: true,
+
     before (app) {
       app.get('/api/v2/bbmri_subjects', function (request, response) {
         if (request.query.aggs) {
@@ -90,7 +92,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: '',
-    assetsPublicPath: '/apps/${app.id}',
+    assetsPublicPath: '/plugin/app/' + packageJson.name,
 
     /**
      * Source Maps

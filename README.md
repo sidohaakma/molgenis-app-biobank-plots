@@ -285,30 +285,95 @@ You can add a runtime configuration by inlining this code snippet in your index.
     </script>
 ```
 
-## Developing Biobank Plots
-When you want to develop the Biobank plots you must be aware that this is an MOLGENIS app. See 
+## Contributing
+There are 2 ways to test and develop in apps for MOLGENIS.
 
-### Build Setup
+- locally without MOLGENIS
+- locally with MOLGENIS
+
+### Test locally without a running MOLGENIS instance
+
+For local testing you can execute the following commands:
 
 ```bash
-# install dependencies
+# To install the application
 yarn install
 
-# serve with hot reload at localhost:8080
+# To run develop mode
 yarn dev
-
-# Build for production with minification
-# The created artifacts can be uploaded to the MOLGENIS app store.
-# After zipping it into an archive
-yarn build
-
-# run unit tests
-yarn unit
-
-# run all tests
-yarn test
 ```
 
-### Include app in MOLGENIS
+It will render a local version of the core variable catalogue.
 
-You can create a MOLGENIS app by following this manual: [MOLGENIS app developement](https://molgenis.gitbooks.io/molgenis/content/developer_documentation/app-development.html)
+#### Run unit tests
+You can run unit tests by executing this command:
+
+```bash
+# Run once
+yarn unit
+
+# Run in watch-mode
+yarn debug
+```
+
+#### Run end-to-end tests
+You can run end-to-end test locally by running the following command:
+
+```bash
+yarn e2e
+```
+
+### Test with a running MOLGENIS instance
+For local testing with a running MOLGENIS instance you have to alter the config of the app:
+
+Comment in the following block
+
+```config/index.js```
+
+```javascript
+module.exports = {
+  dev: {
+
+    // Paths
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+    // Beginning of block
+    proxyTable: {
+      '/login': {
+        target: 'http://localhost:8080'
+      },
+      '/api': {
+        target: 'http://localhost:8080'
+      }
+    },
+    // End of block
+```
+
+And comment out this block in the same file.
+
+
+```javascript
+/**
+ * GET and POST interceptors
+ * Removes the need for a running backend during development
+ */
+No mock data available
+```
+
+That is it. Run a molgenis instance on localhost:8080 and start the core variable catalogue with:
+
+```javascript
+yarn dev
+```
+
+## Build your MOLGENIS app
+
+See: [App developement documentation](https://molgenis.gitbooks.io/molgenis/content/developer_documentation/app-development.html)
+
+You can now create a working application that can be imported in MOLGENIS directly, by executing:
+
+```bash
+yarn build
+```
+
+You can find the zip-file in the ```dist/molgenis-app-biobank-plots.zip```.
