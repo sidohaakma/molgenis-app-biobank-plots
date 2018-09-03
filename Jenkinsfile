@@ -15,6 +15,7 @@ pipeline {
         }
         container('vault') {
           script {
+            env.TUNNEL_IDENTIFIER = sh(script: 'echo ${GIT_COMMIT}-${BUILD_NUMBER}', returnStdout: true)
             env.GITHUB_TOKEN = sh(script: 'vault read -field=value secret/ops/token/github', returnStdout: true)
             env.CODECOV_TOKEN = sh(script: 'vault read -field=value secret/ops/token/codecov', returnStdout: true)
             env.SAUCE_CRED_USR = sh(script: 'vault read -field=username secret/ops/token/saucelabs', returnStdout: true)
@@ -23,18 +24,17 @@ pipeline {
             env.REGISTRY_CRED_PSW = sh(script: 'vault read -field=password secret/ops/account/nexus', returnStdout: true)
           }
         }
+        container('node') {
+          sh "daemon --name=sauceconnect -- /usr/local/bin/sc -u ${SAUCE_CRED_USR} -k ${SAUCE_CRED_PSW} -i ${TUNNEL_IDENTIFIER}"
+        }
       }
     }
     stage('Build: [ pull request ]') {
       when {
         changeRequest()
       }
-      environment {
-        TUNNEL_IDENTIFIER = "${GIT_COMMIT}-${BUILD_NUMBER}"
-      }
       steps {
         container('node') {
-          sh "daemon --name=sauceconnect -- /usr/local/bin/sc -u ${SAUCE_CRED_USR} -k ${SAUCE_CRED_PSW} -i ${TUNNEL_IDENTIFIER}"
           sh "yarn install"
           sh "yarn unit"
           sh "yarn e2e --env ci_chrome,ci_safari,ci_firefox"
@@ -44,7 +44,6 @@ pipeline {
       post {
         always {
           container('node') {
-            sh "daemon --name=sauceconnect --stop"
             sh "curl -s https://codecov.io/bash | bash -s - -c -F unit -K"
           }
         }
@@ -54,13 +53,9 @@ pipeline {
       when {
         branch 'master'
       }
-      environment {
-        TUNNEL_IDENTIFIER = "${GIT_COMMIT}-${BUILD_NUMBER}"
-      }
       steps {
         milestone 1
         container('node') {
-          sh "daemon --name=sauceconnect -- /usr/local/bin/sc -u ${SAUCE_CRED_USR} -k ${SAUCE_CRED_PSW} -i ${TUNNEL_IDENTIFIER}"
           sh "yarn install"
           sh "yarn unit"
           sh "yarn e2e --env ci_chrome,ci_safari,ci_firefox"
@@ -70,7 +65,6 @@ pipeline {
       post {
         always {
           container('node') {
-            sh "daemon --name=sauceconnect --stop"
             sh "curl -s https://codecov.io/bash | bash -s - -c -F unit -K"
           }
         }
@@ -110,6 +104,13 @@ pipeline {
 
           sh "git push --tags origin ${BRANCH_NAME}"
         }
+      }
+    }
+  }
+  post {
+    always {
+      container('node') {
+        sh "daemon --name=sauceconnect --stop"
       }
     }
   }
