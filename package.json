@@ -1,6 +1,6 @@
 {
   "name": "molgenis-app-biobank-plots",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Charts and other visualizations for biobanks",
   "contributors": [
     "connor <c.stroomberg@gmail.com",
