@@ -24,11 +24,11 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // proxyTable: {
-    //   '/api/v2': {
-    //     target: 'http://localhost:8080'
-    //   }
-    // },
+    proxyTable: {
+      '/api/v2': {
+        target: 'http://localhost:8080'
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -60,29 +60,29 @@ module.exports = {
     cacheBusting: true,
     cssSourceMap: true,
 
-    before (app) {
-      app.get('/api/v2/bbmri_subjects', function (request, response) {
-        if (request.query.aggs) {
-          const attr = request.query.aggs.split('==')[1]
-          if (attr === 'biobank') response.json(biobankAggregateResponse)
-          if (attr === 'sex') response.json(sexAggregateResponse)
-          if (attr === 'ever_smoked') response.json(smokingAggregateResponse)
-          if (attr === 'age') response.json(ageYearsAggregateResponse)
-          if (attr === 'genotypes') response.json(genotypesAggregateResponse)
-          if (attr === 'metabolome') response.json(metabolomeAggregateResponse)
-          if (attr === 'methylome') response.json(methylomeAggregateResponse)
-          if (attr === 'transcriptome') response.json(transcriptomeAggregateResponse)
-          if (attr === 'whole_genome_sequencing') response.json(wgsAggregateResponse)
-          if (attr === 'cell_counts') response.json(cellcountsAggregateResponse)
-        } else if (request.query.q) {
-          response.json(filteredBiobankSubjectsResponse)
-        } else if (request.query.includeCategories) {
-          response.json(biobankSubjectsIncludeCategoriesResponse)
-        } else {
-          response.json(biobankSubjectsResponse)
-        }
-      })
-    }
+    // before (app) {
+    //   app.get('/api/v2/bbmri_subjects', function (request, response) {
+    //     if (request.query.aggs) {
+    //       const attr = request.query.aggs.split('==')[1]
+    //       if (attr === 'biobank') response.json(biobankAggregateResponse)
+    //       if (attr === 'sex') response.json(sexAggregateResponse)
+    //       if (attr === 'ever_smoked') response.json(smokingAggregateResponse)
+    //       if (attr === 'age') response.json(ageYearsAggregateResponse)
+    //       if (attr === 'genotypes') response.json(genotypesAggregateResponse)
+    //       if (attr === 'metabolome') response.json(metabolomeAggregateResponse)
+    //       if (attr === 'methylome') response.json(methylomeAggregateResponse)
+    //       if (attr === 'transcriptome') response.json(transcriptomeAggregateResponse)
+    //       if (attr === 'whole_genome_sequencing') response.json(wgsAggregateResponse)
+    //       if (attr === 'cell_counts') response.json(cellcountsAggregateResponse)
+    //     } else if (request.query.q) {
+    //       response.json(filteredBiobankSubjectsResponse)
+    //     } else if (request.query.includeCategories) {
+    //       response.json(biobankSubjectsIncludeCategoriesResponse)
+    //     } else {
+    //       response.json(biobankSubjectsResponse)
+    //     }
+    //   })
+    // }
   },
 
   build: {

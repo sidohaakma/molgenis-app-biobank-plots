@@ -123,7 +123,76 @@ const webpackConfig = merge(baseWebpackConfig, {
       apiDependency: "v2",
       includeMenuAndFooter: true,
       runtimeOptions: {
-        language: "en"
+        language: "en",
+        sampleTable: 'bbmri_subjects',
+        primaryColor: '#184B8A',
+        secondaryColor: '#ed660c',
+        tertiaryColor: '#cccccc',
+        backgroundColor: '#e6e9ef',
+        attributes: [
+          {
+            name: 'biobank',
+            title: 'Number of samples per biobank',
+            type: 'HorizontalBarChart',
+            inline: false
+          },
+          {
+            name: 'cell_counts',
+            title: 'Cell counts',
+            type: 'ColumnChart',
+            inline: true,
+            datasets: [
+              {label: 'Yes', backgroundColor: '#184B8A'},
+              {label: 'No', backgroundColor:  '#ed660c'},
+              {label: 'Not available', backgroundColor: '#cccccc'}
+            ]
+          },
+          {
+            name: 'age',
+            title: 'Age in years',
+            type: 'VerticalBarChart',
+            inline: false
+          },
+          {
+            name: 'data_type',
+            title: 'Data available',
+            inline: false,
+            columns: [
+              {id: 'genotypes', label: 'Genotypes'},
+              {id: 'metabolome', label: 'Metabolome'},
+              {id: 'methylome', label: 'Methylome'},
+              {id: 'transcriptome', label: 'Transcriptome'},
+              {id: 'whole_genome_sequencing', label: 'Whole genome sequence'}
+            ],
+            type: 'MultiColumnChart', // Use MultiColumnChart for COMPOUND types
+            datasets: [
+              {label: 'Available', backgroundColor: '#184B8A'},
+              {label: 'Unavailable', backgroundColor:  '#ed660c'}
+            ]
+          },
+          {
+            name: 'ever_smoked',
+            inline: true,
+            title: 'Ever smoked',
+            type: 'ColumnChart',
+            datasets: [
+              {label: 'Yes', backgroundColor: '#184B8A'},
+              {label: 'No', backgroundColor:  '#ed660c'},
+              {label: 'Not available', backgroundColor: '#cccccc'}
+            ]
+          },
+          {
+            name: 'sex',
+            title: 'Sex',
+            inline: true,
+            type: 'ColumnChart',
+            datasets: [
+              {label: 'Male', backgroundColor: '#184B8A'},
+              {label: 'Female', backgroundColor:  '#ed660c'},
+              {label: 'Unknown', backgroundColor: '#cccccc'}
+            ]
+          }
+        ]
       }
     }),
 
