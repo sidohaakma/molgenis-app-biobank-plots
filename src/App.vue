@@ -1,7 +1,7 @@
 <template>
   <div id="application-container">
     <div class="container">
-      <img src="./assets/img/bbmri-header.png" alt="bbmri header" id="bbmri-header" class="mb-4"/>
+      <img src="./img/bbmri-header.png" alt="bbmri header" id="bbmri-header" class="mb-4"/>
       <router-view></router-view>
     </div>
   </div>
