@@ -24,11 +24,11 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // proxyTable: {
-    //   '/api/v2': {
-    //     target: 'http://localhost:8080'
-    //   }
-    // },
+    proxyTable: {
+      '/api/v2': {
+        target: 'http://localhost:8080'
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -92,7 +92,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: '',
-    assetsPublicPath: '/plugin/app/' + packageJson.name,
+    assetsPublicPath: '/plugin/app/' + packageJson.name + '/',
 
     /**
      * Source Maps
