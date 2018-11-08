@@ -41,7 +41,7 @@ module.exports = {
       access_key: process.env.SAUCE_CRED_PSW,
       desiredCapabilities: {
         name: packageJson.name,
-        build: packageJson.name + '#build-${BUILD_NUMBER}',
+        build: packageJson.name + '#PR-${CHANGE_ID}-build-${BUILD_NUMBER}',
         'tunnel-identifier': process.env.TUNNEL_IDENTIFIER,
         browserName: 'chrome'
       },
@@ -60,7 +60,7 @@ module.exports = {
       access_key: process.env.SAUCE_CRED_PSW,
       desiredCapabilities: {
         name: packageJson.name,
-        build: packageJson.name + '#build-${BUILD_NUMBER}',
+        build: packageJson.name + '#PR-${CHANGE_ID}-build-${BUILD_NUMBER}',
         'tunnel-identifier': process.env.TUNNEL_IDENTIFIER,
         browserName: 'firefox'
       },
@@ -79,7 +79,7 @@ module.exports = {
       access_key: process.env.SAUCE_CRED_PSW,
       desiredCapabilities: {
         name: packageJson.name,
-        build: packageJson.name + '#build-${BUILD_NUMBER}',
+        build: packageJson.name + '#PR-${CHANGE_ID}-build-${BUILD_NUMBER}',
         'tunnel-identifier': process.env.TUNNEL_IDENTIFIER,
         browserName: 'internet explorer',
         platform: 'Windows 10',
@@ -100,7 +100,7 @@ module.exports = {
       access_key: process.env.SAUCE_CRED_PSW,
       desiredCapabilities: {
         name: packageJson.name,
-        build: packageJson.name + '#build-${BUILD_NUMBER}',
+        build: packageJson.name + '#PR-${CHANGE_ID}-build-${BUILD_NUMBER}',
         'tunnel-identifier': process.env.TUNNEL_IDENTIFIER,
         browserName: 'safari'
       },
