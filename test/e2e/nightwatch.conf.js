@@ -3,6 +3,7 @@ var config = require('../../config')
 var packageJson = require('../../package.json');
 
 const buildName = packageJson.name + '#PR-' + process.env.CHANGE_ID + '-build-' + process.env.BUILD_NUMBER
+const ciDevServer = 'http://' + process.env.JENKINS_AGENT_NAME + ':' + (process.env.PORT || config.dev.port)
 
 var defaultPauzeBeforeTestStart = 3000
 
@@ -48,6 +49,7 @@ module.exports = {
         browserName: 'chrome'
       },
       globals: {
+        devServerUrl: ciDevServer,
         waitForConditionTimeout: 10000,
         waitBeforeTestStart: defaultPauzeBeforeTestStart
       }
@@ -67,6 +69,7 @@ module.exports = {
         browserName: 'firefox'
       },
       globals: {
+        devServerUrl: ciDevServer,
         waitForConditionTimeout: 10000,
         waitBeforeTestStart: defaultPauzeBeforeTestStart
       }
@@ -88,6 +91,7 @@ module.exports = {
         version: '11.103',
       },
       globals: {
+        devServerUrl: ciDevServer,
         waitForConditionTimeout: 10000,
         waitBeforeTestStart: defaultPauzeBeforeTestStart
       }
@@ -107,6 +111,7 @@ module.exports = {
         browserName: 'safari'
       },
       globals: {
+        devServerUrl: ciDevServer,
         waitForConditionTimeout: 10000,
         waitBeforeTestStart: 5000
       }
